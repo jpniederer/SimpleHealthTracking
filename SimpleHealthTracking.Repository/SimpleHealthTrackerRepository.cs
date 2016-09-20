@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleHealthTracking.Repository
+﻿namespace SimpleHealthTracking.Repository
 {
-    class SimpleHealthTrackerRepository
+    using Entities;
+    using System;
+    using System.Linq;
+
+    public class SimpleHealthTrackerRepository : ISimpleHealthTrackerRepository
     {
+        SimpleHealthTrackerContext _context;
+
+        public SimpleHealthTrackerRepository(SimpleHealthTrackerContext context)
+        {
+            _context = context;
+            _context.Configuration.LazyLoadingEnabled = false;
+        }
     }
 }

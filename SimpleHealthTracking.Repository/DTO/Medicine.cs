@@ -1,6 +1,7 @@
 ﻿namespace SimpleHealthTracking.Repository.DTO
 {
     using System;
+    using System.Collections.Generic;
 
     public class Medicine
     {
@@ -13,5 +14,6 @@
         public DateTime? EndDate { get; set; }
         public DateTime TimeAdded { get; set; }
         public DateTime UpdateTime { get; set; }
+        public ICollection<MedicineTaken> MedicineTakens { get; set; }
     }
 }

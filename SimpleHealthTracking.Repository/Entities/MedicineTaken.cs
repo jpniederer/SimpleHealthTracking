@@ -15,6 +15,8 @@
 
         public DateTime TimeAdded { get; set; }
 
+        public virtual Medicine Medicine { get; set; }
+
         public MedicineTaken() { }
 
         public MedicineTaken(int medicineId, DateTime dateAddedFor)

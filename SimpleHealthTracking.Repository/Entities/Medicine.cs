@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Collections.Generic;
 
     public partial class Medicine
     {
@@ -28,7 +29,12 @@
 
         public DateTime UpdateTime { get; set; }
 
-        public Medicine() { }
+        public virtual ICollection<MedicineTaken> MedicineTakens { get; set; }
+
+        public Medicine()
+        {
+            MedicineTakens = new HashSet<MedicineTaken>();
+        }
 
         public Medicine(Guid userId, string name, int numberOfTimesPerDay, bool isActive)
         {
@@ -38,6 +44,7 @@
             IsActive = isActive;
             TimeAdded = DateTime.Now;
             UpdateTime = DateTime.Now;
+            MedicineTakens = new HashSet<MedicineTaken>();
         }
     }
 }
