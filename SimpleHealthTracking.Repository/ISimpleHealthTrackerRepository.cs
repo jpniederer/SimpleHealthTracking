@@ -12,7 +12,7 @@
         ActionResult<Checkin> DeleteCheckin(int id);
         Checkin GetCheckin(int id);
         IQueryable<Checkin> GetCheckinsForUser(Guid userId);
-        IQueryable<Checkin> GetCheckinsByRange(DateTime startDate, DateTime endDate);
+        IQueryable<Checkin> GetCheckinsByRange(DateTime startDate, DateTime endDate, Guid userId);
 
         // Medicines
         ActionResult<Medicine> InsertMedicine(Medicine medicine);
