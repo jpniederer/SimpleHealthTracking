@@ -8,8 +8,9 @@
     {
         public int Id { get; set; }
 
+        [StringLength(128)]
         [Required]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         public float? Weight { get; set; }
 
@@ -33,7 +34,7 @@
 
         public Checkin() { }
 
-        public Checkin(Guid userId)
+        public Checkin(string userId)
         {
             UserId = userId;
             TimeAdded = DateTime.Now;

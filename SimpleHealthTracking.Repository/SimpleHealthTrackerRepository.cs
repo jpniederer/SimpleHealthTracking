@@ -97,7 +97,7 @@
             return _context.Checkins.FirstOrDefault(c => c.Id == id);
         }
 
-        public IQueryable<Checkin> GetCheckinsForUser(Guid userId)
+        public IQueryable<Checkin> GetCheckinsForUser(string userId)
         {
             var checkins = _context.Checkins.Where(c => c.UserId.Equals(userId));
 
@@ -111,7 +111,7 @@
             }
         }
         
-        public IQueryable<Checkin> GetCheckinsByRange(DateTime startDate, DateTime endDate, Guid userId)
+        public IQueryable<Checkin> GetCheckinsByRange(DateTime startDate, DateTime endDate, string userId)
         {
             var checkins = _context.Checkins.Where(c => c.UserId.Equals(userId) &&
                                                 c.TimeAdded.Ticks >= startDate.Ticks &&
@@ -219,7 +219,7 @@
             return _context.Medicines.FirstOrDefault(m => m.Id == id);
         }
 
-        public IQueryable<Medicine> GetMedicinesForUser(Guid userId)
+        public IQueryable<Medicine> GetMedicinesForUser(string userId)
         {
             var medicines = _context.Medicines.Where(m => m.UserId.Equals(userId));
 
@@ -392,7 +392,7 @@
             return _context.Sleeps.FirstOrDefault(s => s.Id == id);
         }
 
-        public IQueryable<Sleep> GetSleepForUser(Guid userId)
+        public IQueryable<Sleep> GetSleepForUser(string userId)
         {
             var sleeps = _context.Sleeps.Where(s => s.UserId.Equals(userId));
 
@@ -406,7 +406,7 @@
             }
         }
 
-        public IQueryable<Sleep> GetSleepForUserInRange(Guid userId, DateTime startDate, DateTime endDate)
+        public IQueryable<Sleep> GetSleepForUserInRange(string userId, DateTime startDate, DateTime endDate)
         {
             return _context.Sleeps.Where(s => s.UserId.Equals(userId) &&
                                         s.StartTime.Value.Ticks >= startDate.Ticks &&

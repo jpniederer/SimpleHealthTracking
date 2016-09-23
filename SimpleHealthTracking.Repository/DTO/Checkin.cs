@@ -5,7 +5,7 @@
     public class Checkin
     {
         public int Id { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public float? Weight { get; set; }
         public float? Heartrate { get; set; }
         public float? SystolicBloodPressure { get; set; }

@@ -8,8 +8,9 @@
     {
         public int Id { get; set; }
 
+        [StringLength(128)]
         [Required]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         [Required]
         [StringLength(500)]
@@ -36,7 +37,7 @@
             MedicineTakens = new HashSet<MedicineTaken>();
         }
 
-        public Medicine(Guid userId, string name, int numberOfTimesPerDay, bool isActive)
+        public Medicine(string userId, string name, int numberOfTimesPerDay, bool isActive)
         {
             UserId = userId;
             Name = name;

@@ -11,15 +11,15 @@
         ActionResult<Checkin> UpdateCheckin(Checkin checkin);
         ActionResult<Checkin> DeleteCheckin(int id);
         Checkin GetCheckin(int id);
-        IQueryable<Checkin> GetCheckinsForUser(Guid userId);
-        IQueryable<Checkin> GetCheckinsByRange(DateTime startDate, DateTime endDate, Guid userId);
+        IQueryable<Checkin> GetCheckinsForUser(string userId);
+        IQueryable<Checkin> GetCheckinsByRange(DateTime startDate, DateTime endDate, string userId);
 
         // Medicines
         ActionResult<Medicine> InsertMedicine(Medicine medicine);
         ActionResult<Medicine> UpdateMedicine(Medicine medicine);
         ActionResult<Medicine> DeleteMedicine(int id);
         Medicine GetMedicine(int id);
-        IQueryable<Medicine> GetMedicinesForUser(Guid userId);
+        IQueryable<Medicine> GetMedicinesForUser(string userId);
 
         // Medicine Taken
         ActionResult<MedicineTaken> InsertMedicineTaken(MedicineTaken medicineTaken);
@@ -33,7 +33,7 @@
         ActionResult<Sleep> UpdateSleep(Sleep sleep);
         ActionResult<Sleep> DeleteSleep(int id);
         Sleep GetSleep(int id);
-        IQueryable<Sleep> GetSleepForUser(Guid userId);
-        IQueryable<Sleep> GetSleepForUserInRange(Guid userId, DateTime startDate, DateTime endDate);
+        IQueryable<Sleep> GetSleepForUser(string userId);
+        IQueryable<Sleep> GetSleepForUserInRange(string userId, DateTime startDate, DateTime endDate);
     }
 }

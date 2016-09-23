@@ -7,8 +7,9 @@
     {
         public int Id { get; set; }
 
+        [StringLength(128)]
         [Required]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         public DateTime? StartTime { get; set; }
 
@@ -24,7 +25,7 @@
 
         public Sleep() { }
 
-        public Sleep(Guid userId)
+        public Sleep(string userId)
         {
             UserId = userId;
             TimeAdded = DateTime.Now;

@@ -6,7 +6,7 @@
     public class Medicine
     {
         public int Id { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
         public int NumberOfTimesPerDay { get; set; }
         public bool IsActive { get; set; }
