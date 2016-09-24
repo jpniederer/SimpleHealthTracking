@@ -10,7 +10,7 @@
 
     public partial class SimpleHealthTrackerContext : DbContext
     {
-        public SimpleHealthTrackerContext() : base("name=SimpleHealthTrackerContext") { }
+        public SimpleHealthTrackerContext() : base("name=SimpleHealthTrackingContext") { }
 
         public virtual DbSet<Checkin> Checkins { get; set; }
         public virtual DbSet<Medicine> Medicines { get; set; }

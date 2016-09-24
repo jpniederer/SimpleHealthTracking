@@ -1,9 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-
-namespace SimpleHealthTracking.Models
+﻿namespace SimpleHealthTracking.Models
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using Newtonsoft.Json;
     // Models used as parameters to AccountController actions.
 
     public class AddExternalLoginBindingModel
