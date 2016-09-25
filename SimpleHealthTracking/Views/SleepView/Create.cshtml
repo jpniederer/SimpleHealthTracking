@@ -1,0 +1,30 @@
+﻿@model SimpleHealthTracking.ViewModels.SleepFormViewModel
+
+@{
+    ViewBag.Title = "Create a Sleep Record";
+}
+
+<h2>Create</h2>
+<form>
+    <div class="form-group">
+        @Html.LabelFor(s => s.StartDate)
+        @Html.TextBoxFor(s => s.StartDate, new { @class = "form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.StartTime)
+        @Html.TextBoxFor(s => s.StartTime, new { @class = "form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.EndDate)
+        @Html.TextBoxFor(s => s.EndDate, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.EndTime)
+        @Html.TextBoxFor(s => s.EndTime, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.SleepQuality)
+        @Html.TextBoxFor(s => s.SleepQuality, new { @class = "form-control"})
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

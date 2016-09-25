@@ -236,10 +236,14 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckinController.cs" />
+    <Compile Include="Controllers\CheckinViewController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Controllers\MedicineTakenController.cs" />
+    <Compile Include="Controllers\MedicineTakenViewController.cs" />
+    <Compile Include="Controllers\MedicineViewController.cs" />
     <Compile Include="Controllers\SleepController.cs" />
+    <Compile Include="Controllers\SleepViewController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -256,6 +260,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\SleepFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\IdentityDatabaseSetup.sql" />
@@ -327,6 +332,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
+    <Content Include="Views\SleepView\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609240313330_InitialIdentityModel.resx">
@@ -342,6 +348,11 @@
       <Project>{ab220a0c-f12b-491b-bcef-d2eb9f403cb7}</Project>
       <Name>SimpleHealthTracking.Repository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\CheckinView\" />
+    <Folder Include="Views\MedicineTakenView\" />
+    <Folder Include="Views\MedicineView\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

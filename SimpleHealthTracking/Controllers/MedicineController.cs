@@ -26,7 +26,7 @@
             repository = repo;
         }
 
-        [Route("Medicine/{id}")]
+        [Route("api/Medicine/{id}")]
         public IHttpActionResult Delete(int id)
         {
             try
