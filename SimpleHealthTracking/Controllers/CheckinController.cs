@@ -9,6 +9,7 @@
     using System.Text;
     using System.Threading.Tasks;
     using System.Web.Http;
+    using System.Net;
 
     public class CheckinController : ApiController
     {
@@ -25,6 +26,28 @@
             repository = repo;
         }
 
+        [Route("Checkin/{id}")]
+        public IHttpActionResult Delete(int id)
+        {
+            try
+            {
+                var result = repository.DeleteCheckin(id);
 
+                if (result.Status == ActionStatus.Deleted)
+                {
+                    return StatusCode(HttpStatusCode.NoContent);
+                }
+                else if (result.Status == ActionStatus.NotFound)
+                {
+                    return NotFound();
+                }
+
+                return BadRequest();
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
+        }
     }
 }

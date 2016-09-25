@@ -9,8 +9,45 @@
     using System.Text;
     using System.Threading.Tasks;
     using System.Web.Http;
+    using System.Net;
 
     public class MedicineController : ApiController
     {
+        ISimpleHealthTrackerRepository repository;
+        MedicineFactory medicineFactory = new MedicineFactory();
+
+        public MedicineController()
+        {
+            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+        }
+
+        public MedicineController(ISimpleHealthTrackerRepository repo)
+        {
+            repository = repo;
+        }
+
+        [Route("Medicine/{id}")]
+        public IHttpActionResult Delete(int id)
+        {
+            try
+            {
+                var result = repository.DeleteMedicine(id);
+
+                if (result.Status == ActionStatus.Deleted)
+                {
+                    return StatusCode(HttpStatusCode.NoContent);
+                }
+                else if (result.Status == ActionStatus.NotFound)
+                {
+                    return NotFound();
+                }
+
+                return BadRequest();
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
+        }
     }
 }
