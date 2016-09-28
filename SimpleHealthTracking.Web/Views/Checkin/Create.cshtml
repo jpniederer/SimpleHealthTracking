@@ -1,7 +1,40 @@
-﻿
+﻿@model SimpleHealthTracking.Web.ViewModels.SleepViewModel
+
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add Sleep Entry";
 }
 
-<h2>Create</h2>
-
+<h2>Add a New Sleep Entry</h2>
+@using (Html.BeginForm("Create", "Sleep"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(s => s.StartDate)
+        @Html.TextBoxFor(s => s.StartDate, new { @class = "form-control", autofocus = "autofocus", placeholder = "01/01/2017" })
+        @Html.ValidationMessageFor(s => s.StartDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.StartTime)
+        @Html.TextBoxFor(s => s.StartTime, new { @class = "form-control", placeholder = "22:22" })
+        @Html.ValidationMessageFor(s => s.StartTime)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.EndDate)
+        @Html.TextBoxFor(s => s.EndDate, new { @class = "form-control", placeholder = "01/02/2017"})
+        @Html.ValidationMessageFor(s => s.EndDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.EndTime)
+        @Html.TextBoxFor(s => s.EndTime, new { @class = "form-control", placeholder = "06:30" })
+        @Html.ValidationMessageFor(s => s.EndTime)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.SleepQuality)
+        @Html.TextBoxFor(s => s.SleepQuality, new { @class = "form-control", placeholder = "0.0 out of 10.0 rating (not required)" })
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
