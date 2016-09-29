@@ -1,36 +1,51 @@
-﻿@model SimpleHealthTracking.Web.ViewModels.SleepViewModel
+﻿@model SimpleHealthTracking.Web.ViewModels.CheckinViewModel
 
 @{
-    ViewBag.Title = "Add Sleep Entry";
+    ViewBag.Title = "Add a Checkin Entry";
 }
 
-<h2>Add a New Sleep Entry</h2>
-@using (Html.BeginForm("Create", "Sleep"))
+<h2>Add a New Checkin Entry</h2>
+@using (Html.BeginForm("Create", "Checkin"))
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        @Html.LabelFor(s => s.StartDate)
-        @Html.TextBoxFor(s => s.StartDate, new { @class = "form-control", autofocus = "autofocus", placeholder = "01/01/2017" })
-        @Html.ValidationMessageFor(s => s.StartDate)
+        @Html.LabelFor(c => c.Weight)
+        @Html.TextBoxFor(c => c.Weight, new { @class = "form-control", autofocus = "autofocus", placeholder = "155.5 (not required)" })
+        @Html.ValidationMessageFor(c => c.Weight)
     </div>
     <div class="form-group">
-        @Html.LabelFor(s => s.StartTime)
-        @Html.TextBoxFor(s => s.StartTime, new { @class = "form-control", placeholder = "22:22" })
-        @Html.ValidationMessageFor(s => s.StartTime)
+        @Html.LabelFor(c => c.Heartrate)
+        @Html.TextBoxFor(c => c.Heartrate, new { @class = "form-control", placeholder = "60 (not required)" })
+        @Html.ValidationMessageFor(c => c.Heartrate)
     </div>
     <div class="form-group">
-        @Html.LabelFor(s => s.EndDate)
-        @Html.TextBoxFor(s => s.EndDate, new { @class = "form-control", placeholder = "01/02/2017"})
-        @Html.ValidationMessageFor(s => s.EndDate)
+        @Html.LabelFor(c => c.SystolicBloodPressure)
+        @Html.TextBoxFor(c => c.SystolicBloodPressure, new { @class = "form-control", placeholder = "120 (not required)"})
+        @Html.ValidationMessageFor(c => c.SystolicBloodPressure)
     </div>
     <div class="form-group">
-        @Html.LabelFor(s => s.EndTime)
-        @Html.TextBoxFor(s => s.EndTime, new { @class = "form-control", placeholder = "06:30" })
-        @Html.ValidationMessageFor(s => s.EndTime)
+        @Html.LabelFor(c => c.DiastolicBloodPressure)
+        @Html.TextBoxFor(c => c.DiastolicBloodPressure, new { @class = "form-control", placeholder = "80 (not required)" })
+        @Html.ValidationMessageFor(c => c.DiastolicBloodPressure)
     </div>
     <div class="form-group">
-        @Html.LabelFor(s => s.SleepQuality)
-        @Html.TextBoxFor(s => s.SleepQuality, new { @class = "form-control", placeholder = "0.0 out of 10.0 rating (not required)" })
+        @Html.LabelFor(c => c.PhysicalFeelingRating)
+        @Html.TextBoxFor(c => c.PhysicalFeelingRating, new { @class = "form-control", placeholder = "0.0 out of 10.0 rating (not required)" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.PsychologicalFeelingRating)
+        @Html.TextBoxFor(c => c.PsychologicalFeelingRating, new { @class = "form-control", placeholder = "0.0 out of 10.0 (not required)" })
+        @Html.ValidationMessageFor(c => c.PsychologicalFeelingRating)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.ExerciseRating)
+        @Html.TextBoxFor(c => c.ExerciseRating, new { @class = "form-control", placeholder = "0.0 out of 10.0 (not required)" })
+        @Html.ValidationMessageFor(c => c.ExerciseRating)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.Notes)
+        @Html.TextBoxFor(c => c.Notes, new { @class = "form-control", placeholder = "Enter a comment." })
+        @Html.ValidationMessageFor(c => c.Notes)
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 }

@@ -183,6 +183,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CheckinViewModel.cs" />
+    <Compile Include="ViewModels\MedicineViewModel.cs" />
     <Compile Include="ViewModels\SleepViewModel.cs" />
     <Compile Include="ViewModels\ValidDate.cs" />
     <Compile Include="ViewModels\ValidTime.cs" />
