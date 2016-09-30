@@ -55,6 +55,7 @@
     <Compile Include="DTO\CheckinDto.cs" />
     <Compile Include="DTO\MedicineDto.cs" />
     <Compile Include="DTO\MedicineTakenDto.cs" />
+    <Compile Include="DTO\MedicineTakenFullDto.cs" />
     <Compile Include="DTO\SleepDto.cs" />
     <Compile Include="Entities\Checkin.cs" />
     <Compile Include="Entities\Medicine.cs" />

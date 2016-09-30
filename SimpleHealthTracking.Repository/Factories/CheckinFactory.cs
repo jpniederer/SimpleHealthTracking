@@ -1,12 +1,15 @@
 ﻿namespace SimpleHealthTracking.Repository.Factories
 {
+    using DTO;
+    using Entities;
+
     public class CheckinFactory
     {
         public CheckinFactory() { }
 
-        public DTO.CheckinDto CreateCheckin(Entities.Checkin checkin)
+        public CheckinDto CreateCheckin(Checkin checkin)
         {
-            return new DTO.CheckinDto()
+            return new CheckinDto()
             {
                 Id = checkin.Id,
                 UserId = checkin.UserId,
@@ -23,9 +26,9 @@
             };
         }
 
-        public Entities.Checkin CreateCheckin(DTO.CheckinDto checkin)
+        public Checkin CreateCheckin(CheckinDto checkin)
         {
-            return new Entities.Checkin
+            return new Checkin
             {
                 Id = checkin.Id,
                 UserId = checkin.UserId,

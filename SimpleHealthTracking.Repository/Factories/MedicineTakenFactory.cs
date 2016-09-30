@@ -1,12 +1,15 @@
 ﻿namespace SimpleHealthTracking.Repository.Factories
 {
+    using DTO;
+    using Entities;
+
     public class MedicineTakenFactory
     {
         public MedicineTakenFactory() { }
 
-        public DTO.MedicineTaken CreateMedicineTaken(Entities.MedicineTaken medicineTaken)
+        public MedicineTakenFullDto CreateMedicineTaken(MedicineTaken medicineTaken)
         {
-            return new DTO.MedicineTaken()
+            return new MedicineTakenFullDto()
             {
                 Id = medicineTaken.Id,
                 MedicineId = medicineTaken.MedicineId,
@@ -15,9 +18,9 @@
             };
         }
 
-        public Entities.MedicineTaken CreateMedicineTaken(DTO.MedicineTaken medicineTaken)
+        public MedicineTaken CreateMedicineTaken(MedicineTakenFullDto medicineTaken)
         {
-            return new Entities.MedicineTaken()
+            return new MedicineTaken()
             {
                 Id = medicineTaken.Id,
                 MedicineId = medicineTaken.MedicineId,

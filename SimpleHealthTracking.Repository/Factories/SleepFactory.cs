@@ -1,12 +1,15 @@
 ﻿namespace SimpleHealthTracking.Repository.Factories
 {
+    using DTO;
+    using Entities;
+
     public class SleepFactory
     {
         public SleepFactory() { }
 
-        public DTO.SleepDto CreateSleep(Entities.Sleep sleep)
+        public SleepDto CreateSleep(Sleep sleep)
         {
-            return new DTO.SleepDto()
+            return new SleepDto()
             {
                 Id = sleep.Id,
                 UserId = sleep.UserId,
@@ -19,9 +22,9 @@
             };
         }
 
-        public Entities.Sleep CreateSleep(DTO.SleepDto sleep)
+        public Sleep CreateSleep(SleepDto sleep)
         {
-            return new Entities.Sleep()
+            return new Sleep()
             {
                 Id = sleep.Id,
                 UserId = sleep.UserId,

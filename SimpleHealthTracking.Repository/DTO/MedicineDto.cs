@@ -14,6 +14,6 @@
         public DateTime? EndDate { get; set; }
         public DateTime TimeAdded { get; set; }
         public DateTime UpdateTime { get; set; }
-        public ICollection<MedicineTaken> MedicineTakens { get; set; }
+        public ICollection<MedicineTakenFullDto> MedicineTakens { get; set; }
     }
 }

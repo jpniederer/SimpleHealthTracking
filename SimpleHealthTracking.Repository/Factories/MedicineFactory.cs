@@ -2,15 +2,17 @@
 {
     using System.Linq;
     using System.Collections.Generic;
+    using DTO;
+    using Entities;
 
     public class MedicineFactory
     {
         MedicineTakenFactory mtf = new MedicineTakenFactory();
         public MedicineFactory() { }
 
-        public DTO.MedicineDto CreateMedicine(Entities.Medicine medicine)
+        public MedicineDto CreateMedicine(Medicine medicine)
         {
-            return new DTO.MedicineDto()
+            return new MedicineDto()
             {
                 Id = medicine.Id,
                 UserId = medicine.UserId,
@@ -21,13 +23,13 @@
                 EndDate = medicine.EndDate,
                 TimeAdded = medicine.TimeAdded,
                 UpdateTime = medicine.UpdateTime,
-                MedicineTakens = medicine.MedicineTakens == null ? new List<DTO.MedicineTaken>() : medicine.MedicineTakens.Select(m => mtf.CreateMedicineTaken(m)).ToList()
+                MedicineTakens = medicine.MedicineTakens == null ? new List<MedicineTakenFullDto>() : medicine.MedicineTakens.Select(m => mtf.CreateMedicineTaken(m)).ToList()
             };
         }
 
-        public Entities.Medicine CreateMedicine(DTO.MedicineDto medicine)
+        public Medicine CreateMedicine(MedicineDto medicine)
         {
-            return new Entities.Medicine()
+            return new Medicine()
             {
                 Id = medicine.Id,
                 UserId = medicine.UserId,
@@ -38,7 +40,7 @@
                 EndDate = medicine.EndDate,
                 TimeAdded = medicine.TimeAdded,
                 UpdateTime = medicine.UpdateTime,
-                MedicineTakens = medicine.MedicineTakens == null ? new List<Entities.MedicineTaken>() : medicine.MedicineTakens.Select(m => mtf.CreateMedicineTaken(m)).ToList()
+                MedicineTakens = medicine.MedicineTakens == null ? new List<MedicineTaken>() : medicine.MedicineTakens.Select(m => mtf.CreateMedicineTaken(m)).ToList()
             };
         }
     }
