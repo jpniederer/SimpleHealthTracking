@@ -4,9 +4,9 @@
     {
         public SleepFactory() { }
 
-        public DTO.Sleep CreateSleep(Entities.Sleep sleep)
+        public DTO.SleepDto CreateSleep(Entities.Sleep sleep)
         {
-            return new DTO.Sleep()
+            return new DTO.SleepDto()
             {
                 Id = sleep.Id,
                 UserId = sleep.UserId,
@@ -19,7 +19,7 @@
             };
         }
 
-        public Entities.Sleep CreateSleep(DTO.Sleep sleep)
+        public Entities.Sleep CreateSleep(DTO.SleepDto sleep)
         {
             return new Entities.Sleep()
             {

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class Sleep
+    public class SleepDto
     {
         public int Id { get; set; }
         public string UserId { get; set; }

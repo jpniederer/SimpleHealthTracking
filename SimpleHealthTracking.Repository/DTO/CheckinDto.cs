@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class Checkin
+    public class CheckinDto
     {
         public int Id { get; set; }
         public string UserId { get; set; }

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class Medicine
+    public class MedicineDto
     {
         public int Id { get; set; }
         public string UserId { get; set; }

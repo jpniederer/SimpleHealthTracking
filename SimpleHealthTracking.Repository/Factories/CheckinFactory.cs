@@ -4,9 +4,9 @@
     {
         public CheckinFactory() { }
 
-        public DTO.Checkin CreateCheckin(Entities.Checkin checkin)
+        public DTO.CheckinDto CreateCheckin(Entities.Checkin checkin)
         {
-            return new DTO.Checkin()
+            return new DTO.CheckinDto()
             {
                 Id = checkin.Id,
                 UserId = checkin.UserId,
@@ -23,7 +23,7 @@
             };
         }
 
-        public Entities.Checkin CreateCheckin(DTO.Checkin checkin)
+        public Entities.Checkin CreateCheckin(DTO.CheckinDto checkin)
         {
             return new Entities.Checkin
             {

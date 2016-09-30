@@ -8,9 +8,9 @@
         MedicineTakenFactory mtf = new MedicineTakenFactory();
         public MedicineFactory() { }
 
-        public DTO.Medicine CreateMedicine(Entities.Medicine medicine)
+        public DTO.MedicineDto CreateMedicine(Entities.Medicine medicine)
         {
-            return new DTO.Medicine()
+            return new DTO.MedicineDto()
             {
                 Id = medicine.Id,
                 UserId = medicine.UserId,
@@ -25,7 +25,7 @@
             };
         }
 
-        public Entities.Medicine CreateMedicine(DTO.Medicine medicine)
+        public Entities.Medicine CreateMedicine(DTO.MedicineDto medicine)
         {
             return new Entities.Medicine()
             {

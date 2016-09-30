@@ -52,10 +52,10 @@
   <ItemGroup>
     <Compile Include="ActionResult.cs" />
     <Compile Include="ActionStatus.cs" />
-    <Compile Include="DTO\Checkin.cs" />
-    <Compile Include="DTO\Medicine.cs" />
-    <Compile Include="DTO\MedicineTaken.cs" />
-    <Compile Include="DTO\Sleep.cs" />
+    <Compile Include="DTO\CheckinDto.cs" />
+    <Compile Include="DTO\MedicineDto.cs" />
+    <Compile Include="DTO\MedicineTakenDto.cs" />
+    <Compile Include="DTO\SleepDto.cs" />
     <Compile Include="Entities\Checkin.cs" />
     <Compile Include="Entities\Medicine.cs" />
     <Compile Include="Entities\MedicineTaken.cs" />
