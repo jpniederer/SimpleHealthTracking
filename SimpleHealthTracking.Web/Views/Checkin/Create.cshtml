@@ -44,7 +44,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(c => c.Notes)
-        @Html.TextBoxFor(c => c.Notes, new { @class = "form-control", placeholder = "Enter a comment." })
+        @Html.TextAreaFor(c => c.Notes, new { @class = "form-control", placeholder = "Enter a comment." })
         @Html.ValidationMessageFor(c => c.Notes)
     </div>
     <button type="submit" class="btn btn-primary">Save</button>

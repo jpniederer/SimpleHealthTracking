@@ -187,6 +187,7 @@
     <Compile Include="ViewModels\MedicineViewModel.cs" />
     <Compile Include="ViewModels\SleepViewModel.cs" />
     <Compile Include="ViewModels\ValidDate.cs" />
+    <Compile Include="ViewModels\ValidDateOrNull.cs" />
     <Compile Include="ViewModels\ValidTime.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,39 @@
-﻿
+﻿@model SimpleHealthTracking.Web.ViewModels.MedicineViewModel
+
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add a Medicine";
 }
 
-<h2>Create</h2>
-
+<h2>Add a New Medicine</h2>
+@using (Html.BeginForm("Create", "Medicine"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus", placeholder = "Medicine Name"})
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NumberOfTimesPerDay)
+        @Html.TextBoxFor(m => m.NumberOfTimesPerDay, new { @class = "form-control", placeholder = "4"})
+        @Html.ValidationMessageFor(m => m.NumberOfTimesPerDay)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IsActive)
+        @Html.CheckBoxFor(m => m.IsActive, new { @class = "form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.StartDate)
+        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", placeholder = "01/01/2016 (not required)"})
+        @Html.ValidationMessageFor(m => m.StartDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.EndDate)
+        @Html.TextBoxFor(m => m.EndDate, new {  @class = "form-control", placeholder = "01/01/2017 (not required)"})
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")    
+}
