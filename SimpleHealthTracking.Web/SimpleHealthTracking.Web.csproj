@@ -278,6 +278,9 @@
     <Content Include="Views\Sleep\Create.cshtml" />
     <Content Include="Views\Medicine\Create.cshtml" />
     <Content Include="Views\Checkin\Create.cshtml" />
+    <Content Include="Views\Checkin\Delete.cshtml" />
+    <Content Include="Views\Checkin\Edit.cshtml" />
+    <Content Include="Views\Checkin\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
