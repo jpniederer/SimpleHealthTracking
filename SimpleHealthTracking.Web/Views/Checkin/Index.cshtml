@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SimpleHealthTracking.Repository.Entities.Checkin>
+
+@{
+    ViewBag.Title = "Your Checkin Entries";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your Checkin Entries</h2>
+<p>The checkin list only shows a condensed version of your checkins. You can use the Edit, Details, and Delete links to act on your past entries.</p>
+
+<p>
+    @Html.ActionLink("Add a Checkin", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Weight</th>
+        <th>Heartrate</th>
+        <th>Blood Pressure</th>
+        <th>Ratings (Physical, Psych, Exercise)</th>
+        <th>Time Added</th>
+        <th></th>
+    </tr>
+    @foreach (var checkin in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(c => checkin.Weight)</td>
+            <td>@Html.DisplayFor(c => checkin.Heartrate)</td>
+            <td>@String.Concat(checkin.SystolicBloodPressure.ToString(), "/", checkin.DiastolicBloodPressure)</td>
+            <td>@String.Concat(checkin.PhysicalFeelingRating, ", ", checkin.PsychologicalFeelingRating, ", ", checkin.ExerciseRating)</td>
+            <td>@Html.DisplayFor(c => checkin.TimeAdded)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = checkin.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = checkin.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = checkin.Id })
+            </td>
+        </tr>
+    }
+</table>

@@ -91,6 +91,7 @@
         public ActionResult Edit(Checkin checkin)
         {
             var currentUser = User.Identity.GetUserId();
+            checkin.UpdateTime = DateTime.Now;
 
             if (currentUser != checkin.UserId)
             {
@@ -145,6 +146,7 @@
         }
 
         // Checkin Details
+        [Authorize]
         public ActionResult Details(int id)
         {
             var currentUser = User.Identity.GetUserId();
@@ -164,5 +166,12 @@
         }
 
         // Checkin Index
+        [Authorize]
+        public ActionResult Index()
+        {
+            // Will add paging later. Want to get the index page accessible now for testing.
+            var currentUser = User.Identity.GetUserId();
+            return View(repository.GetCheckinsForUser(currentUser).ToList());
+        }
     }
 }

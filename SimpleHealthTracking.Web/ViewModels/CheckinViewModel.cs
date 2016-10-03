@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using SimpleHealthTracking.Repository.Entities;
 
     public class CheckinViewModel
     {
@@ -13,6 +14,20 @@
         public string PsychologicalFeelingRating { get; set; }
         public string ExerciseRating { get; set; }
         public string Notes { get; set; }
+
+        public CheckinViewModel() { }
+
+        public CheckinViewModel(Checkin checkin)
+        {
+            Weight = checkin.Weight.ToString();
+            Heartrate = checkin.Heartrate.ToString();
+            SystolicBloodPressure = checkin.SystolicBloodPressure.ToString();
+            DiastolicBloodPressure = checkin.DiastolicBloodPressure.ToString();
+            PhysicalFeelingRating = checkin.PhysicalFeelingRating.ToString();
+            PsychologicalFeelingRating = checkin.PsychologicalFeelingRating.ToString();
+            ExerciseRating = checkin.ExerciseRating.ToString();
+            Notes = checkin.Notes;
+        }
 
         public float? GetFloatValue(string possibleValue)
         {

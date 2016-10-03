@@ -1,7 +1,41 @@
-﻿
+﻿@model SimpleHealthTracking.Repository.Entities.Checkin
+
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete this Checkin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Delete This Checkin</h2>
 
+<h3>Do you really want to delete this checkin? Once deleted it'll be gone forever.</h3>
+<div>
+    <h4>Checkin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Weight</dt>
+        <dd>@Html.DisplayFor(c => c.Weight)</dd>
+        <dt>Heartrate</dt>
+        <dd>@Html.DisplayFor(c => c.Heartrate)</dd>
+        <dt>Blood Pressure</dt>
+        <dd>@String.Concat(Model.SystolicBloodPressure, "/", Model.DiastolicBloodPressure)</dd>
+        <dt>Physical Rating</dt>
+        <dd>@Html.DisplayFor(c => c.PhysicalFeelingRating)</dd>
+        <dt>Pyschological Rating</dt>
+        <dd>@Html.DisplayFor(c => c.PsychologicalFeelingRating)</dd>
+        <dt>Exercise Rating</dt>
+        <dd>@Html.DisplayFor(c => c.ExerciseRating)</dd>
+        <dt>Notes</dt>
+        <dd><p>@Model.Notes</p></dd>
+        <dt>Time Added</dt>
+        <dd>@Html.DisplayFor(c => c.TimeAdded)</dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete Checkin" class="btn btn-default" /> |
+            @Html.ActionLink("Go Back to Checkin List", "Index")
+        </div>
+    }
+</div>

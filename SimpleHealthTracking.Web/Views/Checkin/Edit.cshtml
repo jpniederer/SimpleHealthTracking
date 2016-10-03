@@ -1,7 +1,68 @@
-﻿
+﻿@model SimpleHealthTracking.Repository.Entities.Checkin
+
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Checkin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
+<h2>Edit Checkin</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.UserId)
+    @Html.HiddenFor(model => model.TimeAdded)
+    <div class="form-group">
+        @Html.LabelFor(c => c.Weight)
+        @Html.TextBoxFor(c => c.Weight, new { @class = "form-control", autofocus = "autofocus", placeholder = "155.5 (not required)" })
+        @Html.ValidationMessageFor(c => c.Weight)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.Heartrate)
+        @Html.TextBoxFor(c => c.Heartrate, new { @class = "form-control", placeholder = "60 (not required)" })
+        @Html.ValidationMessageFor(c => c.Heartrate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.SystolicBloodPressure)
+        @Html.TextBoxFor(c => c.SystolicBloodPressure, new { @class = "form-control", placeholder = "120 (not required)" })
+        @Html.ValidationMessageFor(c => c.SystolicBloodPressure)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.DiastolicBloodPressure)
+        @Html.TextBoxFor(c => c.DiastolicBloodPressure, new { @class = "form-control", placeholder = "80 (not required)" })
+        @Html.ValidationMessageFor(c => c.DiastolicBloodPressure)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.PhysicalFeelingRating)
+        @Html.TextBoxFor(c => c.PhysicalFeelingRating, new { @class = "form-control", placeholder = "0.0 out of 10.0 rating (not required)" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.PsychologicalFeelingRating)
+        @Html.TextBoxFor(c => c.PsychologicalFeelingRating, new { @class = "form-control", placeholder = "0.0 out of 10.0 (not required)" })
+        @Html.ValidationMessageFor(c => c.PsychologicalFeelingRating)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.ExerciseRating)
+        @Html.TextBoxFor(c => c.ExerciseRating, new { @class = "form-control", placeholder = "0.0 out of 10.0 (not required)" })
+        @Html.ValidationMessageFor(c => c.ExerciseRating)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.Notes)
+        @Html.TextAreaFor(c => c.Notes, new { @class = "form-control", placeholder = "Enter a comment." })
+        @Html.ValidationMessageFor(c => c.Notes)
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+<div style="padding-top: 15px;">
+    <p>
+        @Html.ActionLink("Checkin Details", "Details", new { id = Model.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+        @Html.ActionLink("Back to Checkin List", "Index")
+    </p>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
