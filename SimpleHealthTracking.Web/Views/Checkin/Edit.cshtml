@@ -13,7 +13,6 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Id)
     @Html.HiddenFor(model => model.UserId)
-    @Html.HiddenFor(model => model.TimeAdded)
     <div class="form-group">
         @Html.LabelFor(c => c.Weight)
         @Html.TextBoxFor(c => c.Weight, new { @class = "form-control", autofocus = "autofocus", placeholder = "155.5 (not required)" })
@@ -52,6 +51,11 @@
         @Html.LabelFor(c => c.Notes)
         @Html.TextAreaFor(c => c.Notes, new { @class = "form-control", placeholder = "Enter a comment." })
         @Html.ValidationMessageFor(c => c.Notes)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.TimeAdded)
+        @Html.TextBoxFor(c => c.TimeAdded, new { @class = "form-control", placeholder = "01/01/2017 01:01:01" })
+        @Html.ValidationMessageFor(c => c.TimeAdded)
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 }
