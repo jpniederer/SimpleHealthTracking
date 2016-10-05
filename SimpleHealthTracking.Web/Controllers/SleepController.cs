@@ -10,6 +10,7 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+    using System.Net;
 
     public class SleepController : Controller
     {
@@ -81,6 +82,111 @@
             }
 
             return 0.0f;
+        }
+
+        [Authorize]
+        public ActionResult Edit(int id)
+        {
+            var currentUser = User.Identity.GetUserId();
+            Sleep sleep = repository.GetSleep(id);
+
+            if (sleep == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (currentUser != sleep.UserId)
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            return View(sleep);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Sleep sleep)
+        {
+            var currentUser = User.Identity.GetUserId();
+            
+            if (currentUser != sleep.UserId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            if (ModelState.IsValid)
+            {
+                sleep.UpdateTime = DateTime.Now;
+                sleep.MinutesSlept = GetMinutesSlept(sleep);
+                repository.UpdateSleep(sleep);
+                return RedirectToAction("Index");
+            }
+
+            return View(sleep);
+        }
+
+        [Authorize]
+        public ActionResult Delete(int id)
+        {
+            var currentUser = User.Identity.GetUserId();
+            Sleep sleep = repository.GetSleep(id);
+
+            if (currentUser != sleep.UserId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            if (sleep == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(sleep);
+        }
+
+        [Authorize]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var currentUser = User.Identity.GetUserId();
+            Sleep sleep = repository.GetSleep(id);
+
+            if (currentUser != sleep.UserId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            repository.DeleteCheckin(id);
+
+            return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public ActionResult Details(int id)
+        {
+            var currentUser = User.Identity.GetUserId();
+            Sleep sleep = repository.GetSleep(id);
+
+            if (currentUser != sleep.UserId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            if (sleep == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(sleep);
+        }
+
+        [Authorize]
+        public ActionResult Index()
+        {
+            var currentUser = User.Identity.GetUserId();
+            return View(repository.GetSleepForUser(currentUser).ToList());
         }
     }
 }

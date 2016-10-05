@@ -91,7 +91,6 @@
         public ActionResult Edit(Checkin checkin)
         {
             var currentUser = User.Identity.GetUserId();
-            checkin.UpdateTime = DateTime.Now;
 
             if (currentUser != checkin.UserId)
             {
@@ -100,6 +99,7 @@
 
             if (ModelState.IsValid)
             {
+                checkin.UpdateTime = DateTime.Now;
                 repository.UpdateCheckin(checkin);
                 return RedirectToAction("Index");
             }

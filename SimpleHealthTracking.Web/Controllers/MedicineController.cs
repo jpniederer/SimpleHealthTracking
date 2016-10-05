@@ -87,7 +87,6 @@
         public ActionResult Edit(Medicine medicine)
         {
             var currentUser = User.Identity.GetUserId();
-            medicine.UpdateTime = DateTime.Now;
 
             if (currentUser != medicine.UserId)
             {
@@ -96,6 +95,7 @@
 
             if (ModelState.IsValid)
             {
+                medicine.UpdateTime = DateTime.Now;
                 repository.UpdateMedicine(medicine);
                 return RedirectToAction("Index");
             }
