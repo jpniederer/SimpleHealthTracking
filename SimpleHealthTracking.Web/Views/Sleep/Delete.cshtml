@@ -1,7 +1,36 @@
-﻿
+﻿@model SimpleHealthTracking.Repository.Entities.Sleep
+
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete this Sleep Record";
 }
 
-<h2>Delete</h2>
+<h2>Delete This Sleep Record</h2>
 
+<h3>Do you really want to delete this sleep record? Once deleted, it'll be gone forever.</h3>
+<div>
+    <h4>Sleep</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Start Time</dt>
+        <dd>@Html.DisplayFor(s => s.StartTime)</dd>
+        <dt>End Time</dt>
+        <dd>@Html.DisplayFor(s => s.EndTime)</dd>
+        <dt>Minutes Slept</dt>
+        <dd>@Html.DisplayFor(s => s.MinutesSlept)</dd>
+        <dt>Sleep Quality</dt>
+        <dd>@Html.DisplayFor(s => s.SleepQuality)</dd>
+        <dt>Time Created</dt>
+        <dd>@Html.DisplayFor(s => s.TimeAdded)</dd>
+        <dt>Last Update Time</dt>
+        <dd>@Html.DisplayFor(s => s.UpdateTime)</dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete Sleep" class="btn btn-default" /> |
+            @Html.ActionLink("Go Back to Sleep List", "Index")
+        </div>
+    }
+</div>

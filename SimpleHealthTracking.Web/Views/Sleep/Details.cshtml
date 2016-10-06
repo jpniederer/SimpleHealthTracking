@@ -1,7 +1,31 @@
-﻿
+﻿@model SimpleHealthTracking.Repository.Entities.Sleep
+
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Sleep Details</h2>
 
+<div>
+    <h4>Sleep</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Start Time</dt>
+        <dd>@Html.DisplayFor(s => s.StartTime)</dd>
+        <dt>End Time</dt>
+        <dd>@Html.DisplayFor(s => s.EndTime)</dd>
+        <dt>Minutes Slept</dt>
+        <dd>@Html.DisplayFor(s => s.MinutesSlept)</dd>
+        <dt>Sleep Quality</dt>
+        <dd>@Html.DisplayFor(s => s.SleepQuality)</dd>
+        <dt>Time Created</dt>
+        <dd>@Html.DisplayFor(s => s.TimeAdded)</dd>
+        <dt>Last Update Time</dt>
+        <dd>@Html.DisplayFor(s => s.UpdateTime)</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+    @Html.ActionLink("Back to Checkin List", "Index")
+</p>

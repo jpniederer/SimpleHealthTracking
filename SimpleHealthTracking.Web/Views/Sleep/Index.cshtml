@@ -1,7 +1,37 @@
-﻿
+﻿@model IEnumerable<SimpleHealthTracking.Repository.Entities.Sleep>
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Your Sleep Entries";
 }
 
-<h2>Index</h2>
+<h2>Your Sleep Entries</h2>
+<p>The sleep list only shows a condensed version of your sleep entries.</p>
 
+<p>
+    @Html.ActionLink("Add a Sleep Record", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Minutes Slept</th>
+        <th>Sleep Quality</th>
+        <th>Time Created</th>
+        <th></th>
+    </tr>
+    @foreach (var sleep in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(s => sleep.StartTime)</td>
+            <td>@Html.DisplayFor(s => sleep.EndTime)</td>
+            <td>@Html.DisplayFor(s => sleep.MinutesSlept)</td>
+            <td>@Html.DisplayFor(s => sleep.SleepQuality)</td>
+            <td>@Html.DisplayFor(s => sleep.TimeAdded)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = sleep.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = sleep.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = sleep.Id })
+            </td>
+        </tr>
+    }
+</table>

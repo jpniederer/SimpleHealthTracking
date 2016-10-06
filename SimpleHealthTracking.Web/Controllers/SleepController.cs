@@ -158,7 +158,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
-            repository.DeleteCheckin(id);
+            repository.DeleteSleep(id);
 
             return RedirectToAction("Index");
         }
