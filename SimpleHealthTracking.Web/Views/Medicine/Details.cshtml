@@ -1,7 +1,33 @@
-﻿
+﻿@model SimpleHealthTracking.Repository.Entities.Medicine
+
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Medicine Details</h2>
 
+<div>
+    <h4>Medicine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd>@Html.DisplayFor(m => m.Name)</dd>
+        <dt>Number of Times to Take</dt>
+        <dd>@Html.DisplayFor(m => m.NumberOfTimesPerDay)</dd>
+        <dt>Currently Taking</dt>
+        <dd>@Html.DisplayFor(m => m.IsActive)</dd>
+        <dt>Start Date</dt>
+        <dd>@Html.DisplayFor(m => m.StartDate)</dd>
+        <dt>End Date</dt>
+        <dd>@Html.DisplayFor(m => m.EndDate)</dd>
+        <dt>Create Time</dt>
+        <dd>@Html.DisplayFor(m => m.TimeAdded)</dd>
+        <dt>Last Update</dt>
+        <dd>@Html.DisplayFor(m => m.UpdateTime)</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+    @Html.ActionLink("Back to Medicine List", "Index")
+</p>

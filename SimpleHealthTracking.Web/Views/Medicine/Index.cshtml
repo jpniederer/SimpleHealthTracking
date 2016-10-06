@@ -1,7 +1,38 @@
-﻿
+﻿@model IEnumerable<SimpleHealthTracking.Repository.Entities.Medicine>
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Your Medicines";
 }
 
-<h2>Index</h2>
+<h2>Your Medicines</h2>
 
+<p>
+    @Html.ActionLink("Add a New Medication", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Times Per Day</th>
+        <th>Is Active</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Create Time</th>
+        <th></th>
+    </tr>
+    @foreach (var medicine in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => medicine.Name)</td>
+            <td>@Html.DisplayFor(m => medicine.NumberOfTimesPerDay)</td>
+            <td>@Html.DisplayFor(m => medicine.IsActive)</td>
+            <td>@Html.DisplayFor(m => medicine.StartDate)</td>
+            <td>@Html.DisplayFor(m => medicine.EndDate)</td>
+            <td>@Html.DisplayFor(m => medicine.TimeAdded)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = medicine.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = medicine.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = medicine.Id })
+            </td>
+        </tr>
+    }
+</table>
