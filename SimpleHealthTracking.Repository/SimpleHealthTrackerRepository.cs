@@ -156,7 +156,7 @@
             {
                 var currentMedicine = _context.Medicines.FirstOrDefault(m => m.Id == medicine.Id);
 
-                if (currentMedicine != null)
+                if (currentMedicine == null)
                 {
                     return new ActionResult<Medicine>(medicine, ActionStatus.NotFound);
                 }
