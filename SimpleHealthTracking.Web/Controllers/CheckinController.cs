@@ -63,7 +63,7 @@
 
             repository.InsertCheckin(checkin);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
         // Edit Checkin
@@ -182,7 +182,7 @@
         private void SetupIndexSortingViewbag(string sortOrder)
         {
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.DateSortParameter = String.IsNullOrEmpty(sortOrder) ? "TimeAddedDesc" : "";
+            ViewBag.DateSortParameter = String.IsNullOrEmpty(sortOrder) ? "TimeAddedAsc" : "";
             ViewBag.WeightSortParameter = sortOrder == "Weight" ? "WeightDesc" : "Weight";
             ViewBag.HeartrateSortParameter = sortOrder == "Heartrate" ? "HeartrateDesc" : "Heartrate";
         }
@@ -201,10 +201,10 @@
                     return checkinsForUser.OrderBy(c => c.Heartrate);
                 case "HeartrateDesc":
                     return checkinsForUser.OrderByDescending(c => c.Heartrate);
-                case "TimeAddedDesc":
-                    return checkinsForUser.OrderByDescending(c => c.TimeAdded);
-                default:
+                case "TimeAddedAsc":
                     return checkinsForUser.OrderBy(c => c.TimeAdded);
+                default:
+                    return checkinsForUser.OrderByDescending(c => c.TimeAdded);
             }
         }
     }

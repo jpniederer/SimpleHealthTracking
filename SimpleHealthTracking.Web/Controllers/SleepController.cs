@@ -11,6 +11,7 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Net;
+    using PagedList;
 
     public class SleepController : Controller
     {
@@ -62,7 +63,7 @@
 
             repository.InsertSleep(sleep);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
         private float GetMinutesSlept(Sleep sleep)
@@ -183,10 +184,54 @@
         }
 
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, int? page)
         {
             var currentUser = User.Identity.GetUserId();
-            return View(repository.GetSleepForUser(currentUser).ToList());
+            var sleepsForUser = GetSleepsForIndex(sortOrder, currentUser);
+            SetupIndexSortingViewbag(sortOrder);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(sleepsForUser.ToPagedList(pageNumber, pageSize));
+        }
+
+        private void SetupIndexSortingViewbag(string sortOrder)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DateSortParameter = String.IsNullOrEmpty(sortOrder) ? "TimeAddedAsc" : "";
+            ViewBag.StartTimeParameter = sortOrder == "StartTime" ? "StartTimeDesc" : "StartTime";
+            ViewBag.EndTimeParameter = sortOrder == "EndTime" ? "EndTimeDesc" : "EndTime";
+            ViewBag.MinutesSleptParameter = sortOrder == "MinutesSlept" ? "MinutesSleptDesc" : "MinutesSlept";
+            ViewBag.SleepQualityParameter = sortOrder == "SleepQuality" ? "SleepQualityDesc" : "SleepQuality";
+        }
+
+        private IEnumerable<Sleep> GetSleepsForIndex(string sortOrder, string currentUser)
+        {
+            var sleepsForUser = repository.GetSleepForUser(currentUser);
+
+            switch (sortOrder)
+            {
+                case "StartTime":
+                    return sleepsForUser.OrderBy(s => s.StartTime);
+                case "StartTimeDesc":
+                    return sleepsForUser.OrderByDescending(s => s.StartTime);
+                case "EndTime":
+                    return sleepsForUser.OrderBy(s => s.EndTime);
+                case "EndTimeDesc":
+                    return sleepsForUser.OrderByDescending(s => s.EndTime);
+                case "MinutesSlept":
+                    return sleepsForUser.OrderBy(s => s.MinutesSlept);
+                case "MinutesSleptDesc":
+                    return sleepsForUser.OrderByDescending(s => s.MinutesSlept);
+                case "SleepQuality":
+                    return sleepsForUser.OrderBy(s => s.SleepQuality);
+                case "SleepQualityDesc":
+                    return sleepsForUser.OrderByDescending(s => s.SleepQuality);
+                case "TimeAddedAsc":
+                    return sleepsForUser.OrderBy(s => s.TimeAdded);
+                default:
+                    return sleepsForUser.OrderByDescending(s => s.TimeAdded);
+            }
         }
     }
 }

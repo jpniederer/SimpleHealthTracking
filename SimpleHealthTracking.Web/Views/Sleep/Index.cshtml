@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SimpleHealthTracking.Repository.Entities.Sleep>
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<SimpleHealthTracking.Repository.Entities.Sleep>
 
 @{
     ViewBag.Title = "Your Sleep Entries";
@@ -12,11 +13,21 @@
 </p>
 <table class="table">
     <tr>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Minutes Slept</th>
-        <th>Sleep Quality</th>
-        <th>Time Created</th>
+        <th>
+            @Html.ActionLink("Start Time", "Index", new { sortOrder = ViewBag.StartTimeParameter })
+        </th>
+        <th>
+            @Html.ActionLink("End Time", "Index", new { sortOrder = ViewBag.EndTimeParameter })
+        </th>
+        <th>
+            @Html.ActionLink("Minutes Slept", "Index", new { sortOrder = ViewBag.MinutesSleptParameter })
+        </th>
+        <th>
+            @Html.ActionLink("Sleep Quality", "Index", new { sortOrder = ViewBag.SleepQualityParameter })
+        </th>
+        <th>
+            @Html.ActionLink("Time Created", "Index", new { sortOrder = ViewBag.DateSortParameter })
+        </th>
         <th></th>
     </tr>
     @foreach (var sleep in Model)
@@ -35,3 +46,9 @@
         </tr>
     }
 </table>
+<p>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort }))
+</p>
