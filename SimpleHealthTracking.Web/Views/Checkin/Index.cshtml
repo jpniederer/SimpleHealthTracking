@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SimpleHealthTracking.Repository.Entities.Checkin>
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<SimpleHealthTracking.Repository.Entities.Checkin>
 
 @{
     ViewBag.Title = "Your Checkin Entries";
@@ -13,11 +14,17 @@
 </p>
 <table class="table">
     <tr>
-        <th>Weight</th>
-        <th>Heartrate</th>
+        <th>
+            @Html.ActionLink("Weight", "Index", new { sortOrder = ViewBag.WeightSortParameter })
+        </th>
+        <th>
+            @Html.ActionLink("Heartrate", "Index", new { sortOrder = ViewBag.HeartrateSortParameter })
+        </th>
         <th>Blood Pressure</th>
         <th>Ratings (Physical, Psych, Exercise)</th>
-        <th>Time Added</th>
+        <th>
+            @Html.ActionLink("Time Created", "Index", new { sortOrder = ViewBag.DateSortParameter })
+        </th>
         <th></th>
     </tr>
     @foreach (var checkin in Model)
@@ -36,3 +43,9 @@
         </tr>
     }
 </table>
+<p>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort }))
+</p>

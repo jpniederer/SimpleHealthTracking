@@ -11,6 +11,7 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Net;
+    using PagedList;
 
     public class CheckinController : Controller
     {
@@ -167,11 +168,44 @@
 
         // Checkin Index
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, int? page)
         {
-            // Will add paging later. Want to get the index page accessible now for testing.
             var currentUser = User.Identity.GetUserId();
-            return View(repository.GetCheckinsForUser(currentUser).ToList());
+            var checkinsForUser = GetCheckinsForIndex(sortOrder, currentUser);
+            SetupIndexSortingViewbag(sortOrder);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(checkinsForUser.ToPagedList(pageNumber, pageSize));
+        }
+
+        private void SetupIndexSortingViewbag(string sortOrder)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DateSortParameter = String.IsNullOrEmpty(sortOrder) ? "TimeAddedDesc" : "";
+            ViewBag.WeightSortParameter = sortOrder == "Weight" ? "WeightDesc" : "Weight";
+            ViewBag.HeartrateSortParameter = sortOrder == "Heartrate" ? "HeartrateDesc" : "Heartrate";
+        }
+
+        private IEnumerable<Checkin> GetCheckinsForIndex(string sortOrder, string currentUser)
+        {
+            var checkinsForUser = repository.GetCheckinsForUser(currentUser);
+
+            switch (sortOrder)
+            {
+                case "Weight":
+                    return checkinsForUser.OrderBy(c => c.Weight);
+                case "WeightDesc":
+                    return checkinsForUser.OrderByDescending(c => c.Weight);
+                case "Heartrate":
+                    return checkinsForUser.OrderBy(c => c.Heartrate);
+                case "HeartrateDesc":
+                    return checkinsForUser.OrderByDescending(c => c.Heartrate);
+                case "TimeAddedDesc":
+                    return checkinsForUser.OrderByDescending(c => c.TimeAdded);
+                default:
+                    return checkinsForUser.OrderBy(c => c.TimeAdded);
+            }
         }
     }
 }
