@@ -12,8 +12,33 @@
     using System.Net.Http;
     using System.Web.Http;
 
+    [Authorize]
     public class SleepApiController : ApiController
     {
+        ISimpleHealthTrackerRepository repository;
+        SleepFactory sleepFactory = new SleepFactory();
 
+        public SleepApiController()
+        {
+            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+        }
+
+        public SleepApiController(ISimpleHealthTrackerRepository repo)
+        {
+            repository = repo;
+        }
+
+        [HttpPost]
+        public IHttpActionResult AddSleep(SleepDto sleepDto)
+        {
+            var userId = User.Identity.GetUserId();
+            Sleep sleep = sleepFactory.CreateSleep(sleepDto);
+
+            sleep.TimeAdded = DateTime.Now;
+            sleep.UpdateTime = DateTime.Now;
+            repository.InsertSleep(sleep);
+
+            return Ok();
+        }
     }
 }
