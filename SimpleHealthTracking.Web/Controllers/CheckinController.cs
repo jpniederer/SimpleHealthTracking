@@ -172,14 +172,14 @@
         {
             var currentUser = User.Identity.GetUserId();
             var checkinsForUser = GetCheckinsForIndex(sortOrder, currentUser);
-            SetupIndexSortingViewbag(sortOrder);
+            SetupIndexSortingViewBag(sortOrder);
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(checkinsForUser.ToPagedList(pageNumber, pageSize));
         }
 
-        private void SetupIndexSortingViewbag(string sortOrder)
+        private void SetupIndexSortingViewBag(string sortOrder)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.DateSortParameter = String.IsNullOrEmpty(sortOrder) ? "TimeAddedAsc" : "";

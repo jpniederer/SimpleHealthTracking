@@ -11,6 +11,7 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Net;
+    using PagedList;
 
     public class MedicineController : Controller
     {
@@ -59,7 +60,7 @@
 
             repository.InsertMedicine(medicine);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
         [Authorize]
@@ -160,10 +161,59 @@
         }
 
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, int? page)
         {
             var currentUser = User.Identity.GetUserId();
-            return View(repository.GetMedicinesForUser(currentUser).ToList());
+            var medicinesForUser = GetMedicinesForIndex(sortOrder, currentUser);
+            SetupIndexSortingViewBag(sortOrder);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(medicinesForUser.ToPagedList(pageNumber, pageSize));
+        }
+
+        private void SetupIndexSortingViewBag(string sortOrder)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSort = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
+            ViewBag.NumberTimesSort = sortOrder == "NumberTimes" ? "NumberTimesDesc" : "NumberTimes";
+            ViewBag.IsActiveSort = sortOrder == "IsActive" ? "IsActive" : "IsActiveDesc";
+            ViewBag.StartDateSort = sortOrder == "StartDate" ? "StartDateDesc" : "StartDate";
+            ViewBag.EndDateSort = sortOrder == "EndDate" ? "EndDateDesc" : "EndDate";
+            ViewBag.TimeAddedSort = sortOrder == "TimeAdded" ? "TimeAddedDesc" : "TimeAdded";
+        }
+
+        private IEnumerable<Medicine> GetMedicinesForIndex(string sortOrder, string currentUser)
+        {
+            var medicinesForUser = repository.GetMedicinesForUser(currentUser);
+
+            switch (sortOrder)
+            {
+                case "NumberTimes":
+                    return medicinesForUser.OrderBy(m => m.NumberOfTimesPerDay);
+                case "NumberTimesDesc":
+                    return medicinesForUser.OrderByDescending(m => m.NumberOfTimesPerDay);
+                case "IsActive":
+                    return medicinesForUser.OrderBy(m => m.IsActive);
+                case "IsActiveDesc":
+                    return medicinesForUser.OrderByDescending(m => m.IsActive);
+                case "StartDate":
+                    return medicinesForUser.OrderBy(m => m.StartDate);
+                case "StartDateDesc":
+                    return medicinesForUser.OrderByDescending(m => m.StartDate);
+                case "EndDate":
+                    return medicinesForUser.OrderBy(m => m.EndDate);
+                case "EndDateDesc":
+                    return medicinesForUser.OrderByDescending(m => m.EndDate);
+                case "TimeAdded":
+                    return medicinesForUser.OrderBy(m => m.TimeAdded);
+                case "TimeAddedDesc":
+                    return medicinesForUser.OrderByDescending(m => m.TimeAdded);
+                case "NameDesc":
+                    return medicinesForUser.OrderByDescending(m => m.Name);
+                default:
+                    return medicinesForUser.OrderBy(m => m.Name);
+            }
         }
     }
 }

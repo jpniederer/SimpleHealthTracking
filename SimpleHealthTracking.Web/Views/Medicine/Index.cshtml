@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SimpleHealthTracking.Repository.Entities.Medicine>
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<SimpleHealthTracking.Repository.Entities.Medicine>
 
 @{
     ViewBag.Title = "Your Medicines";
@@ -11,12 +12,24 @@
 </p>
 <table class="table">
     <tr>
-        <th>Name</th>
-        <th>Times Per Day</th>
-        <th>Is Active</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Create Time</th>
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSort })
+        </th>
+        <th>
+            @Html.ActionLink("Times Per Day", "Index", new { sortOrder = ViewBag.NumberTimesSort })
+        </th>
+        <th>
+            @Html.ActionLink("Is Active", "Index", new { sortOrder = ViewBag.IsActiveSort })
+        </th>
+        <th>
+            @Html.ActionLink("Start Date", "Index", new { sortOrder = ViewBag.StartDateSort })
+        </th>
+        <th>
+            @Html.ActionLink("End Date", "Index", new { sortOrder = ViewBag.EndDateSort })
+        </th>
+        <th>
+            @Html.ActionLink("Create Time", "Index", new { sortOrder = ViewBag.TimeAddedSort })
+        </th>
         <th></th>
     </tr>
     @foreach (var medicine in Model)
@@ -36,3 +49,8 @@
         </tr>
     }
 </table>
+<p>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort }))
+</p>
