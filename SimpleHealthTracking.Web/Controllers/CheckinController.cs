@@ -28,6 +28,14 @@
             repository = repo;
         }
 
+        [Authorize]
+        public ActionResult CheckinPartial()
+        {
+            CheckinViewModel viewModel = new CheckinViewModel();
+
+            return View(viewModel);
+        }
+
         // Create Checkin
         [Authorize]
         public ActionResult Create()

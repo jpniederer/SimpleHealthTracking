@@ -1,0 +1,22 @@
+﻿@model SimpleHealthTracking.Web.ViewModels.CheckinViewModel
+
+<h2>Add a New Checkin</h2>
+<div class="row">
+    <div class="col-md-4">
+        <h4>Weight</h4>
+        @Html.TextBoxFor(c => c.Weight, new { @class = "form-control", autofocus = "autofocus", placeholder = "155.5 (not required)" })
+        @Html.ValidationMessageFor(c => c.Weight)
+    </div>
+    <div class="col-md-4">
+        <h4>Heartrate</h4>
+        @Html.TextBoxFor(c => c.Heartrate, new { @class = "form-control", placeholder = "60 (not required)" })
+        @Html.ValidationMessageFor(c => c.Heartrate)
+    </div>
+    <div class="col-md-4">
+        <div id="counter">0</div>
+        <button id="timer" onclick="timerClick()">Start Timer</button>
+    </div>
+</div>
+<div class="partial-add-record">
+    <button type="submit" class="btn btn-primary">Add Checkin</button>
+</div>
