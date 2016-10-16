@@ -27,6 +27,14 @@
         {
             repository = repo;
         }
+
+        [Authorize]
+        public ActionResult SleepPartial()
+        {
+            SleepViewModel viewModel = new SleepViewModel();
+
+            return View(viewModel);
+        }
         
         [Authorize]
         public ActionResult Create()

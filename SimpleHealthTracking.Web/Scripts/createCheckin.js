@@ -1,0 +1,1 @@
+﻿// Will be used to call the Web API function to create a checkin from the home page.

@@ -1,0 +1,28 @@
+﻿@model SimpleHealthTracking.Web.ViewModels.SleepViewModel
+
+<h2>Add a New Sleep Entry</h2>
+<div class="row">
+    <div class="col-md-3">
+        <h4>Start Time</h4>
+        @Html.TextBoxFor(s => s.StartDate, new { @class = "form-control", placeholder = "01/01/2017"})
+        @Html.ValidationMessageFor(s => s.StartDate)
+    </div>
+    <div class="col-md-3">
+        <h4>Start Time</h4>
+        @Html.TextBoxFor(s => s.StartTime, new { @class = "form-control", placeholder = "22:00" })
+        @Html.ValidationMessageFor(s => s.StartTime)
+    </div>
+    <div class="col-md-3">
+        <h4>End Time</h4>
+        @Html.TextBoxFor(s => s.EndDate, new { @class = "form-control", placeholder = "01/02/2017" })
+        @Html.ValidationMessageFor(s => s.EndDate)
+    </div>
+    <div class="col-md-3">
+        <h4>Start Time</h4>
+        @Html.TextBoxFor(s => s.EndTime, new { @class = "form-control", placeholder = "08:00" })
+        @Html.ValidationMessageFor(s => s.EndTime)
+    </div>
+</div>
+<div class="partial-add-record">
+    <button type="submit" class="btn btn-primary">Add Sleep</button>
+</div>
