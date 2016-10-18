@@ -36,6 +36,7 @@
 
             checkin.TimeAdded = DateTime.Now;
             checkin.UpdateTime = DateTime.Now;
+            checkin.UserId = userId;
             repository.InsertCheckin(checkin);
 
             return Ok();
