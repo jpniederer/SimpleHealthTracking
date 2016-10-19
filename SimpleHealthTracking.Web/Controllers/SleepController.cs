@@ -3,6 +3,7 @@
     using SimpleHealthTracking.Repository;
     using SimpleHealthTracking.Repository.Entities;
     using SimpleHealthTracking.Repository.Factories;
+    using SimpleHealthTracking.Repository.DTO;
     using SimpleHealthTracking.Web.ViewModels;
     using Microsoft.AspNet.Identity;
     using System;
@@ -31,9 +32,9 @@
         [Authorize]
         public ActionResult SleepPartial()
         {
-            SleepViewModel viewModel = new SleepViewModel();
+            SleepDto sleepDto = new SleepDto();
 
-            return View(viewModel);
+            return View(sleepDto);
         }
         
         [Authorize]

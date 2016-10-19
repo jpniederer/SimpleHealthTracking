@@ -32,6 +32,7 @@
         public IHttpActionResult AddSleep(SleepDto sleepDto)
         {
             var userId = User.Identity.GetUserId();
+            sleepDto.SetDates();
             Sleep sleep = sleepFactory.CreateSleep(sleepDto);
 
             sleep.TimeAdded = DateTime.Now;

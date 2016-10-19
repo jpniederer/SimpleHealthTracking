@@ -2,13 +2,13 @@
 $(document).ready(function () {
     $(".create-sleep").click(function (e) {
         var button = $(e.target);
-        var startDateTextBox = document.getElementById("StartDate");
-        var startTimeTextBox = document.getElementById("StartTime");
-        var endDateTextBox = document.getElementById("EndDate");
-        var endTimeTextBox = document.getElementById("EndTime");
+        var startDateTextBox = document.getElementById("StartDateText");
+        var startTimeTextBox = document.getElementById("StartTimeText");
+        var endDateTextBox = document.getElementById("EndDateText");
+        var endTimeTextBox = document.getElementById("EndTimeText");
         $.post("/api/SleepApi", {
-            StartDate: startDateTextBox.value, StartTime: startTimeTextBox.value,
-            EndDate: endDateTextBox.value, EndTime: endTimeTextBox.value
+            StartDateText: startDateTextBox.value, StartTimeText: startTimeTextBox.value,
+            EndDateText: endDateTextBox.value, EndTimeText: endTimeTextBox.value
         }).done(function () {
             alert("Sleep added.");
             startDateTextBox.value = null;
