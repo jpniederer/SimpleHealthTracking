@@ -31,5 +31,26 @@
             TimeAdded = DateTime.Now;
             UpdateTime = DateTime.Now;
         }
+
+        public void SetMinutesSlept()
+        {
+            long startTicks = 0;
+            long endTicks = 0;
+
+            if (EndTime != null && StartTime != null)
+            {
+                startTicks = ((DateTime)StartTime).Ticks;
+                endTicks = ((DateTime)EndTime).Ticks;
+            }
+
+            if (endTicks > startTicks)
+            {
+                MinutesSlept = (float)TimeSpan.FromTicks(endTicks - startTicks).TotalMinutes;
+            }
+            else
+            {
+                MinutesSlept = 0.0f;
+            }
+        }
     }
 }

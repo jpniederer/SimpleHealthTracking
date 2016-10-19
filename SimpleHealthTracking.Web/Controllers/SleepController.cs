@@ -67,30 +67,11 @@
                 UpdateTime = DateTime.Now
             };
 
-            sleep.MinutesSlept = GetMinutesSlept(sleep);
+            sleep.SetMinutesSlept();
 
             repository.InsertSleep(sleep);
 
             return RedirectToAction("Index");
-        }
-
-        private float GetMinutesSlept(Sleep sleep)
-        {
-            long startTicks = 0;
-            long endTicks = 0;
-
-            if (sleep.EndTime != null && sleep.StartTime != null)
-            {
-                startTicks = ((DateTime)sleep.StartTime).Ticks;
-                endTicks = ((DateTime)sleep.EndTime).Ticks;
-            }
-
-            if (endTicks > startTicks)
-            {
-                return (float)TimeSpan.FromTicks(endTicks - startTicks).TotalMinutes;
-            }
-
-            return 0.0f;
         }
 
         [Authorize]
@@ -127,7 +108,7 @@
             if (ModelState.IsValid)
             {
                 sleep.UpdateTime = DateTime.Now;
-                sleep.MinutesSlept = GetMinutesSlept(sleep);
+                sleep.SetMinutesSlept();
                 repository.UpdateSleep(sleep);
                 return RedirectToAction("Index");
             }

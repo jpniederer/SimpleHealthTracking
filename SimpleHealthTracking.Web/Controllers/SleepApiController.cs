@@ -36,6 +36,8 @@
 
             sleep.TimeAdded = DateTime.Now;
             sleep.UpdateTime = DateTime.Now;
+            sleep.UserId = userId;
+            sleep.SetMinutesSlept();
             repository.InsertSleep(sleep);
 
             return Ok();
