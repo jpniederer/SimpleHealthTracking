@@ -107,3 +107,8 @@ h6,
 .partial-add-record {
     padding: 10px 0px;
 }
+
+.record-added {
+    color: green;
+    font: bold;
+}
