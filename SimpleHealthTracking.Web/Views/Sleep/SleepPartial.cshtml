@@ -2,6 +2,9 @@
 
 <h2>Add a New Sleep Entry</h2>
 <div class="row">
+    <div class="record-added"">
+        <p id="SleepAddedText"></p>
+    </div>
     <div class="col-md-3">
         <h4>Start Date</h4>
         @Html.TextBoxFor(s => s.StartDateText, new { @class = "form-control", placeholder = "01/01/2017"})

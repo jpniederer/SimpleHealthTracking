@@ -10,7 +10,7 @@ $(document).ready(function () {
             StartDateText: startDateTextBox.value, StartTimeText: startTimeTextBox.value,
             EndDateText: endDateTextBox.value, EndTimeText: endTimeTextBox.value
         }).done(function () {
-            alert("Sleep added.");
+            showSleepAdded();
             startDateTextBox.value = null;
             startTimeTextBox.value = null;
             endDateTextBox.value = null;
@@ -21,3 +21,9 @@ $(document).ready(function () {
         });
     });
 })
+
+function showSleepAdded() {
+    var sleepText = document.getElementById("SleepAddedText");
+    sleepText.visible = true;
+    sleepText.innerText = "New Sleep Added";
+}

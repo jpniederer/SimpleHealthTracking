@@ -6,7 +6,6 @@ $(document).ready(function () {
         var heartRateTextBox = document.getElementById("Heartrate");
         $.post("/api/CheckinApi", { Weight: weightTextBox.value, HeartRate: heartRateTextBox.value})
             .done(function () {
-                //alert("Checkin added.");
                 showCheckinAdded();
                 weightTextBox.value = null;
                 heartRateTextBox.value = null;
@@ -18,7 +17,7 @@ $(document).ready(function () {
 })
 
 function showCheckinAdded() {
-    var checkinLabel = document.getElementById("CheckinAddedText");
-    checkinLabel.visible = true;
-    checkinLabel.innerText = "New Checkin Added";
+    var checkinText = document.getElementById("CheckinAddedText");
+    checkinText.visible = true;
+    checkinText.innerText = "New Checkin Added";
 }
