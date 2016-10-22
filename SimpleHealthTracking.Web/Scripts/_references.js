@@ -2,6 +2,7 @@
 /// <reference path="bootstrap.min.js" />
 /// <reference path="createcheckin.js" />
 /// <reference path="createsleep.js" />
+/// <reference path="jquery.timepicker.min.js" />
 /// <reference path="jquery.validate.min.js" />
 /// <reference path="jquery.validate.unobtrusive.js" />
 /// <reference path="jquery-3.1.1.js" />

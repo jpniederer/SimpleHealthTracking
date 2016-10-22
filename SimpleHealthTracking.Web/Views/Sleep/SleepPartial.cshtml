@@ -7,22 +7,22 @@
     </div>
     <div class="col-md-3">
         <h4>Start Date</h4>
-        @Html.TextBoxFor(s => s.StartDateText, new { @class = "form-control", placeholder = "01/01/2017"})
+        @Html.TextBoxFor(s => s.StartDateText, new { @class = "form-control datepicker", placeholder = "01/01/2017"})
         @Html.ValidationMessageFor(s => s.StartDateText)
     </div>
     <div class="col-md-3">
         <h4>Start Time</h4>
-        @Html.TextBoxFor(s => s.StartTimeText, new { @class = "form-control", placeholder = "22:00" })
+        @Html.TextBoxFor(s => s.StartTimeText, new { @class = "form-control timepicker", placeholder = "22:00" })
         @Html.ValidationMessageFor(s => s.StartTimeText)
     </div>
     <div class="col-md-3">
         <h4>End Date</h4>
-        @Html.TextBoxFor(s => s.EndDateText, new { @class = "form-control", placeholder = "01/02/2017" })
+        @Html.TextBoxFor(s => s.EndDateText, new { @class = "form-control datepicker", placeholder = "01/02/2017" })
         @Html.ValidationMessageFor(s => s.EndDateText)
     </div>
     <div class="col-md-3">
         <h4>End Time</h4>
-        @Html.TextBoxFor(s => s.EndTimeText, new { @class = "form-control", placeholder = "08:00" })
+        @Html.TextBoxFor(s => s.EndTimeText, new { @class = "form-control timepicker", placeholder = "08:00" })
         @Html.ValidationMessageFor(s => s.EndTimeText)
     </div>
 </div>

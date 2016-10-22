@@ -36,5 +36,16 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/timer.js"></script>
     <script src="~/Scripts/createSleep.js"></script>    
-    <script src="~/Scripts/createCheckin.js"></script>    
+    <script src="~/Scripts/createCheckin.js"></script>
+    <script src="~/Scripts/jquery.timepicker.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+        });
+
+        $(function () {
+            $(".timepicker").timepicker();
+        });
+    </script>
 }
