@@ -42,10 +42,17 @@
     <script>
         $(function () {
             $(".datepicker").datepicker();
-        });
 
-        $(function () {
-            $(".timepicker").timepicker();
+            $(".timepicker").timepicker({
+                'step': 15,
+                'timeFormat': 'H:i'
+            });
+
+            $(".timepickerEnd").timepicker({
+                'scrollDefault': '08:00',
+                'step': 15,
+                'timeFormat': 'H:i'
+            });
         });
     </script>
 }

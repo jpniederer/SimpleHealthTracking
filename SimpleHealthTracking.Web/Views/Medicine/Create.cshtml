@@ -24,16 +24,22 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.StartDate)
-        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", placeholder = "01/01/2016 (not required)"})
+        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control datepicker", placeholder = "01/01/2016 (not required)"})
         @Html.ValidationMessageFor(m => m.StartDate)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.EndDate)
-        @Html.TextBoxFor(m => m.EndDate, new {  @class = "form-control", placeholder = "01/01/2017 (not required)"})
+        @Html.TextBoxFor(m => m.EndDate, new {  @class = "form-control datepicker", placeholder = "01/01/2017 (not required)"})
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 }
 @section scripts
 {
-    @Scripts.Render("~/bundles/jqueryval")    
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+        });
+    </script>
 }
