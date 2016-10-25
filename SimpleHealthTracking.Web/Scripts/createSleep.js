@@ -6,19 +6,25 @@ $(document).ready(function () {
         var startTimeTextBox = document.getElementById("StartTimeText");
         var endDateTextBox = document.getElementById("EndDateText");
         var endTimeTextBox = document.getElementById("EndTimeText");
-        $.post("/api/SleepApi", {
-            StartDateText: startDateTextBox.value, StartTimeText: startTimeTextBox.value,
-            EndDateText: endDateTextBox.value, EndTimeText: endTimeTextBox.value
-        }).done(function () {
-            showSleepAdded();
-            startDateTextBox.value = null;
-            startTimeTextBox.value = null;
-            endDateTextBox.value = null;
-            endTimeTextBox.value = null;
-        })
-        .fail(function () {
-            alert("Could not create the sleep entry.");
-        });
+        if (startDateTextBox.value !== "" && startTimeTextBox.value !== "" &&
+            endDateTextBox.value !== "" && endTimeTextBox.value !== "") {
+            $.post("/api/SleepApi", {
+                StartDateText: startDateTextBox.value, StartTimeText: startTimeTextBox.value,
+                EndDateText: endDateTextBox.value, EndTimeText: endTimeTextBox.value
+            }).done(function () {
+                showSleepAdded();
+                startDateTextBox.value = null;
+                startTimeTextBox.value = null;
+                endDateTextBox.value = null;
+                endTimeTextBox.value = null;
+            })
+            .fail(function () {
+                alert("Could not create the sleep entry.");
+            });
+        } else {
+            alert("You must fill out all of start date/time and end date/time to create a sleep record.");
+        }
+        
     });
 })
 

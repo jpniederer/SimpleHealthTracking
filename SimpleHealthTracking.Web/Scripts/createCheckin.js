@@ -4,7 +4,8 @@ $(document).ready(function () {
         var button = $(e.target);
         var weightTextBox = document.getElementById("Weight");
         var heartRateTextBox = document.getElementById("Heartrate");
-        $.post("/api/CheckinApi", { Weight: weightTextBox.value, HeartRate: heartRateTextBox.value})
+        if (weightTextBox.value !== "" || heartRateTextBox.value !== "") {
+            $.post("/api/CheckinApi", { Weight: weightTextBox.value, HeartRate: heartRateTextBox.value })
             .done(function () {
                 showCheckinAdded();
                 weightTextBox.value = null;
@@ -13,6 +14,10 @@ $(document).ready(function () {
             .fail(function () {
                 alert("Could not create the checkin.");
             });
+        } else {
+            alert("You must add a weight or heartrate to create a checkin.");
+        }
+        
     });
 })
 
