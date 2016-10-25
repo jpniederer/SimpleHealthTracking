@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Upload Excel";
+}
+
+<h2>Upload Excel</h2>
+<p>You can upload data from an Excel file. The upload format is displayed below for reference.
+    Note that the Excel file must be in the following format to work.    
+</p>
+@using (Html.BeginForm("Upload", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <input type="submit" name="Submit" value="Upload" />
+}
+<hr />
+<h4>Upload Format</h4>
+<p>Your file containing the data must be called "HealthForImport" with the following format:</p>
+<table>
+    <thead>
+        <tr>
+            <td></td>
+            <td>Date</td>
+            <td>Time</td>
+            <td>Weight (lbs)</td>
+            <td>Heart Rate (bpm)</td>
+            <td>Notes</td>
+            <td>Took Pills</td>
+            <td>Mind</td>
+            <td>Body</td>
+            <td>Feel</td>
+        </tr>
+        
+    </thead>
+    <tbody>
+        <tr>
+            <td>Awake</td>
+            <td>1/19/2016</td>
+            <td>6:00 AM</td>
+            <td>160</td>
+            <td>61</td>
+            <td>First entry.</td>
+            <td></td>
+            <td>9</td>
+            <td>8</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>Bed</td>
+            <td>1/19/2016</td>
+            <td>9:27 PM</td>
+            <td>160</td>
+            <td>60</td>
+            <td>Second entry.</td>
+            <td>9:00 PM</td>
+            <td>9</td>
+            <td>8</td>
+            <td>8</td>
+        </tr>
+    </tbody>
+</table>
