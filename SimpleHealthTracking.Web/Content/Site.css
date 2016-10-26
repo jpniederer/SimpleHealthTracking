@@ -48,12 +48,14 @@ span.field-validation-error {
 }
 
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #2a942a;
     background-color: rgba(42, 148, 42, 0.68);
 }
 
 .dropdown-menu {
-    box-shadow: none;
     -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .navbar-inverse .navbar-nav > .dropdown > a .caret {
@@ -92,7 +94,7 @@ h6,
 .form-control {
     font-size: 17px;
     padding: 20px 15px;
-    -ms-border-radius: 9px;
+    /*-ms-border-radius: 9px;*/
     border-radius: 9px;
 }
 
@@ -100,12 +102,12 @@ h6,
 .btn {
     font-size: 17px;
     padding: 7px 20px;
-    -ms-border-radius: 9px;
+    /*-ms-border-radius: 9px;*/
     border-radius: 9px;
 }
 
 .partial-add-record {
-    padding: 10px 0px;
+    padding: 10px;
 }
 
 .record-added {

@@ -14,7 +14,7 @@ function timerClick() {
         temp = document.getElementById('counter');
         temp.innerHTML = 0;
         isCounting = true;
-        interval = setInterval(function () { startTimer() }, 1000);
+        interval = setInterval(function () { startTimer(); }, 1000);
         timer.innerHTML = "Stop Timer";
     }
 }

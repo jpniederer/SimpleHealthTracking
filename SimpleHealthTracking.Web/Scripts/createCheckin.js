@@ -17,9 +17,9 @@ $(document).ready(function () {
         } else {
             alert("You must add a weight or heartrate to create a checkin.");
         }
-        
+
     });
-})
+});
 
 function showCheckinAdded() {
     var checkinText = document.getElementById("CheckinAddedText");

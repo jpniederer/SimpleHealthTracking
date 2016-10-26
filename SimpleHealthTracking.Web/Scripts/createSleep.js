@@ -24,9 +24,9 @@ $(document).ready(function () {
         } else {
             alert("You must fill out all of start date/time and end date/time to create a sleep record.");
         }
-        
+
     });
-})
+});
 
 function showSleepAdded() {
     var sleepText = document.getElementById("SleepAddedText");
