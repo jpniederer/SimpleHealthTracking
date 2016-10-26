@@ -36,5 +36,10 @@
                 UpdateTime = sleep.UpdateTime
             };
         }
+
+        public Sleep CreateSleep(ExcelImportDto excelImportDto)
+        {
+            return new Sleep();
+        }
     }
 }

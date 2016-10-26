@@ -28,5 +28,10 @@
                 TimeAdded = medicineTaken.TimeAdded
             };
         }
+
+        public MedicineTaken CreateMedicineTaken(ExcelImportDto excelImportDto)
+        {
+            return new MedicineTaken();
+        }
     }
 }

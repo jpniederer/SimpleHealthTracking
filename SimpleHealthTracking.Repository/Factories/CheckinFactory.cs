@@ -44,5 +44,10 @@
                 UpdateTime = checkin.UpdateTime
             };
         }
+
+        public Checkin CreateCheckin(ExcelImportDto excelImportDto)
+        {
+            return new Checkin();
+        }
     }
 }

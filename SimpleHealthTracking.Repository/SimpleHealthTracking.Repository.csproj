@@ -53,6 +53,7 @@
     <Compile Include="ActionResult.cs" />
     <Compile Include="ActionStatus.cs" />
     <Compile Include="DTO\CheckinDto.cs" />
+    <Compile Include="DTO\ExcelImportDto.cs" />
     <Compile Include="DTO\MedicineDto.cs" />
     <Compile Include="DTO\MedicineTakenDto.cs" />
     <Compile Include="DTO\MedicineTakenFullDto.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Factories\MedicineFactory.cs" />
     <Compile Include="Factories\MedicineTakenFactory.cs" />
     <Compile Include="Factories\SleepFactory.cs" />
+    <Compile Include="Helpers\ExcelImportListGenerator.cs" />
     <Compile Include="Helpers\ListExtentions.cs" />
     <Compile Include="ISimpleHealthTrackerRepository.cs" />
     <Compile Include="Migrations\201609240301591_InitialRepositoryMode.cs" />
