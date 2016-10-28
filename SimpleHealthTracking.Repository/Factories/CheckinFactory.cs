@@ -2,6 +2,7 @@
 {
     using DTO;
     using Entities;
+    using System;
 
     public class CheckinFactory
     {
@@ -47,7 +48,32 @@
 
         public Checkin CreateCheckin(ExcelImportDto excelImportDto)
         {
-            return new Checkin();
+            Checkin checkin = new Checkin
+            {
+                UserId = excelImportDto.UserId,
+                Notes = excelImportDto.Notes,
+                UpdateTime = DateTime.Now
+            };
+
+            checkin.Weight = GetFloatValue(excelImportDto.Weight);
+            checkin.Heartrate = GetFloatValue(excelImportDto.Heartrate);
+            checkin.PhysicalFeelingRating = GetFloatValue(excelImportDto.Feel);
+            checkin.PsychologicalFeelingRating = GetFloatValue(excelImportDto.Mind);
+            checkin.ExerciseRating = GetFloatValue(excelImportDto.Body);
+            checkin.TimeAdded = DateTime.Parse(string.Format("{0} {1}", excelImportDto.DateEntry, excelImportDto.TimeEntry));
+            return checkin;
+        }
+
+        public float? GetFloatValue(string possibleValue)
+        {
+            float value;
+
+            if (float.TryParse(possibleValue, out value))
+            {
+                return value;
+            }
+
+            return null;
         }
     }
 }

@@ -13,5 +13,6 @@
         public string Body { get; set; }
         public string Feel { get; set; }
         public string UserId { get; set; }
+        public int MedicineId { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 {
     using DTO;
     using Entities;
+    using System;
 
     public class MedicineTakenFactory
     {
@@ -29,9 +30,16 @@
             };
         }
 
+        // Verify that the Medicine field of the excel record is not null. If
+        // the medicine field isn't null then the medicine was taken.
         public MedicineTaken CreateMedicineTaken(ExcelImportDto excelImportDto)
         {
-            return new MedicineTaken();
+            return new MedicineTaken()
+            {
+                MedicineId = excelImportDto.MedicineId,
+                DateAddedFor = DateTime.Parse(string.Format("{0} {1}", excelImportDto.DateEntry, excelImportDto.TimeEntry)),
+                TimeAdded = DateTime.Now
+            };
         }
     }
 }
