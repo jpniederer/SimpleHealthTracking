@@ -3,9 +3,13 @@
     using Excel;
     using System;
     using System.Collections.Generic;
+    using System.Data;
+    using System.IO;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+    using SimpleHealthTracking.Repository.DTO;
+    using SimpleHealthTracking.Repository.Factories;
 
     public class UploadController : Controller
     {
@@ -26,12 +30,28 @@
         [ValidateAntiForgeryToken]
         public ActionResult UploadExcel(HttpPostedFileBase file)
         {
-            if (file != null && file.ContentLength > 0)
+            List<ExcelImportDto> excelData;
+
+            if (file != null && file.ContentLength > 0 && file.FileName.EndsWith("xlxs"))
             {
-                // Process file.
+                excelData = GetExcelData(file);
             }
 
             return RedirectToAction("UploadExcel");
+        }
+
+        private List<ExcelImportDto> GetExcelData(HttpPostedFileBase file)
+        {
+            List<ExcelImportDto> rows = new List<ExcelImportDto>();
+            IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(file.InputStream);
+            
+            while (excelReader.Read())
+            {
+
+            }
+
+            excelReader.Close();
+            return rows;
         }
 
     }
