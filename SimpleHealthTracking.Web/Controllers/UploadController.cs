@@ -1,6 +1,7 @@
 ﻿namespace SimpleHealthTracking.Web.Controllers
 {
     using Excel;
+    using Microsoft.AspNet.Identity;
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -10,6 +11,7 @@
     using System.Web.Mvc;
     using SimpleHealthTracking.Repository.DTO;
     using SimpleHealthTracking.Repository.Factories;
+    using SimpleHealthTracking.Web.Classes;
 
     public class UploadController : Controller
     {
@@ -30,28 +32,24 @@
         [ValidateAntiForgeryToken]
         public ActionResult UploadExcel(HttpPostedFileBase file)
         {
-            List<ExcelImportDto> excelData;
+            ExcelDataConverter excelData;
 
-            if (file != null && file.ContentLength > 0 && file.FileName.EndsWith("xlxs"))
+            if (file != null && file.ContentLength > 0 && file.FileName.EndsWith("xlsx"))
             {
                 excelData = GetExcelData(file);
+                excelData.GenerateAllRecords();
             }
 
             return RedirectToAction("UploadExcel");
         }
 
-        private List<ExcelImportDto> GetExcelData(HttpPostedFileBase file)
+        private ExcelDataConverter GetExcelData(HttpPostedFileBase file)
         {
-            List<ExcelImportDto> rows = new List<ExcelImportDto>();
+            string userId = User.Identity.GetUserId();
             IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(file.InputStream);
-            
-            while (excelReader.Read())
-            {
+            excelReader.IsFirstRowAsColumnNames = true;
 
-            }
-
-            excelReader.Close();
-            return rows;
+            return new ExcelDataConverter(excelReader, "HealthForImport", userId);
         }
 
     }

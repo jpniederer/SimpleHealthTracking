@@ -2,6 +2,7 @@
 {
     using DTO;
     using Entities;
+    using Helpers;
     using System;
 
     public class CheckinFactory
@@ -60,7 +61,9 @@
             checkin.PhysicalFeelingRating = GetFloatValue(excelImportDto.Feel);
             checkin.PsychologicalFeelingRating = GetFloatValue(excelImportDto.Mind);
             checkin.ExerciseRating = GetFloatValue(excelImportDto.Body);
-            checkin.TimeAdded = DateTime.Parse(string.Format("{0} {1}", excelImportDto.DateEntry, excelImportDto.TimeEntry));
+            checkin.TimeAdded = DateTime.Parse(string.Format("{0} {1}",
+                Utility.GetDateString(excelImportDto.DateEntry),
+                Utility.GetTimeString(excelImportDto.TimeEntry)));
             return checkin;
         }
 

@@ -7,8 +7,9 @@
 <p>You can upload data from an Excel file. The upload format is displayed below for reference.
     Note that the Excel file must be in the following format to work.    
 </p>
-@using (Html.BeginForm("Upload", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("UploadExcel", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.AntiForgeryToken()
     <input type="file" name="file" />
     <input type="submit" name="Submit" value="Upload" />
 }

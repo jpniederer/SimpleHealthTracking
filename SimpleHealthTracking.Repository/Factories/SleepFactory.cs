@@ -2,6 +2,7 @@
 {
     using DTO;
     using Entities;
+    using Helpers;
     using System;
 
     public class SleepFactory
@@ -43,8 +44,12 @@
             Sleep sleep = new Sleep()
             {
                 UserId = excelImportDtoAwake.UserId,
-                StartTime = DateTime.Parse(string.Format("{0} {1}", excelImportDtoAwake.DateEntry, excelImportDtoAwake.TimeEntry)),
-                EndTime = DateTime.Parse(string.Format("{0} {1}", excelImportDtoBed.DateEntry, excelImportDtoBed.TimeEntry)),
+                StartTime = DateTime.Parse(string.Format("{0} {1}",
+                    Utility.GetDateString(excelImportDtoAwake.DateEntry), 
+                    Utility.GetTimeString(excelImportDtoAwake.TimeEntry))),
+                EndTime = DateTime.Parse(string.Format("{0} {1}", 
+                    Utility.GetDateString(excelImportDtoBed.DateEntry),
+                    Utility.GetTimeString(excelImportDtoBed.TimeEntry))),
                 TimeAdded = DateTime.Now,
                 UpdateTime = DateTime.Now
             };

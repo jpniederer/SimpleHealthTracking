@@ -69,6 +69,7 @@
     <Compile Include="Factories\SleepFactory.cs" />
     <Compile Include="Helpers\ExcelImportListGenerator.cs" />
     <Compile Include="Helpers\ListExtentions.cs" />
+    <Compile Include="Helpers\Utility.cs" />
     <Compile Include="ISimpleHealthTrackerRepository.cs" />
     <Compile Include="Migrations\201609240301591_InitialRepositoryMode.cs" />
     <Compile Include="Migrations\201609240301591_InitialRepositoryMode.Designer.cs">

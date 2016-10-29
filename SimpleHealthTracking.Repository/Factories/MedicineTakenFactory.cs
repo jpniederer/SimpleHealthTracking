@@ -2,6 +2,7 @@
 {
     using DTO;
     using Entities;
+    using Helpers;
     using System;
 
     public class MedicineTakenFactory
@@ -37,7 +38,9 @@
             return new MedicineTaken()
             {
                 MedicineId = excelImportDto.MedicineId,
-                DateAddedFor = DateTime.Parse(string.Format("{0} {1}", excelImportDto.DateEntry, excelImportDto.TimeEntry)),
+                DateAddedFor = DateTime.Parse(string.Format("{0} {1}", 
+                    Utility.GetDateString(excelImportDto.DateEntry), 
+                    Utility.GetTimeString(excelImportDto.TimeEntry))),
                 TimeAdded = DateTime.Now
             };
         }
