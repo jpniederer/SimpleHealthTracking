@@ -12,23 +12,24 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Sleep Patterns</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            How much you've slept in the last 30 days.
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p>
+            <div class="chart">
+            </div>
+        </p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Weight Over Time</h2>
+        <p></p>
+        <p></p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Recent Heartrates</h2>
+        <p></p>
+        <p></p>
     </div>
 </div>
 @section scripts
@@ -39,6 +40,7 @@
     <script src="~/Scripts/createCheckin.js"></script>
     <script src="~/Scripts/jquery.timepicker.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script>
         $(function () {
             $(".datepicker").datepicker();
@@ -54,5 +56,17 @@
                 'timeFormat': 'H:i'
             });
         });
+
+        var data = [4, 8, 15, 16, 23, 42];
+        //var x = d3.scale.linear()
+        //    .domain([0, d3.max(data)])
+        //    .range([0, 420]);
+
+        d3.select(".chart")
+          .selectAll("div")
+            .data(data)
+          .enter().append("div")
+            .style("width", function (d) { return d * 10 + "px"; })
+            .text(function (d) { return d; });
     </script>
 }
