@@ -48,6 +48,7 @@
             IEnumerable<DataRow> rows = from DataRow row in excelWorksheet.Rows
                                         where row["Date"].ToString() != ""
                                         select row;
+            int medicineId = GetFirstActiveMedicineId();
 
             ExcelImportRecords = rows.Select(row => new ExcelImportDto()
             {
@@ -62,8 +63,21 @@
                 Body = row["Body"].ToString(),
                 Feel = row["Feel"].ToString(),
                 UserId = UserId,
-                MedicineId = 14
+                MedicineId = medicineId
             }).ToList();
+        }
+
+        private int GetFirstActiveMedicineId()
+        {
+            List<Medicine> medicines = repository.GetMedicinesForUser(UserId).ToList();
+
+            foreach (var medicine in medicines)
+            {
+                if (medicine.IsActive)
+                    return medicine.Id;
+            }
+
+            return 0;
         }
 
         private void SetupCheckins()
@@ -82,7 +96,7 @@
 
             foreach (var excelRecord in ExcelImportRecords)
             {
-                if (excelRecord.Medicine != null)
+                if (excelRecord.Medicine != null && excelRecord.MedicineId != 0)
                 {
                     MedicinesTaken.Add(medicineTakenFactory.CreateMedicineTaken(excelRecord));
                 }
