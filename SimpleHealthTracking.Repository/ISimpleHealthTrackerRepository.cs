@@ -35,5 +35,6 @@
         Sleep GetSleep(int id);
         IQueryable<Sleep> GetSleepForUser(string userId);
         IQueryable<Sleep> GetSleepForUserInRange(string userId, DateTime startDate, DateTime endDate);
+        IQueryable<Sleep> GetLastThirtySleepsForUser(string userId);
     }
 }

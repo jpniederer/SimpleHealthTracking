@@ -28,6 +28,16 @@
             repository = repo;
         }
 
+        [Authorize]
+        [HttpGet]
+        public IHttpActionResult GetLastThirtySleeps()
+        {
+            string userId = User.Identity.GetUserId();
+            var sleeps = repository.GetLastThirtySleepsForUser(userId);
+
+            return Json(sleeps);
+        }
+
         [HttpPost]
         public IHttpActionResult AddSleep(SleepDto sleepDto)
         {

@@ -412,5 +412,12 @@
                                         s.StartTime.Value.Ticks >= startDate.Ticks &&
                                         s.EndTime.Value.Ticks <= endDate.Ticks);
         }
+
+        public IQueryable<Sleep> GetLastThirtySleepsForUser(string userId)
+        {
+            return _context.Sleeps.Where(s => s.UserId.Equals(userId))
+                                         .OrderByDescending(s => s.Id)
+                                         .Take(30);
+        }
     }
 }
