@@ -28,6 +28,17 @@
             repository = repo;
         }
 
+        [Authorize]
+        [HttpGet]
+        public IHttpActionResult GetLastCheckins(int count)
+        {
+            string userId = User.Identity.GetUserId();
+            var checkins = repository.GetLastNumberOfCheckinsForUser(userId, count);
+
+            return Json(checkins);
+        }
+
+        [Authorize]
         [HttpPost]
         public IHttpActionResult AddCheckin(CheckinDto checkinDto)
         {

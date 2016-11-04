@@ -38,6 +38,17 @@
             return Json(sleeps);
         }
 
+        [Authorize]
+        [HttpGet]
+        public IHttpActionResult GetLastSleeps(int count)
+        {
+            string userId = User.Identity.GetUserId();
+            var sleeps = repository.GetLastNumberOfSleepsForUser(userId, count);
+
+            return Json(sleeps);
+        }
+
+        [Authorize]
         [HttpPost]
         public IHttpActionResult AddSleep(SleepDto sleepDto)
         {

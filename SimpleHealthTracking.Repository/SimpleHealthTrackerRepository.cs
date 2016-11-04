@@ -127,6 +127,13 @@
             }
         }
 
+        public IQueryable<Checkin> GetLastNumberOfCheckinsForUser(string userId, int count)
+        {
+            return _context.Checkins.Where(c => c.UserId.Equals(userId))
+                                            .OrderByDescending(c => c.TimeAdded)
+                                            .Take(count);
+        }
+
         // Medicines
         public ActionResult<Medicine> InsertMedicine(Medicine medicine)
         {
