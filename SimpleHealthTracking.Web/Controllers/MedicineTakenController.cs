@@ -24,7 +24,8 @@
         public ActionResult Index(string sortOrder, int? page)
         {
             var currentUser = User.Identity.GetUserId();
-            var medicinesTakenForUser = GetMedicinesTakenForIndex(sortOrder, currentUser);
+            List<Medicine> medicinesForUser = repository.GetMedicinesForUser(currentUser).ToList();
+            var medicinesTakenForUser = GetMedicinesTakenForIndex(sortOrder, currentUser, medicinesForUser);
             SetupIndexSortingViewBag(sortOrder);
 
             int pageSize = 10;
@@ -39,20 +40,27 @@
             ViewBag.MedicineNameParameter = sortOrder == "Medicine" ? "MedicineDesc" : "Medicine";
         }
 
-        private IEnumerable<MedicineTaken> GetMedicinesTakenForIndex(string sortOrder, string currentUser)
+        private IEnumerable<MedicineTaken> GetMedicinesTakenForIndex(string sortOrder, string currentUser, List<Medicine> medicines)
         {
             var mts = repository.GetMedicineTakenByUser(currentUser);
+            List<MedicineTaken> medicinesTaken = new List<MedicineTaken>();
+
+            foreach (var mt in mts)
+            {
+                mt.Medicine = medicines.SingleOrDefault(m => m.Id == mt.MedicineId);
+                medicinesTaken.Add(mt);
+            }
 
             switch (sortOrder)
             {
                 case "Medicine":
-                    return mts.OrderBy(m => m.Medicine.Name);
+                    return medicinesTaken.OrderBy(m => m.Medicine.Name);
                 case "MedicineDesc":
-                    return mts.OrderByDescending(m => m.Medicine.Name);
+                    return medicinesTaken.OrderByDescending(m => m.Medicine.Name);
                 case "DateAsc":
-                    return mts.OrderBy(m => m.TimeAdded);
+                    return medicinesTaken.OrderBy(m => m.TimeAdded);
                 default:
-                    return mts.OrderByDescending(m => m.TimeAdded);
+                    return medicinesTaken.OrderByDescending(m => m.TimeAdded);
             }
         }
     }
