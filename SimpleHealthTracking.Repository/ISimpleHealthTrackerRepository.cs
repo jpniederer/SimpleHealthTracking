@@ -28,6 +28,7 @@
         MedicineTaken GetMedicineTaken(int id);
         IQueryable<MedicineTaken> GetMedicineTakenByMedicineId(int medicineId);
         IQueryable<MedicineTaken> GetMedicineTakenByMedicineIdByDate(int medicineId, DateTime date);
+        IQueryable<MedicineTaken> GetMedicineTakenByUser(string userId);
 
         // Sleep
         ActionResult<Sleep> InsertSleep(Sleep sleep);

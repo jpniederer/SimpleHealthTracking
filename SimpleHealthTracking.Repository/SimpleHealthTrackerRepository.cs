@@ -318,6 +318,15 @@
             }
         }
 
+        public IQueryable<MedicineTaken> GetMedicineTakenByUser(string userId)
+        {
+            var medicineIdsForUser = GetMedicinesForUser(userId).Select(m => m.Id);
+
+            return from mt in _context.MedicineTakens
+                   where medicineIdsForUser.Contains(mt.MedicineId)
+                   select mt;
+        }
+
         // Sleep
         public ActionResult<Sleep> InsertSleep(Sleep sleep)
         {
