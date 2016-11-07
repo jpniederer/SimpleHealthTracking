@@ -9,6 +9,7 @@
     using System.Web;
     using System.Web.Mvc;
     using PagedList;
+    using Web.ViewModels;
 
     public class MedicineTakenController : Controller
     {
@@ -19,11 +20,46 @@
             repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
         }
 
+        [Authorize]
+        public ActionResult Create()
+        {
+            MedicineTakenViewModel viewModel = new MedicineTakenViewModel();
+            string currentUser = User.Identity.GetUserId();
+            ViewBag.MedicinesForUser = repository.GetMedicinesForUser(currentUser)
+                                       .Select(m => new { Value = m.Id, Text = m.Name });
+
+            return View(viewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(MedicineTakenViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                string currentUser = User.Identity.GetUserId();
+                ViewBag.MedicinesForUser = repository.GetMedicinesForUser(currentUser)
+                                       .Select(m => new { Value = m.Id, Text = m.Name });
+                return View("Create", viewModel);
+            }
+
+            MedicineTaken medicineTaken = new MedicineTaken
+            {
+                MedicineId = viewModel.MedicineId,
+                DateAddedFor = viewModel.GetDateTimeAddedFor(),
+                TimeAdded = DateTime.Now
+            };
+
+            repository.InsertMedicineTaken(medicineTaken);
+            return RedirectToAction("Index");
+        }
+
         // GET: MedicineTakenView
         [Authorize]
         public ActionResult Index(string sortOrder, int? page)
         {
-            var currentUser = User.Identity.GetUserId();
+            string currentUser = User.Identity.GetUserId();
             List<Medicine> medicinesForUser = repository.GetMedicinesForUser(currentUser).ToList();
             var medicinesTakenForUser = GetMedicinesTakenForIndex(sortOrder, currentUser, medicinesForUser);
             SetupIndexSortingViewBag(sortOrder);
@@ -58,9 +94,9 @@
                 case "MedicineDesc":
                     return medicinesTaken.OrderByDescending(m => m.Medicine.Name);
                 case "DateAsc":
-                    return medicinesTaken.OrderBy(m => m.TimeAdded);
+                    return medicinesTaken.OrderBy(m => m.DateAddedFor);
                 default:
-                    return medicinesTaken.OrderByDescending(m => m.TimeAdded);
+                    return medicinesTaken.OrderByDescending(m => m.DateAddedFor);
             }
         }
     }
