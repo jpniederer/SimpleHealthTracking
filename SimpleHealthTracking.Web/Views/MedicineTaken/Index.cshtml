@@ -25,7 +25,10 @@
         <tr>
             <td>@Html.DisplayFor(m => mt.Medicine.Name)</td>
             <td>@Html.DisplayFor(m => mt.DateAddedFor)</td>
-            <td>Utility</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = mt.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = mt.Id })
+            </td>
         </tr>
     }
 </table>

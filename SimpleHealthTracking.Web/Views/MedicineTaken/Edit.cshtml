@@ -1,0 +1,34 @@
+﻿@model SimpleHealthTracking.Repository.Entities.MedicineTaken
+
+@{
+    ViewBag.Title = "Edit MedicineTaken";
+}
+
+<h2>Edit MedicineTaken</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.TimeAdded)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(mt => mt.MedicineId)
+        @Html.DropDownListFor(mt => mt.MedicineId, new SelectList(ViewBag.MedicinesForUser, "Value", "Text", Model.MedicineId))
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(mt => mt.DateAddedFor)
+        @Html.TextBoxFor(mt => mt.DateAddedFor, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+<div style="padding-top: 15px;">
+    <p>
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+        @Html.ActionLink("Back to MedicineTaken Record List", "Index")
+    </p>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

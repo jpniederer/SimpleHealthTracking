@@ -1,0 +1,30 @@
+﻿@model SimpleHealthTracking.Repository.Entities.MedicineTaken
+
+@{
+    ViewBag.Title = "Delete this MedicineTaken Record";
+}
+
+<h2>Delete this MedicineTaken Record</h2>
+
+<h3>Do you really want to delete this medicine taken record? Once delete, it'll be forever.</h3>
+<div>
+    <h4>Medicine Taken</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Medicine</dt>
+        <dd>@Html.DisplayFor(mt => mt.Medicine.Name)</dd>
+        <dt>Time Taken</dt>
+        <dd>@Html.DisplayFor(mt => mt.DateAddedFor)</dd>
+        <dt>Last Update Time</dt>
+        <dd>@Html.DisplayFor(mt => mt.TimeAdded)</dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete Entry" class="btn btn-default" /> |
+            @Html.ActionLink("Go Back to Medicine Taken List", "Index")
+        </div>
+    }
+</div>

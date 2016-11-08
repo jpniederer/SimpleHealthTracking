@@ -263,6 +263,37 @@
             }
         }
 
+        public ActionResult<MedicineTaken> UpdateMedicineTaken(MedicineTaken medicineTaken)
+        {
+            try
+            {
+                var currentMedicineTaken = _context.MedicineTakens.FirstOrDefault(m => m.Id == medicineTaken.Id);
+
+                if (currentMedicineTaken == null)
+                {
+                    return new ActionResult<MedicineTaken>(medicineTaken, ActionStatus.NotFound);
+                }
+
+                _context.Entry(currentMedicineTaken).State = EntityState.Detached;
+                _context.MedicineTakens.Attach(medicineTaken);
+                _context.Entry(medicineTaken).State = EntityState.Modified;
+                var result = _context.SaveChanges();
+
+                if (result > 0)
+                {
+                    return new ActionResult<MedicineTaken>(medicineTaken, ActionStatus.Updated);
+                }
+                else
+                {
+                    return new ActionResult<MedicineTaken>(medicineTaken, ActionStatus.NothingModified, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ActionResult<MedicineTaken>(medicineTaken, ActionStatus.Error, ex);
+            }
+        }
+
         public ActionResult<MedicineTaken> DeleteMedicineTaken(int id)
         {
             try

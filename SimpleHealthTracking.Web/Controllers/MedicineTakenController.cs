@@ -6,6 +6,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Web;
     using System.Web.Mvc;
     using PagedList;
@@ -52,6 +53,66 @@
             };
 
             repository.InsertMedicineTaken(medicineTaken);
+            return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public ActionResult Edit(int id)
+        {
+            string currentUser = User.Identity.GetUserId();
+            MedicineTaken medicineTaken = repository.GetMedicineTaken(id);
+
+            if (medicineTaken == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.MedicinesForUser = repository.GetMedicinesForUser(currentUser)
+                                       .Select(m => new { Value = m.Id, Text = m.Name });
+            return View(medicineTaken);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(MedicineTaken medicineTaken)
+        {
+            string currentUser = User.Identity.GetUserId();
+
+            if (ModelState.IsValid)
+            {
+                medicineTaken.TimeAdded = DateTime.Now;
+                repository.UpdateMedicineTaken(medicineTaken);
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.MedicinesForUser = repository.GetMedicinesForUser(currentUser)
+                                       .Select(m => new { Value = m.Id, Text = m.Name });
+            return View(medicineTaken);
+        }
+
+        [Authorize]
+        public ActionResult Delete(int id)
+        {
+            MedicineTaken medicineTaken = repository.GetMedicineTaken(id);
+            medicineTaken.Medicine = repository.GetMedicine(medicineTaken.MedicineId);
+
+            if (medicineTaken == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(medicineTaken);
+        }
+
+        [Authorize]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteMedicineTaken(int id)
+        {
+            MedicineTaken medicineTaken = repository.GetMedicineTaken(id);
+
+            repository.DeleteMedicineTaken(id);
             return RedirectToAction("Index");
         }
 

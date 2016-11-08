@@ -24,6 +24,7 @@
 
         // Medicine Taken
         ActionResult<MedicineTaken> InsertMedicineTaken(MedicineTaken medicineTaken);
+        ActionResult<MedicineTaken> UpdateMedicineTaken(MedicineTaken medicineTaken);
         ActionResult<MedicineTaken> DeleteMedicineTaken(int id);
         MedicineTaken GetMedicineTaken(int id);
         IQueryable<MedicineTaken> GetMedicineTakenByMedicineId(int medicineId);
