@@ -1,0 +1,25 @@
+﻿@model SimpleHealthTracking.Web.ViewModels.MedicineTakenViewModel
+
+<h2>Add a New Medicine Taken</h2>
+<div class="row">
+    <div class="record-added">
+        <p id="MedicineTakenAddedText"></p>
+    </div>
+    <div class="col-md-3">
+        <h4>Medicine</h4>
+        @Html.DropDownListFor(mt => mt.MedicineId, new SelectList(ViewBag.MedicinesForUser, "Value", "Text"))
+    </div>
+    <div class="col-md-3">
+        @Html.LabelFor(mt => mt.DateAddedFor)
+        @Html.TextBoxFor(mt => mt.DateAddedFor, new { @class = "form-control datepicker", placeholder = "01/01/2017" })
+        @Html.ValidationMessageFor(mt => mt.DateAddedFor)
+    </div>
+    <div class="col-md-3">
+        @Html.LabelFor(mt => mt.TimeAddedFor)
+        @Html.TextBoxFor(mt => mt.TimeAddedFor, new { @class = "form-control timepickermt", placeholder = "22:22" })
+        @Html.ValidationMessageFor(mt => mt.TimeAddedFor)
+    </div>
+</div>
+<div class="partial-add-record">
+    <button class="btn btn-primary create-medicineTaken">Add Medicine Taken</button>
+</div>

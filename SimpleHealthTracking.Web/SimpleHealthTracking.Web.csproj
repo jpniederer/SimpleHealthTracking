@@ -248,6 +248,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\createCheckin.js" />
+    <Content Include="Scripts\createMedicineTaken.js" />
     <Content Include="Scripts\createSleep.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -326,6 +327,7 @@
     <Content Include="Views\MedicineTaken\Create.cshtml" />
     <Content Include="Views\MedicineTaken\Edit.cshtml" />
     <Content Include="Views\MedicineTaken\Delete.cshtml" />
+    <Content Include="Views\MedicineTaken\MedicineTakenPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

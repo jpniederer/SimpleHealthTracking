@@ -1,6 +1,7 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="bootstrap.min.js" />
 /// <reference path="createcheckin.js" />
+/// <reference path="createmedicinetaken.js" />
 /// <reference path="createsleep.js" />
 /// <reference path="jquery.timepicker.min.js" />
 /// <reference path="jquery.validate.min.js" />

@@ -4,6 +4,7 @@
     using SimpleHealthTracking.Repository.DTO;
     using SimpleHealthTracking.Repository.Factories;
     using SimpleHealthTracking.Repository;
+    using Web.ViewModels;
     using Microsoft.AspNet.Identity;
     using System;
     using System.Collections.Generic;
@@ -28,36 +29,23 @@
             repository = repo;
         }
 
+        [Authorize]
         [HttpPost]
-        public IHttpActionResult MedicineTaken(MedicineTakenDto mtd)
+        public IHttpActionResult AddMedicineTaken(MedicineTakenViewModel viewModel)
         {
-            var userId = User.Identity.GetUserId();
-            Medicine medicine = repository.GetMedicine(mtd.MedicineId);
-            
-            if (medicine == null)
+            if (!ModelState.IsValid)
             {
-                return BadRequest("No such medicine exists.");
+                return BadRequest();
             }
 
-            var medicineTakenForDate = repository.GetMedicineTakenByMedicineIdByDate(mtd.MedicineId,
-                mtd.DateAddedFor).ToList();
-
-            if (medicineTakenForDate.Count >= medicine.NumberOfTimesPerDay)
+            MedicineTaken medicineTaken = new MedicineTaken
             {
-                return BadRequest(String.Format("You've already taken {0} of {1} today.", 
-                    medicine.NumberOfTimesPerDay, 
-                    medicine.Name));
-            }
-
-            var medicineTaken = new MedicineTaken
-            {
-                MedicineId = mtd.MedicineId,
-                DateAddedFor = mtd.DateAddedFor,
+                MedicineId = viewModel.MedicineId,
+                DateAddedFor = viewModel.GetDateTimeAddedFor(),
                 TimeAdded = DateTime.Now
             };
 
             repository.InsertMedicineTaken(medicineTaken);
-
             return Ok();
         }
     }

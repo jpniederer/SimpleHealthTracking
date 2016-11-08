@@ -22,6 +22,16 @@
         }
 
         [Authorize]
+        public ActionResult MedicineTakenPartial()
+        {
+            string currentUser = User.Identity.GetUserId();
+            ViewBag.MedicinesForUser = repository.GetMedicinesForUser(currentUser)
+                                       .Select(m => new { Value = m.Id, Text = m.Name });
+            MedicineTakenViewModel viewModel = new MedicineTakenViewModel();
+            return View(viewModel);
+        }
+
+        [Authorize]
         public ActionResult Create()
         {
             MedicineTakenViewModel viewModel = new MedicineTakenViewModel();
