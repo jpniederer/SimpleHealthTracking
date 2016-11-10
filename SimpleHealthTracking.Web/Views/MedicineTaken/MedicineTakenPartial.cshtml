@@ -7,15 +7,16 @@
     </div>
     <div class="col-md-3">
         <h4>Medicine</h4>
-        @Html.DropDownListFor(mt => mt.MedicineId, new SelectList(ViewBag.MedicinesForUser, "Value", "Text"))
+        @Html.DropDownListFor(mt => mt.MedicineId, new SelectList(ViewBag.MedicinesForUser, "Value", "Text"), new { @class = "form-control" })
+        @Html.ValidationMessageFor(mt => mt.MedicineId)
     </div>
     <div class="col-md-3">
-        @Html.LabelFor(mt => mt.DateAddedFor)
+        <h4>Date</h4>
         @Html.TextBoxFor(mt => mt.DateAddedFor, new { @class = "form-control datepicker", placeholder = "01/01/2017" })
         @Html.ValidationMessageFor(mt => mt.DateAddedFor)
     </div>
     <div class="col-md-3">
-        @Html.LabelFor(mt => mt.TimeAddedFor)
+        <h4>Time</h4>
         @Html.TextBoxFor(mt => mt.TimeAddedFor, new { @class = "form-control timepickermt", placeholder = "22:22" })
         @Html.ValidationMessageFor(mt => mt.TimeAddedFor)
     </div>

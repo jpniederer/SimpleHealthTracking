@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(mt => mt.MedicineId)
-        @Html.DropDownListFor(mt => mt.MedicineId, new SelectList(ViewBag.MedicinesForUser, "Value", "Text"))
+        @Html.DropDownListFor(mt => mt.MedicineId, new SelectList(ViewBag.MedicinesForUser, "Value", "Text"), , new { @class = "form-control" })
     </div>
     <div class="form-group">
         @Html.LabelFor(mt => mt.DateAddedFor)
