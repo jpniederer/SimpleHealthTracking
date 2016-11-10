@@ -48,5 +48,31 @@
             repository.InsertMedicineTaken(medicineTaken);
             return Ok();
         }
+
+        [Authorize]
+        [HttpGet]
+        public IHttpActionResult IsMedicineTakenForDate(DateTime date)
+        {
+            bool isAllMedicineTakenForDate = false;
+            string userId = User.Identity.GetUserId();
+            List<Medicine> medicinesForUser = repository.GetActiveMedicineForUser(userId).ToList();
+            List<MedicineTaken> medicineTakenToday = repository.GetMedicineTakenByUserForDate(userId, date).ToList();
+
+            foreach (var medicine in medicinesForUser)
+            {
+                int medsTaken = medicineTakenToday.Where(mt => mt.MedicineId == medicine.Id).Count();
+
+                if (medicine.NumberOfTimesPerDay == medsTaken)
+                {
+                    isAllMedicineTakenForDate = true;
+                }
+                else
+                {
+                    return Json(false);
+                }
+            }
+
+            return Json(isAllMedicineTakenForDate);
+        }
     }
 }

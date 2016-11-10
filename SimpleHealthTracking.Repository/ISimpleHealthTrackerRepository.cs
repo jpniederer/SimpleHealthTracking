@@ -21,6 +21,7 @@
         ActionResult<Medicine> DeleteMedicine(int id);
         Medicine GetMedicine(int id);
         IQueryable<Medicine> GetMedicinesForUser(string userId);
+        IQueryable<Medicine> GetActiveMedicineForUser(string userId);
 
         // Medicine Taken
         ActionResult<MedicineTaken> InsertMedicineTaken(MedicineTaken medicineTaken);
@@ -30,6 +31,8 @@
         IQueryable<MedicineTaken> GetMedicineTakenByMedicineId(int medicineId);
         IQueryable<MedicineTaken> GetMedicineTakenByMedicineIdByDate(int medicineId, DateTime date);
         IQueryable<MedicineTaken> GetMedicineTakenByUser(string userId);
+        IQueryable<MedicineTaken> GetMedicineTakenByUserForDate(string userId, DateTime date);
+
 
         // Sleep
         ActionResult<Sleep> InsertSleep(Sleep sleep);

@@ -263,6 +263,7 @@
     <Compile Include="ViewModels\SleepFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\FullDatabaseCreation.sql" />
     <Content Include="App_Data\IdentityDatabaseSetup.sql" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />

@@ -240,6 +240,13 @@
             }
         }
 
+        public IQueryable<Medicine> GetActiveMedicineForUser(string userId)
+        {
+            var medicine = _context.Medicines.Where(m => m.UserId.Equals(userId) && m.IsActive);
+
+            return medicine;
+        }
+
         // Medicine Taken
         public ActionResult<MedicineTaken> InsertMedicineTaken(MedicineTaken medicineTaken)
         {
@@ -341,7 +348,7 @@
 
             if (medicine != null)
             {
-                return _context.MedicineTakens.Where(mt => mt.MedicineId == medicineId && mt.DateAddedFor.Date == date);
+                return _context.MedicineTakens.Where(mt => mt.MedicineId == medicineId && DbFunctions.TruncateTime(mt.DateAddedFor) == date.Date);
             }
             else
             {
@@ -355,6 +362,15 @@
 
             return from mt in _context.MedicineTakens
                    where medicineIdsForUser.Contains(mt.MedicineId)
+                   select mt;
+        }
+
+        public IQueryable<MedicineTaken> GetMedicineTakenByUserForDate(string userId, DateTime date)
+        {
+            var medicineIdsForUser = GetMedicinesForUser(userId).Select(m => m.Id);
+
+            return from mt in _context.MedicineTakens
+                   where medicineIdsForUser.Contains(mt.MedicineId) && DbFunctions.TruncateTime(mt.DateAddedFor) == date.Date
                    select mt;
         }
 
