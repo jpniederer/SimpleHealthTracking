@@ -44,8 +44,17 @@
         {
             var userId = User.Identity.GetUserId();
             Checkin checkin = checkinFactory.CreateCheckin(checkinDto);
+            DateTime time;
 
-            checkin.TimeAdded = DateTime.Now;
+            if (DateTime.TryParse(checkinDto.TimeString, out time))
+            {
+                checkin.TimeAdded = time;
+            }
+            else
+            {
+                checkin.TimeAdded = DateTime.Now;
+            }
+
             checkin.UpdateTime = DateTime.Now;
             checkin.UserId = userId;
             repository.InsertCheckin(checkin);

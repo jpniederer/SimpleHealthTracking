@@ -16,5 +16,6 @@
         public string Notes { get; set; }
         public DateTime TimeAdded { get; set; }
         public DateTime UpdateTime { get; set; }
+        public string TimeString { get; set; }
     }
 }

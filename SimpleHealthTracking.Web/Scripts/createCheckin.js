@@ -5,7 +5,12 @@ $(document).ready(function () {
         var weightTextBox = document.getElementById("Weight");
         var heartRateTextBox = document.getElementById("Heartrate");
         if (weightTextBox.value !== "" || heartRateTextBox.value !== "") {
-            $.post("/api/CheckinApi", { Weight: weightTextBox.value, HeartRate: heartRateTextBox.value })
+            var time = new Date();
+            var timeString = time.toLocaleDateString() + " " + time.toLocaleTimeString();
+            $.post("/api/CheckinApi", {
+                Weight: weightTextBox.value, HeartRate: heartRateTextBox.value,
+                TimeString: timeString
+            })
             .done(function () {
                 showCheckinAdded();
                 weightTextBox.value = null;
