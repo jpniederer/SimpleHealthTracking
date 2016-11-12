@@ -17,3 +17,11 @@ Features
 + Data Import From Old Spreadsheet
 
   A Python script will be written to convert the old spreadsheet entries into the new format. The script will call the REST functions to generate the proper records.
+
+Deployment
+--------------
+The current version of SimpleHealthTracking is live on Azure: http://simplehealthtracking.azurewebsites.net/.
+
+Setup
+--------------
+To setup your development environment locally, you'll have to create a local mdb file by running the "Update-Database" command in the Visual Studio Package Manager Console for both the SimpleHealthTracking.Repository and SimpleHealthTracking projects.
