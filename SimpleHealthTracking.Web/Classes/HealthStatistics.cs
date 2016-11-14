@@ -7,22 +7,48 @@
 
     public class HealthStatistics
     {
+        public double AverageWeight { get; private set; }
+        public double MaxWeight { get; private set; }
+        public double MinWeight { get; private set; }
+        public double AverageHeartrate { get; private set; }
+        public double MaxHeartrate { get; private set; }
+        public double MinHeartrate { get; private set; }
         List<Checkin> checkins;
         List<MedicineTaken> medicinesTaken;
         List<Sleep> sleeps;
         ISimpleHealthTrackerRepository repository;
         string userId;
 
-        public HealthStatistics(string user)
+        public HealthStatistics(string user, bool getAllStats = false)
         {
             userId = user;
             repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+
+            if (getAllStats)
+            {
+                SetAllStats();
+            }
         }
 
-        public HealthStatistics(ISimpleHealthTrackerRepository repo, string user)
+        public HealthStatistics(ISimpleHealthTrackerRepository repo, string user, bool getAllStats = false)
         {
             repository = repo;
             userId = user;
+
+            if (getAllStats)
+            {
+                SetAllStats();
+            }
+        }
+
+        private void SetAllStats()
+        {
+            GetAverageWeight();
+            GetMaxWeight();
+            GetMinWeight();
+            GetAverageHeartrate();
+            GetMaxHeartrate();
+            GetMinHeartrate();
         }
 
         private void SetupCheckins()
@@ -42,16 +68,16 @@
 
         public double GetAverageWeight()
         {
-            double averageWeight = 0.0;
+            AverageWeight = 0.0;
 
             if (checkins == null)
             {
                 SetupCheckins();
             }
 
-            averageWeight = checkins.Where(c => c.Weight != null).Average(c => (float)c.Weight);
+            AverageWeight = checkins.Where(c => c.Weight != null).Average(c => (float)c.Weight);
 
-            return averageWeight;
+            return AverageWeight;
         }
 
         public double GetAverageWeightFromLatestNumberOfEntries(int numberEntries)
@@ -71,16 +97,72 @@
 
         public double GetMaxWeight()
         {
-            double maxWeight = 0.0;
+            MaxWeight = 0.0;
 
             if (checkins == null)
             {
                 SetupCheckins();
             }
 
-            maxWeight = checkins.Where(c => c.Weight != null).Max(c => (float)c.Weight);
+            MaxWeight = checkins.Where(c => c.Weight != null).Max(c => (float)c.Weight);
 
-            return maxWeight;
+            return MaxWeight;
+        }
+
+        public double GetMinWeight()
+        {
+            MinWeight = 0.0;
+
+            if (checkins == null)
+            {
+                SetupCheckins();
+            }
+
+            MinWeight = checkins.Where(c => c.Weight != null).Min(c => (float)c.Weight);
+
+            return MinWeight;
+        }
+
+        public double GetAverageHeartrate()
+        {
+            AverageHeartrate = 0.0;
+
+            if (checkins == null)
+            {
+                SetupCheckins();
+            }
+
+            AverageHeartrate = checkins.Where(c => c.Heartrate != null).Average(c => (float)c.Heartrate);
+
+            return AverageHeartrate;
+        }
+
+        public double GetMaxHeartrate()
+        {
+            MaxHeartrate = 0.0;
+
+            if (checkins == null)
+            {
+                SetupCheckins();
+            }
+
+            MaxHeartrate = checkins.Where(c => c.Heartrate != null).Max(c => (float)c.Heartrate);
+
+            return MaxHeartrate;
+        }
+
+        public double GetMinHeartrate()
+        {
+            MinHeartrate = 0.0;
+
+            if (checkins == null)
+            {
+                SetupCheckins();
+            }
+
+            MinHeartrate = checkins.Where(c => c.Heartrate != null).Min(c => (float)c.Heartrate);
+
+            return MinHeartrate;
         }
     }
 }

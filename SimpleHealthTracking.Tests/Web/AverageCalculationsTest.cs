@@ -27,5 +27,13 @@
 
             Assert.AreNotEqual(0, maxWeight);
         }
+
+        [TestMethod]
+        public void TestSetAllStats()
+        {
+            HealthStatistics hs = new HealthStatistics(userId, true);
+
+            Assert.AreNotEqual(0, hs.AverageHeartrate);
+        }
     }
 }
