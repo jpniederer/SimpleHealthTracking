@@ -1,0 +1,26 @@
+﻿@model SimpleHealthTracking.Web.Classes.HealthStatistics
+
+@{ 
+    ViewBag.Title = "Health Statistics";
+}
+
+<h2>Health Statistics</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Heartrate</h2>
+        <ul>
+            <li><b>Average:</b> @Model.AverageHeartrate.ToString("0.00")</li>
+            <li><b>Max:</b> @Model.MaxHeartrate</li>
+            <li><b>Min:</b> @Model.MinHeartrate</li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>Weight</h2>
+        <ul>
+            <li><b>Average:</b> @Model.AverageWeight.ToString("0.00")</li>
+            <li><b>Max:</b> @Model.MaxWeight</li>
+            <li><b>Min:</b> @Model.MinWeight</li>
+        </ul>
+    </div>
+</div>
