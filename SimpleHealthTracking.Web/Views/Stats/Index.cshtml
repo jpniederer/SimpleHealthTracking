@@ -19,4 +19,16 @@
         <p><b>Max:</b> @Model.MaxWeightCheckin.Weight on @Model.MaxWeightCheckin.TimeAdded.ToShortDateString()</p>
         <p><b>Min:</b> @Model.MinWeightCheckin.Weight on @Model.MinWeightCheckin.TimeAdded.ToShortDateString()</p>
     </div>
+    <div class="col-md-3">
+        <h2>Sleep</h2>
+        <p><b>Average Slept (hours):</b> @((Model.AverageMinutesSlept / 60).ToString("0.00"))</p>
+        <p><b>Average Start Time:</b> @Model.AverageSleepStartTime.ToShortTimeString()</p>
+        <p><b>Average End Time:</b> @Model.AverageSleepEndTime.ToShortTimeString()</p>
+        <p><b>Most Sleep (hours):</b> @(((double)Model.MostSleep.MinutesSlept / 60).ToString("0.00"))
+            on @Model.MostSleep.StartTime.Value.ToShortDateString()
+        </p>
+        <p><b>Least Sleep (hours):</b> @(((double)Model.LeastSleep.MinutesSlept / 60).ToString("0.00"))
+         on @Model.LeastSleep.StartTime.Value.ToShortDateString()
+        </p>
+    </div>
 </div>
