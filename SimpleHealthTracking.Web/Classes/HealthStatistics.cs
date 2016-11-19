@@ -239,9 +239,7 @@
 
         public void SetAverageStartAndEndSleepTimes()
         {
-            int totalStartHours = 0;
             int totalStartMinutes = 0;
-            int totalEndHours = 0;
             int totalEndMinutes = 0;
 
             if (sleeps == null)
@@ -255,30 +253,28 @@
             {
                 if (sleep.StartTime.Value.Hour == 0)
                 {
-                    totalStartHours += 24;
+                    totalStartMinutes += 24 * 60 + sleep.StartTime.Value.Minute;
                 }
                 else if (sleep.StartTime.Value.Hour == 1)
                 {
-                    totalStartHours += 25;
+                    totalStartMinutes += 25 * 60 + sleep.StartTime.Value.Minute;
                 }
                 else if (sleep.StartTime.Value.Hour == 2)
                 {
-                    totalStartHours += 26;
+                    totalStartMinutes += 26 * 60 + sleep.StartTime.Value.Minute;
                 }
                 else
                 {
-                    totalStartHours += sleep.StartTime.Value.Hour;
+                    totalStartMinutes += sleep.StartTime.Value.Hour * 60 + sleep.StartTime.Value.Minute;
                 }
                 
-                totalStartMinutes += sleep.StartTime.Value.Minute;
-                totalEndHours += sleep.EndTime.Value.Hour;
-                totalEndMinutes += sleep.EndTime.Value.Minute;
+                totalEndMinutes += sleep.EndTime.Value.Hour * 60 + sleep.EndTime.Value.Minute;
             }
 
-            int averageStartHour = totalStartHours / wellDefinedSleeps.Count;
-            int averageStartMinute = totalStartMinutes / wellDefinedSleeps.Count;
-            int averageEndHour = totalEndHours / wellDefinedSleeps.Count;
-            int averageEndMinute = totalEndMinutes / wellDefinedSleeps.Count;
+            int averageStartHour = totalStartMinutes / 60 / wellDefinedSleeps.Count;
+            int averageStartMinute = totalStartMinutes / wellDefinedSleeps.Count % 60;
+            int averageEndHour = totalEndMinutes / 60 / wellDefinedSleeps.Count;
+            int averageEndMinute = totalEndMinutes / wellDefinedSleeps.Count % 60;
 
             AverageSleepStartTime = new DateTime(2016, 11, 16, averageStartHour % 24, averageStartMinute, 0, 0);
             AverageSleepEndTime = new DateTime(2016, 11, 16, averageEndHour, averageEndMinute, 0, 0);
