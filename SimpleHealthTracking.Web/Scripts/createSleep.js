@@ -8,7 +8,7 @@ $(document).ready(function () {
         var endTimeTextBox = document.getElementById("EndTimeText");
         if (startDateTextBox.value !== "" && startTimeTextBox.value !== "" &&
             endDateTextBox.value !== "" && endTimeTextBox.value !== "") {
-            $.post("/api/SleepApi", {
+            $.post("/api/SleepApi/AddSleep", {
                 StartDateText: startDateTextBox.value, StartTimeText: startTimeTextBox.value,
                 EndDateText: endDateTextBox.value, EndTimeText: endTimeTextBox.value
             }).done(function () {

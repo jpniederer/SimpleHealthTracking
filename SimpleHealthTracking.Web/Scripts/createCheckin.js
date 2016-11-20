@@ -7,7 +7,7 @@ $(document).ready(function () {
         if (weightTextBox.value !== "" || heartRateTextBox.value !== "") {
             var time = new Date();
             var timeString = time.toLocaleDateString() + " " + time.toLocaleTimeString();
-            $.post("/api/CheckinApi", {
+            $.post("/api/CheckinApi/AddCheckin", {
                 Weight: weightTextBox.value, HeartRate: heartRateTextBox.value,
                 TimeString: timeString
             })

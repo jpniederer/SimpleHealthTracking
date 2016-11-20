@@ -209,6 +209,7 @@
     <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Controllers\SleepApiController.cs" />
     <Compile Include="Controllers\SleepController.cs" />
+    <Compile Include="Controllers\StatsApiController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">

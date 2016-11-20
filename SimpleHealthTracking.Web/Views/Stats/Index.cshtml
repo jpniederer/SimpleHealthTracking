@@ -21,13 +21,13 @@
     </div>
     <div class="col-md-3">
         <h2>Sleep</h2>
-        <p><b>Average Slept (hours):</b> @((Model.AverageMinutesSlept / 60).ToString("0.00"))</p>
+        <p><b>Average Slept:</b> @((Model.AverageMinutesSlept / 60).ToString("0.00")) hours</p>
         <p><b>Average Start Time:</b> @Model.AverageSleepStartTime.ToShortTimeString()</p>
         <p><b>Average End Time:</b> @Model.AverageSleepEndTime.ToShortTimeString()</p>
-        <p><b>Most Sleep (hours):</b> @(((double)Model.MostSleep.MinutesSlept / 60).ToString("0.00"))
+        <p><b>Most Sleep:</b> @(((double)Model.MostSleep.MinutesSlept / 60).ToString("0.00")) hours
             on @Model.MostSleep.StartTime.Value.ToShortDateString()
         </p>
-        <p><b>Least Sleep (hours):</b> @(((double)Model.LeastSleep.MinutesSlept / 60).ToString("0.00"))
+        <p><b>Least Sleep:</b> @(((double)Model.LeastSleep.MinutesSlept / 60).ToString("0.00")) hours
          on @Model.LeastSleep.StartTime.Value.ToShortDateString()
         </p>
     </div>
