@@ -187,6 +187,19 @@
             return View(checkinsForUser.ToPagedList(pageNumber, pageSize));
         }
 
+        [Authorize]
+        public ActionResult Notes(int? page)
+        {
+            var currentUser = User.Identity.GetUserId();
+            var checkinsForUser = repository.GetCheckinsForUser(currentUser)
+                .Where(c => c.Notes != "")
+                .OrderBy(c => c.TimeAdded);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(checkinsForUser.ToPagedList(pageNumber, pageSize));
+        }
+
         private void SetupIndexSortingViewBag(string sortOrder)
         {
             ViewBag.CurrentSort = sortOrder;

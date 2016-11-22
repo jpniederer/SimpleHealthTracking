@@ -1,0 +1,31 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<SimpleHealthTracking.Repository.Entities.Checkin>
+
+@{
+    ViewBag.Title = "Checkin Notes";
+}
+
+<h2>Checkin Notes</h2>
+
+<p>
+    @Html.ActionLink("Add a Checkin", "Create")
+</p>
+@foreach (var checkin in Model)
+{
+    <div>
+        <h3>Notes</h3>
+        <p>@checkin.Notes</p>
+        <p>From <i>@checkin.TimeAdded.ToString()</i></p>
+    </div>
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { id = checkin.Id }) |
+        @Html.ActionLink("Full Details", "Details", new { id = checkin.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = checkin.Id })
+    </div>
+    <hr />
+}
+<p>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    
+    @Html.PagedListPager(Model, page => Url.Action("Notes", new { page }))
+</p>
