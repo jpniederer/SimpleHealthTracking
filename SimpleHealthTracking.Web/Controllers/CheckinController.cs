@@ -192,8 +192,8 @@
         {
             var currentUser = User.Identity.GetUserId();
             var checkinsForUser = repository.GetCheckinsForUser(currentUser)
-                .Where(c => c.Notes != "")
-                .OrderBy(c => c.TimeAdded);
+                .Where(c => !string.IsNullOrEmpty(c.Notes))
+                .OrderByDescending(c => c.TimeAdded);
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
