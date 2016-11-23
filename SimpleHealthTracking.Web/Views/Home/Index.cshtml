@@ -68,6 +68,36 @@
             });
         });
 
+        //var data;
+        var checkinWeightsJson, checkinHeartratesJson,
+            weights, heartrates;
+        $(document).ready(function () {
+            $.get("api/CheckinApi/GetLastCheckinsForWeights?count=30", function (d) {
+                checkinWeightsJson = d;
+            });
+            $.get("api/CheckinApi/GetLastCheckinsForHeartrates?count=30", function (d) {
+                checkinHeartratesJson = d;
+            });
+        });
+
+        function setupWeights() {
+            weights = checkinWeightsJson.map(function (item) {
+                return {
+                    weight: item.Weight,
+                    time: item.TimeAdded
+                };
+            });
+        };
+
+        function setupHeartrates() {
+            heartrates = checkinHeartratesJson.map(function (item) {
+                return {
+                    heartrate: item.Heartrate,
+                    time: item.TimeAdded
+                };
+            });
+        };
+
         var data = [4, 8, 15, 16, 23, 42];
         //var x = d3.scale.linear()
         //    .domain([0, d3.max(data)])

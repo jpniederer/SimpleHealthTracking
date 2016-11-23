@@ -39,6 +39,26 @@
         }
 
         [Authorize]
+        [HttpGet]
+        public IHttpActionResult GetLastCheckinsForWeights(int count)
+        {
+            string userId = User.Identity.GetUserId();
+            var checkins = repository.GetLastNumberOfCheckinWeightsForUser(userId, count);
+
+            return Json(checkins);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IHttpActionResult GetLastCheckinsForHeartrates(int count)
+        {
+            string userId = User.Identity.GetUserId();
+            var checkins = repository.GetLastNumberOfCheckinHeartratesForUser(userId, count);
+
+            return Json(checkins);
+        }
+
+        [Authorize]
         [HttpPost]
         public IHttpActionResult AddCheckin(CheckinDto checkinDto)
         {

@@ -14,6 +14,8 @@
         IQueryable<Checkin> GetCheckinsForUser(string userId);
         IQueryable<Checkin> GetCheckinsByRange(DateTime startDate, DateTime endDate, string userId);
         IQueryable<Checkin> GetLastNumberOfCheckinsForUser(string userId, int count);
+        IQueryable<Checkin> GetLastNumberOfCheckinWeightsForUser(string userId, int count);
+        IQueryable<Checkin> GetLastNumberOfCheckinHeartratesForUser(string userId, int count);
 
         // Medicines
         ActionResult<Medicine> InsertMedicine(Medicine medicine);

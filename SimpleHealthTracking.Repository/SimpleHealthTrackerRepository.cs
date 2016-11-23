@@ -134,6 +134,20 @@
                                             .Take(count);
         }
 
+        public IQueryable<Checkin> GetLastNumberOfCheckinWeightsForUser(string userId, int count)
+        {
+            return _context.Checkins.Where(c => c.UserId.Equals(userId) && c.Weight != null)
+                                            .OrderByDescending(c => c.TimeAdded)
+                                            .Take(count);
+        }
+
+        public IQueryable<Checkin> GetLastNumberOfCheckinHeartratesForUser(string userId, int count)
+        {
+            return _context.Checkins.Where(c => c.UserId.Equals(userId) && c.Heartrate != null)
+                                            .OrderByDescending(c => c.TimeAdded)
+                                            .Take(count);
+        }
+
         // Medicines
         public ActionResult<Medicine> InsertMedicine(Medicine medicine)
         {
