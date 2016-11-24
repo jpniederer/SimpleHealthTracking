@@ -33,7 +33,11 @@
     <div class="col-md-4">
         <h2>Recent Heartrates</h2>
         <p></p>
-        <p></p>
+        <p>
+            <div class="heartrateChart">
+                <svg id="heartChart"></svg>
+            </div>
+        </p>
     </div>
 </div>
 @section scripts
@@ -72,13 +76,21 @@
         var checkinWeightsJson, checkinHeartratesJson,
             weights, heartrates;
         $(document).ready(function () {
+            setupTestChart();
+            setupDataSets();
+            setupWeights();
+            setupHeartrates();
+            setupHeartrateGraph();
+        });
+
+        function setupDataSets() {
             $.get("api/CheckinApi/GetLastCheckinsForWeights?count=30", function (d) {
                 checkinWeightsJson = d;
             });
             $.get("api/CheckinApi/GetLastCheckinsForHeartrates?count=30", function (d) {
                 checkinHeartratesJson = d;
             });
-        });
+        };
 
         function setupWeights() {
             weights = checkinWeightsJson.map(function (item) {
@@ -92,22 +104,68 @@
         function setupHeartrates() {
             heartrates = checkinHeartratesJson.map(function (item) {
                 return {
-                    heartrate: item.Heartrate,
-                    time: item.TimeAdded
+                    x: item.TimeAdded,
+                    y: item.Heartrate                    
                 };
             });
         };
 
-        var data = [4, 8, 15, 16, 23, 42];
-        //var x = d3.scale.linear()
-        //    .domain([0, d3.max(data)])
-        //    .range([0, 420]);
+        function setupHeartrateGraph() {
+            var heart = d3.select("#heartChart"),
+                margins = { top: 10, right: 10, bottom: 10, left: 20 },
+                width = 400, //+.attr("width") - margin.left - margin.right,
+                height = 150, //+svg.attr("height") - margin.top - margin.bottom,
+                //g = svg.append("g").attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+                xRange = d3.scaleLinear().range([margins.left, width - margins.right]).domain([
+                    d3.min(heartrates, function (d) {
+                        return d.x;
+                    }),
+                    d3.max(heartrates, function (d) {
+                        return d.x;
+                    })
+                ]),
+                yRange = d3.scaleLinear().range([height - margins.top, margins.bottom]).domain([
+                    d3.min(heartrates, function (d) {
+                        return d.y;
+                    }),
+                    d3.max(heartrates, function (d) {
+                        return d.y;
+                    })
+                ]),
+                xAxis = d3.axisBottom()
+                    .scale(xRange),
+                    //.tickSize(5)
+                    //.tickSubdivde(true),
+                yAxis = d3.axisLeft()
+                    .scale(yRange);
+                    //.tickSize(5)
+                    //.orient("left")
+                    //.tickSubdivide(true);
 
-        d3.select(".chart")
-          .selectAll("div")
-            .data(data)
-          .enter().append("div")
-            .style("width", function (d) { return d * 10 + "px"; })
-            .text(function (d) { return d; });
+            heart.append("svg:g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + (height - margins.bottom) + ")")
+                .call(xAxis);
+
+            heart.append("svg:g")
+              .attr("class", "y axis")
+              .attr("transform", "translate(" + (margins.left) + ",0)")
+              .call(yAxis);
+        };
+
+        function setupTestChart() {
+            var data = [4, 8, 15, 16, 23, 42];
+            //var x = d3.scale.linear()
+            //    .domain([0, d3.max(data)])
+            //    .range([0, 420]);
+
+            d3.select(".chart")
+              .selectAll("div")
+                .data(data)
+              .enter().append("div")
+                .style("width", function (d) { return d * 10 + "px"; })
+                .text(function (d) { return d; });
+        };
+        
     </script>
 }
