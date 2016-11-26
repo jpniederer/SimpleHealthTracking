@@ -49,6 +49,16 @@
         }
 
         [Authorize]
+        [HttpGet]
+        public IHttpActionResult GetLastFullSleeps(int count)
+        {
+            string userId = User.Identity.GetUserId();
+            var sleeps = repository.GetLastNumberOfSleepsForUser(userId, count);
+
+            return Json(sleeps);
+        }
+
+        [Authorize]
         [HttpPost]
         public IHttpActionResult AddSleep(SleepDto sleepDto)
         {

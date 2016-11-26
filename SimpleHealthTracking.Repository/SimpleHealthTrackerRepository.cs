@@ -503,5 +503,14 @@
                                         .OrderByDescending(s => s.StartTime)
                                         .Take(count);
         }
+
+        public IQueryable<Sleep> GetLastFullSleepsForUser(string userId, int count)
+        {
+            return _context.Sleeps.Where(s => s.UserId.Equals(userId) 
+                                                && s.StartTime != null
+                                                && s.MinutesSlept != null)
+                                        .OrderByDescending(s => s.StartTime)
+                                        .Take(count);
+        }
     }
 }

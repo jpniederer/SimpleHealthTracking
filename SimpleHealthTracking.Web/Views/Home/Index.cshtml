@@ -21,7 +21,8 @@
             How much you've slept in the last 30 days.
         </p>
         <p>
-            <div class="chart">
+            <div class="sleepChart">
+                <svg id="sleepChart" width="400" height="400"></svg>
             </div>
         </p>
     </div>
@@ -78,9 +79,9 @@
 
         var checkinWeightsJson, checkinHeartratesJson,
             weights, heartrates;
+        var sleepTimesJson, sleeps;
 
         $(document).ready(function () {
-            setupTestChart();
             setupDataSets();
         });
 
@@ -97,6 +98,76 @@
             .done(function() {
                 setupHeartrateGraph();
             });
+            $.get("api/SleepApi/GetLastFullSleeps?count=30", function (d) {
+                sleepTimesJson = d;
+            })
+            .done(function() {
+                setupSleepGraph();
+            });
+        };
+
+        function setupSleeps() {
+            sleeps = sleepTimesJson.map(function (item) {
+                return {
+                    x: item.StartTime,
+                    y: item.MinutesSlept / 60
+                };
+            });
+        };
+
+        function setupSleepGraph() {
+            setupSleeps();
+            var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S");
+            var weight = d3.select("#sleepChart"),
+                margins = { top: 20, right: 20, bottom: 20, left: 50 },
+                width = 400,
+                height = 400,
+                xRange = d3.scaleTime().range([margins.left, width - margins.right]).domain([
+                    d3.min(sleeps, function (d) {
+                        return parseTime(d.x);
+                    }),
+                    d3.max(sleeps, function (d) {
+                        return parseTime(d.x);
+                    })
+                ]),
+                yRange = d3.scaleLinear().range([height - margins.top, margins.bottom]).domain([
+                    d3.min(sleeps, function (d) {
+                        return d.y - 0.1;
+                    }),
+                    d3.max(sleeps, function (d) {
+                        return d.y + 0.1;
+                    })
+                ]),
+                xAxis = d3.axisBottom(xRange)
+                        .ticks(5)
+                        .tickFormat(d3.timeFormat("%m/%d")),
+                yAxis = d3.axisLeft(yRange);
+
+
+            weight.append("svg:g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + (height - margins.bottom) + ")")
+                .call(xAxis);
+
+            weight.append("svg:g")
+              .attr("class", "y axis")
+              .attr("transform", "translate(" + (margins.left) + ",0)")
+              .call(yAxis);
+
+            var lineFunc = d3.line()
+                .x(function (d) {
+                    return xRange(parseTime(d.x));
+                })
+                .y(function (d) {
+                    return yRange(d.y);
+                });
+
+            weight.append('svg:path')
+                .attr('d', lineFunc(sleeps))
+                .attr('stroke', 'blue')
+                .attr('stroke-width', 2)
+                .attr('fill', 'none')
+                .text("Recent Heartrates")
         };
 
         function setupWeights() {
@@ -132,7 +203,9 @@
                         return d.y + 1;
                     })
                 ]),
-                xAxis = d3.axisBottom(xRange),
+                xAxis = d3.axisBottom(xRange)
+                        .ticks(5)
+                        .tickFormat(d3.timeFormat("%m/%d")),
                 yAxis = d3.axisLeft(yRange);
 
             weight.append("svg:g")
@@ -195,7 +268,9 @@
                         return d.y + 5;
                     })
                 ]),
-                xAxis = d3.axisBottom(xRange),
+                xAxis = d3.axisBottom(xRange)
+                        .ticks(5)
+                        .tickFormat(d3.timeFormat("%m/%d")),
                 yAxis = d3.axisLeft(yRange);
 
             heart.append("svg:g")
