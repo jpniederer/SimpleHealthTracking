@@ -252,6 +252,7 @@
     <None Include="Properties\PublishProfiles\SimpleHealthTracking - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\SimpleHealthTracking - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\charts.js" />
     <Content Include="Scripts\createCheckin.js" />
     <Content Include="Scripts\createMedicineTaken.js" />
     <Content Include="Scripts\createSleep.js" />

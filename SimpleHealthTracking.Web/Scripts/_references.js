@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="bootstrap.min.js" />
+/// <reference path="charts.js" />
 /// <reference path="createcheckin.js" />
 /// <reference path="createmedicinetaken.js" />
 /// <reference path="createsleep.js" />
