@@ -13,6 +13,7 @@ $(document).ready(function () {
                 EndDateText: endDateTextBox.value, EndTimeText: endTimeTextBox.value
             }).done(function () {
                 showSleepAdded();
+                updateChart("api/SleepApi/GetLastFullSleeps?count=30", setupSleeps, '#sleepChart', 0.1, '');
                 startDateTextBox.value = null;
                 startTimeTextBox.value = null;
                 endDateTextBox.value = null;

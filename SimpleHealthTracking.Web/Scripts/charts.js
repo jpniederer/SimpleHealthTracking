@@ -1,25 +1,40 @@
-﻿var sleepTimesJson, checkinWeightsJson, checkinHeartsJson;
+﻿var webServiceJsonResult;
 
 function setupDataSetsHome() {
     $.get("api/CheckinApi/GetLastCheckinsForWeights?count=30", function (d) {
-        checkinWeightsJson = d;
+        webServiceJsonResult = d;
     })
     .done(function () {
         homeGraphGeneral(setupWeights, "#weightChart", 1, '');
     });
     $.get("api/CheckinApi/GetLastCheckinsForHeartrates?count=30", function (d) {
-        checkinHeartratesJson = d;
+        webServiceJsonResult = d;
     })
     .done(function () {
         homeGraphGeneral(setupHeartrates, "#heartChart", 5, '');
     });
     $.get("api/SleepApi/GetLastFullSleeps?count=30", function (d) {
-        sleepTimesJson = d;
+        webServiceJsonResult = d;
     })
     .done(function () {
         homeGraphGeneral(setupSleeps, "#sleepChart", 0.1, '');
     });
 };
+
+function updateChart(webService, setupFunction, idName, scaleModifier, name) {
+    $.get(webService, function (d) {
+        webServiceJsonResult = d;
+    })
+    .done(function () {
+        deletePreviousChart(idName);
+        homeGraphGeneral(setupFunction, idName, scaleModifier, name);
+    });
+}
+
+function deletePreviousChart(idName) {
+    var svg = d3.select(idName);
+    svg.selectAll("*").remove();
+}
 
 function homeGraphGeneral(setupFunction, idName, scaleModifier, name) {
     var items = setupFunction();
@@ -77,7 +92,7 @@ function homeGraphGeneral(setupFunction, idName, scaleModifier, name) {
 };
 
 function setupSleeps() {
-    var sleeps = sleepTimesJson.map(function (item) {
+    var sleeps = webServiceJsonResult.map(function (item) {
         return {
             x: item.StartTime,
             y: item.MinutesSlept / 60
@@ -88,7 +103,7 @@ function setupSleeps() {
 };
 
 function setupWeights() {
-    var weights = checkinWeightsJson.map(function (item) {
+    var weights = webServiceJsonResult.map(function (item) {
         return {
             x: item.TimeAdded,
             y: item.Weight
@@ -99,7 +114,7 @@ function setupWeights() {
 };
 
 function setupHeartrates() {
-    var heartrates = checkinHeartratesJson.map(function (item) {
+    var heartrates = webServiceJsonResult.map(function (item) {
         return {
             x: item.TimeAdded,
             y: item.Heartrate

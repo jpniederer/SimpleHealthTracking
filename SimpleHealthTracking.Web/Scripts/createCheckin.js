@@ -13,6 +13,8 @@ $(document).ready(function () {
             })
             .done(function () {
                 showCheckinAdded();
+                updateChart("api/CheckinApi/GetLastCheckinsForHeartrates?count=30", setupHeartrates, '#heartChart', 5, '');
+                updateChart("api/CheckinApi/GetLastCheckinsForWeights?count=30", setupWeights, '#weightChart', 1, '');
                 weightTextBox.value = null;
                 heartRateTextBox.value = null;
             })
