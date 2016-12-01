@@ -1,8 +1,6 @@
 ﻿namespace SimpleHealthTracking.Web.ViewModels
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using SimpleHealthTracking.Repository.Entities;
+    using Repository.Entities;
 
     public class CheckinViewModel
     {

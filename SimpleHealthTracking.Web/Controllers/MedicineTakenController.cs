@@ -7,18 +7,17 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
-    using System.Web;
     using System.Web.Mvc;
     using PagedList;
     using Web.ViewModels;
 
     public class MedicineTakenController : Controller
     {
-        ISimpleHealthTrackerRepository repository;
+        ISimpleHealthTrackingRepository repository;
 
         public MedicineTakenController()
         {
-            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
         }
 
         [Authorize]

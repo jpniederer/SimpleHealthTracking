@@ -1,29 +1,28 @@
 ﻿namespace SimpleHealthTracking.Web.Controllers
 {
-    using SimpleHealthTracking.Repository;
-    using SimpleHealthTracking.Repository.Entities;
-    using SimpleHealthTracking.Repository.Factories;
-    using SimpleHealthTracking.Web.ViewModels;
+    using Repository;
+    using Repository.Entities;
+    using Repository.Factories;
+    using ViewModels;
     using Microsoft.AspNet.Identity;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
     using System.Net;
     using PagedList;
 
     public class CheckinController : Controller
     {
-        ISimpleHealthTrackerRepository repository;
+        ISimpleHealthTrackingRepository repository;
         CheckinFactory checkinFactory = new CheckinFactory();
 
         public CheckinController()
         {
-            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
         }
         
-        public CheckinController(ISimpleHealthTrackerRepository repo)
+        public CheckinController(ISimpleHealthTrackingRepository repo)
         {
             repository = repo;
         }

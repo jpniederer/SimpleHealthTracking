@@ -13,17 +13,17 @@
 
     public class SleepController : ApiController
     {
-        ISimpleHealthTrackerRepository repository;
+        ISimpleHealthTrackingRepository repository;
         SleepFactory sleepFactory = new SleepFactory();
 
         const int maxPageSize = 10;
 
         public SleepController()
         {
-            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
         }
 
-        public SleepController(ISimpleHealthTrackerRepository repo)
+        public SleepController(ISimpleHealthTrackingRepository repo)
         {
             repository = repo;
         }

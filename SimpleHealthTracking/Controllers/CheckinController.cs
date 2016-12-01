@@ -13,15 +13,15 @@
 
     public class CheckinController : ApiController
     {
-        ISimpleHealthTrackerRepository repository;
+        ISimpleHealthTrackingRepository repository;
         CheckinFactory checkinFactory = new CheckinFactory();
 
         public CheckinController()
         {
-            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
         }
 
-        public CheckinController(ISimpleHealthTrackerRepository repo)
+        public CheckinController(ISimpleHealthTrackingRepository repo)
         {
             repository = repo;
         }

@@ -23,16 +23,16 @@
         private CheckinFactory checkinFactory = new CheckinFactory();
         private MedicineTakenFactory medicineTakenFactory = new MedicineTakenFactory();
         private SleepFactory sleepFactory = new SleepFactory();
-        ISimpleHealthTrackerRepository repository;
+        ISimpleHealthTrackingRepository repository;
 
         public ExcelDataConverter()
         {
-            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
         }
 
         public ExcelDataConverter(IExcelDataReader rawExcel, string worksheetName, string userId)
         {
-            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
             UserId = userId;
             WorksheetName = worksheetName;
             excelDataSet = rawExcel.AsDataSet();

@@ -1,30 +1,29 @@
 ﻿namespace SimpleHealthTracking.Web.Controllers
 {
-    using SimpleHealthTracking.Repository;
-    using SimpleHealthTracking.Repository.Entities;
-    using SimpleHealthTracking.Repository.Factories;
-    using SimpleHealthTracking.Repository.DTO;
-    using SimpleHealthTracking.Web.ViewModels;
+    using Repository;
+    using Repository.Entities;
+    using Repository.Factories;
+    using Repository.DTO;
+    using ViewModels;
     using Microsoft.AspNet.Identity;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
     using System.Net;
     using PagedList;
 
     public class SleepController : Controller
     {
-        ISimpleHealthTrackerRepository repository;
+        ISimpleHealthTrackingRepository repository;
         SleepFactory sleepFactory = new SleepFactory();
 
         public SleepController()
         {
-            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
         }
 
-        public SleepController(ISimpleHealthTrackerRepository repo)
+        public SleepController(ISimpleHealthTrackingRepository repo)
         {
             repository = repo;
         }

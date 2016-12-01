@@ -4,7 +4,7 @@
     using System;
     using System.Linq;
 
-    public interface ISimpleHealthTrackerRepository
+    public interface ISimpleHealthTrackingRepository
     {
         // Checkins
         ActionResult<Checkin> InsertCheckin(Checkin checkin);

@@ -22,13 +22,13 @@
         List<Checkin> checkins;
         List<MedicineTaken> medicinesTaken;
         List<Sleep> sleeps;
-        ISimpleHealthTrackerRepository repository;
+        ISimpleHealthTrackingRepository repository;
         string userId;
 
         public HealthStatistics(string user, bool getAllStats = false)
         {
             userId = user;
-            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
 
             if (getAllStats)
             {
@@ -36,7 +36,7 @@
             }
         }
 
-        public HealthStatistics(ISimpleHealthTrackerRepository repo, string user, bool getAllStats = false)
+        public HealthStatistics(ISimpleHealthTrackingRepository repo, string user, bool getAllStats = false)
         {
             repository = repo;
             userId = user;
@@ -61,28 +61,52 @@
             SetAverageStartAndEndSleepTimes();
         }
 
-        private void SetupCheckins()
+        private bool SetupCheckins()
         {
             checkins = repository.GetCheckinsForUser(userId).ToList();
+
+            if (checkins.Count == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        private void SetupMedicinesTakens()
+        private bool SetupMedicinesTakens()
         {
             medicinesTaken = repository.GetMedicineTakenByUser(userId).ToList();
+
+            if (medicinesTaken.Count == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        private void SetupSleeps()
+        private bool SetupSleeps()
         {
             sleeps = repository.GetSleepForUser(userId).ToList();
+
+            if (sleeps.Count == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public double GetAverageWeight()
         {
             AverageWeight = 0.0;
 
-            if (checkins == null)
+            if (checkins == null || checkins.Count == 0)
             {
-                SetupCheckins();
+                if (!SetupCheckins())
+                {
+                    return AverageWeight;
+                }
             }
 
             AverageWeight = checkins.Where(c => c.Weight != null).Average(c => (float)c.Weight);
@@ -94,9 +118,12 @@
         {
             double averageWeight = 0.0;
 
-            if (checkins == null)
+            if (checkins == null || checkins.Count == 0)
             {
-                SetupCheckins();
+                if (!SetupCheckins())
+                {
+                    return averageWeight;
+                }
             }
 
             averageWeight = checkins.Where(c => c.Weight != null).Take(numberEntries)
@@ -109,9 +136,12 @@
         {
             MaxWeightCheckin = null;
 
-            if (checkins == null)
+            if (checkins == null || checkins.Count == 0)
             {
-                SetupCheckins();
+                if (!SetupCheckins())
+                {
+                    return null;
+                }
             }
 
             MaxWeightCheckin = checkins.Where(c => c.Weight != null).OrderByDescending(c => c.Weight).Take(1).ToList()[0];
@@ -123,9 +153,12 @@
         {
             MinWeightCheckin = null;
 
-            if (checkins == null)
+            if (checkins == null || checkins.Count == 0)
             {
-                SetupCheckins();
+                if (!SetupCheckins())
+                {
+                    return null;
+                }
             }
 
             MinWeightCheckin = checkins.Where(c => c.Weight != null).OrderBy(c => c.Weight).Take(1).ToList()[0];
@@ -137,9 +170,12 @@
         {
             AverageHeartrate = 0.0;
 
-            if (checkins == null)
+            if (checkins == null || checkins.Count == 0)
             {
-                SetupCheckins();
+                if (!SetupCheckins())
+                {
+                    return AverageHeartrate;
+                }
             }
 
             AverageHeartrate = checkins.Where(c => c.Heartrate != null).Average(c => (float)c.Heartrate);
@@ -151,9 +187,12 @@
         {
             MaxHeartrateCheckin = null;
 
-            if (checkins == null)
+            if (checkins == null || checkins.Count == 0)
             {
-                SetupCheckins();
+                if (!SetupCheckins())
+                {
+                    return null;
+                }
             }
 
             var maxHeartrateList = checkins.Where(c => c.Heartrate != null).OrderByDescending(c => (float)c.Heartrate).ToList();
@@ -170,9 +209,12 @@
         {
             MinHeartrateCheckin = null;
 
-            if (checkins == null)
+            if (checkins == null || checkins.Count == 0)
             {
-                SetupCheckins();
+                if (!SetupCheckins())
+                {
+                    return null;
+                }
             }
 
             var minHeartrateList = checkins.Where(c => c.Heartrate != null).OrderBy(c => c.Heartrate).ToList();
@@ -189,9 +231,12 @@
         {
             AverageMinutesSlept = 0.0;
 
-            if (sleeps == null)
+            if (sleeps == null || sleeps.Count == 0)
             {
-                SetupSleeps();
+                if (!SetupSleeps())
+                {
+                    return AverageMinutesSlept;
+                }
             }
 
             AverageMinutesSlept = sleeps.Where(s => s.MinutesSlept != null).Average(s => (float)s.MinutesSlept);
@@ -203,9 +248,12 @@
         {
             MostSleep = null;
 
-            if (sleeps == null)
+            if (sleeps == null || sleeps.Count == 0)
             {
-                SetupSleeps();
+                if (!SetupSleeps())
+                {
+                    return null;
+                }
             }
 
             var mostSleepList = sleeps.Where(s => s.MinutesSlept != null).OrderByDescending(s => s.MinutesSlept).Take(1).ToList();
@@ -222,9 +270,12 @@
         {
             LeastSleep = null;
 
-            if (sleeps == null)
+            if (sleeps == null || sleeps.Count == 0)
             {
-                SetupSleeps();
+                if (!SetupSleeps())
+                {
+                    return null;
+                }
             }
 
             var leastSleepList = sleeps.Where(s => s.MinutesSlept != null).OrderBy(s => s.MinutesSlept).Take(1).ToList();
@@ -242,9 +293,14 @@
             int totalStartMinutes = 0;
             int totalEndMinutes = 0;
 
-            if (sleeps == null)
+            if (sleeps == null || sleeps.Count == 0)
             {
-                SetupSleeps();
+                if (!SetupSleeps())
+                {
+                    AverageSleepStartTime = DateTime.MinValue;
+                    AverageSleepEndTime = DateTime.MinValue;
+                    return;
+                }
             }
 
             var wellDefinedSleeps = sleeps.Where(s => s.StartTime != null && s.EndTime != null).ToList();

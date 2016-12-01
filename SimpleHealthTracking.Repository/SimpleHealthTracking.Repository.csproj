@@ -70,14 +70,14 @@
     <Compile Include="Helpers\ExcelImportListGenerator.cs" />
     <Compile Include="Helpers\ListExtentions.cs" />
     <Compile Include="Helpers\Utility.cs" />
-    <Compile Include="ISimpleHealthTrackerRepository.cs" />
+    <Compile Include="ISimpleHealthTrackingRepository.cs" />
     <Compile Include="Migrations\201609240301591_InitialRepositoryMode.cs" />
     <Compile Include="Migrations\201609240301591_InitialRepositoryMode.Designer.cs">
       <DependentUpon>201609240301591_InitialRepositoryMode.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleHealthTrackerRepository.cs" />
+    <Compile Include="SimpleHealthTrackingRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609240301591_InitialRepositoryMode.resx">

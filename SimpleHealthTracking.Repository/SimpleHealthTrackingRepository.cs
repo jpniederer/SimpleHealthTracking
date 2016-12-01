@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Data.Entity;
 
-    public class SimpleHealthTrackerRepository : ISimpleHealthTrackerRepository
+    public class SimpleHealthTrackingRepository : ISimpleHealthTrackingRepository
     {
         SimpleHealthTrackerContext _context;
 
-        public SimpleHealthTrackerRepository(SimpleHealthTrackerContext context)
+        public SimpleHealthTrackingRepository(SimpleHealthTrackerContext context)
         {
             _context = context;
             _context.Configuration.LazyLoadingEnabled = false;

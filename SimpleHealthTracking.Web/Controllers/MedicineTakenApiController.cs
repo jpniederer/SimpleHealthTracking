@@ -1,30 +1,27 @@
 ﻿namespace SimpleHealthTracking.Web.Controllers
 {
-    using SimpleHealthTracking.Repository.Entities;
-    using SimpleHealthTracking.Repository.DTO;
-    using SimpleHealthTracking.Repository.Factories;
-    using SimpleHealthTracking.Repository;
-    using Web.ViewModels;
+    using Repository.Entities;
+    using Repository.Factories;
+    using Repository;
+    using ViewModels;
     using Microsoft.AspNet.Identity;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
-    using System.Net.Http;
     using System.Web.Http;
 
     [Authorize]
     public class MedicineTakenApiController : ApiController
     {
-        ISimpleHealthTrackerRepository repository;
+        ISimpleHealthTrackingRepository repository;
         MedicineTakenFactory medicineTakenFactory = new MedicineTakenFactory();
 
         public MedicineTakenApiController()
         {
-            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
         }
 
-        public MedicineTakenApiController(ISimpleHealthTrackerRepository repo)
+        public MedicineTakenApiController(ISimpleHealthTrackingRepository repo)
         {
             repository = repo;
         }

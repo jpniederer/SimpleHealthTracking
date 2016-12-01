@@ -13,15 +13,15 @@
 
     public class MedicineController : ApiController
     {
-        ISimpleHealthTrackerRepository repository;
+        ISimpleHealthTrackingRepository repository;
         MedicineFactory medicineFactory = new MedicineFactory();
 
         public MedicineController()
         {
-            repository = new SimpleHealthTrackerRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
         }
 
-        public MedicineController(ISimpleHealthTrackerRepository repo)
+        public MedicineController(ISimpleHealthTrackingRepository repo)
         {
             repository = repo;
         }
