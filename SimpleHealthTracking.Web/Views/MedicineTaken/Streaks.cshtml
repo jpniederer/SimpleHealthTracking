@@ -1,0 +1,20 @@
+﻿@model IEnumerable<SimpleHealthTracking.Web.Classes.MedicineStats>
+
+@{ 
+    ViewBag.Title = "Medicine/Streak Stats";
+}
+
+<h2>Medicine/Streak Stats</h2>
+<p></p>
+@foreach (var medicine in Model)
+{
+    if (medicine.DoesMedicineHaveRecords)
+    {
+        <div>
+            <h3>@medicine.Medicine.Name</h3>
+            <p>Longest Streak: </p>
+            <p>Completed: @medicine.CompletionCount</p>
+            <p>Completion Percentage: @medicine.CompletionPercentage.ToString("0.00")% (@medicine.CompletionCount of @medicine.TotalExpected)</p>
+        </div>
+    }
+}

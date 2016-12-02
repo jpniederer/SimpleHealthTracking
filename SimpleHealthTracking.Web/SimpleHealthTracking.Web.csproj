@@ -211,6 +211,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Classes\HealthStatistics.cs" />
     <Compile Include="Classes\ExcelDataConverter.cs" />
+    <Compile Include="Classes\MedicineStats.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckinApiController.cs" />
     <Compile Include="Controllers\CheckinController.cs" />
@@ -349,6 +350,7 @@
     <Content Include="Views\MedicineTaken\MedicineTakenPartial.cshtml" />
     <Content Include="Views\Stats\Index.cshtml" />
     <Content Include="Views\Checkin\Notes.cshtml" />
+    <Content Include="Views\MedicineTaken\Streaks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
