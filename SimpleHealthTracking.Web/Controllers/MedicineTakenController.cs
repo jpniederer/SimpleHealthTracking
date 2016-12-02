@@ -1,5 +1,6 @@
 ﻿namespace SimpleHealthTracking.Controllers
 {
+    using Web.Classes;
     using Microsoft.AspNet.Identity;
     using Repository;
     using Repository.Entities;
@@ -28,6 +29,21 @@
                                        .Select(m => new { Value = m.Id, Text = m.Name });
             MedicineTakenViewModel viewModel = new MedicineTakenViewModel();
             return View(viewModel);
+        }
+
+        [Authorize]
+        public ActionResult Streaks()
+        {
+            string userId = User.Identity.GetUserId();
+            List<Medicine> medicines = repository.GetMedicinesForUser(userId).ToList();
+            List<MedicineStats> medicineStats = new List<MedicineStats>();
+
+            foreach (var medicine in medicines)
+            {
+                medicineStats.Add(new MedicineStats(medicine));
+            }
+
+            return View(medicineStats);
         }
 
         [Authorize]
