@@ -212,6 +212,8 @@
     <Compile Include="Classes\HealthStatistics.cs" />
     <Compile Include="Classes\ExcelDataConverter.cs" />
     <Compile Include="Classes\MedicineStats.cs" />
+    <Compile Include="Classes\Streak.cs" />
+    <Compile Include="Classes\StreakGenerator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckinApiController.cs" />
     <Compile Include="Controllers\CheckinController.cs" />

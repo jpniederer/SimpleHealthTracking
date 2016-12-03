@@ -16,6 +16,8 @@
         public int TotalExpected { get; private set; }
         public double CompletionPercentage { get; private set; }
         public bool DoesMedicineHaveRecords { get; private set; }
+        public Streak LongestStreak { get; private set; }
+        public Streak CurrentStreak { get; private set; }
         ISimpleHealthTrackingRepository repository;
 
         public MedicineStats(Medicine medicine)
@@ -30,6 +32,7 @@
                 SetCompletionCount();
                 SetExpectedTotal();
                 SetCompletionPercentage();
+                SetStreaks();
             }
             else
             {
@@ -52,6 +55,13 @@
         private void SetCompletionPercentage()
         {
             CompletionPercentage = 100 * ((double)CompletionCount / TotalExpected);
+        }
+
+        private void SetStreaks()
+        {
+            StreakGenerator sg = new StreakGenerator(Medicine, MedicinesTaken);
+            LongestStreak = sg.GetLongestStreak();
+            CurrentStreak = sg.GetCurrentStreak();
         }
     }
 }
