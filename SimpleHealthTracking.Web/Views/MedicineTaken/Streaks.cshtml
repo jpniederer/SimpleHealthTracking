@@ -12,8 +12,8 @@
     {
         <div>
             <h3>@medicine.Medicine.Name</h3>
-            <p>Longest Streak: @medicine.LongestStreak.DayCount (@medicine.LongestStreak.StartDate.ToShortDateString() to @medicine.LongestStreak.EndDate.ToShortDateString())</p>
-            <p>Current Streak: @medicine.CurrentStreak.DayCount (@medicine.CurrentStreak.StartDate.ToShortDateString() to @medicine.CurrentStreak.EndDate.ToShortDateString())</p>
+            <p>Longest Streak: @medicine.LongestStreak.DayCount @medicine.LongestStreak.BuildDateString()</p>
+            <p>Current Streak: @medicine.CurrentStreak.DayCount @medicine.CurrentStreak.BuildDateString()</p>
             <p>Completed: @medicine.CompletionCount</p>
             <p>Completion Percentage: @medicine.CompletionPercentage.ToString("0.00")% (@medicine.CompletionCount of @medicine.TotalExpected)</p>
         </div>

@@ -96,7 +96,7 @@
 
             foreach (var excelRecord in ExcelImportRecords)
             {
-                if (excelRecord.Medicine != null && excelRecord.MedicineId != 0)
+                if (excelRecord.Medicine != null && excelRecord.Medicine != "" && excelRecord.MedicineId != 0)
                 {
                     MedicinesTaken.Add(medicineTakenFactory.CreateMedicineTaken(excelRecord));
                 }

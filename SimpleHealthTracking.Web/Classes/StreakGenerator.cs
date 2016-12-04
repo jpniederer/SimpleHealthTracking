@@ -63,46 +63,59 @@
                 }
             }
 
-            // Handle Current Day. Only count if it's complete.
-            if (IsSatisfiedForDay(DateTime.Now.Date))
-            {
-                if (currentStreak == maxStreak && endDate.Date == DateTime.Now.Date.AddDays(-1))
-                {
-                    maxStreak++;
-                    endDate = DateTime.Now.Date;
-                }
-            }
+            HandleCurrentDay(ref currentStreak, ref maxStreak, ref endDate);
 
             return new Streak(maxStreak, startDate, endDate);
         }
 
         public Streak GetCurrentStreak()
         {
+            int maxStreak = 0;
             int currentStreak = 0;
-            DateTime startDate = DateTime.MinValue;
+            DateTime startDate = DateTime.Now.Date;
             DateTime endDate = DateTime.MinValue;
+            HandleCurrentDay(ref currentStreak, ref maxStreak, ref endDate);
 
-            foreach (DateTime day in EachDay(startDate, DateTime.Now.Date.AddDays(-1)))
+            foreach (DateTime day in EachDayBackwards(DateTime.Now.Date.AddDays(-1), firstDate))
             {
-                
-            }
+                if (IsSatisfiedForDay(day))
+                {
+                    currentStreak++;
+                    startDate = day;
+                    endDate = currentStreak == 1 ? day : endDate;
+                }
+                else
+                {
+                    break;
+                }
+             }
 
             return new Streak(currentStreak, startDate, endDate);
         }
 
+        // Only counts the current day for a streak if it's complete.
+        public void HandleCurrentDay(ref int currentStreak, ref int maxStreak, ref DateTime endDate)
+        {
+            if (IsSatisfiedForDay(DateTime.Now.Date))
+            {
+                if (currentStreak == maxStreak)
+                {
+                    currentStreak++;
+                    maxStreak++;
+                    endDate = DateTime.Now.Date;
+                }
+            }
+        }
+
         private bool IsSatisfiedForDay(DateTime date)
         {
-            if (!dateCounts.ContainsKey(date.Date))
+            if (!dateCounts.ContainsKey(date.Date) || dateCounts[date.Date] < medicine.NumberOfTimesPerDay)
             {
                 return false;
-            }
-            if (dateCounts[date.Date] >= medicine.NumberOfTimesPerDay)
-            {
-                return true;
             }
             else
             {
-                return false;
+                return true;
             }
         }
 
@@ -114,7 +127,7 @@
 
         public IEnumerable<DateTime> EachDayBackwards(DateTime from, DateTime to)
         {
-            for (var day = from.Date; day.Date <= to.Date; day = day.AddDays(-1))
+            for (var day = from.Date; day.Date >= to.Date; day = day.AddDays(-1))
                 yield return day;
         }
     }

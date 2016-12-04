@@ -1,6 +1,7 @@
 ﻿namespace SimpleHealthTracking.Web.Classes
 {
     using System;
+    using System.Text;
 
     public class Streak
     {
@@ -13,6 +14,20 @@
             DayCount = dayCount;
             StartDate = startDate;
             EndDate = endDate;
+        }
+
+        public string BuildDateString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (DayCount > 0)
+            {
+                sb.Append("(").Append(StartDate.Date.ToShortDateString());
+                sb.Append(" to ").Append(EndDate.Date.ToShortDateString());
+                sb.Append(")");
+            }
+
+            return sb.ToString();
         }
     }
 }
