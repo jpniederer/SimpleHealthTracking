@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Help";
+}
+
+<h2>SimpleHealthTracking Help</h2>
+<p>
+    SimpleHealthTracking is a simple, mobile-friendly, web application that can be used to easily track your health information.
+    To use the website, you'll have to have an account. Once you've registered, you're welcome to use all of the features the site offers.
+    The features are listed below.
+</p>
+<h4><b>Checkins</b></h4>
+<p>
+    Checkins are the most versatile way to save health information. These are periodic updates that usually contain at least a weight and current heartrate.
+    Checkins can also contain blood pressure, notes, and physical, mental, and exercise ratings. 
+</p>
+<h4><b>Medicines/Habits</b></h4>
+<p>
+    Once a medicine or habit is added via the @Html.ActionLink("Medicine Management", "Index", "Medicine") page, you can begin creating instances where you 
+    completed it. Once you start using this feature, you can view statistics about that medicine/habit from the @Html.ActionLink("Streaks", "Streaks", "MedicineTaken") page. 
+</p>
+<h4><b>Sleep Tracking</b></h4>
+<p>
+    Typical sleep entries will have a start and an end time. You can also enter information about the quality of the sleep. Once sleep entries are created,
+    you can view sleep statistics from the @Html.ActionLink("My Stats", "Index", "Stats") page.
+</p>
+<p>
+    If you experience any issues with the site, or just have have questions or requests feel free to email me at josh at jpniederer.com. 
+</p>
