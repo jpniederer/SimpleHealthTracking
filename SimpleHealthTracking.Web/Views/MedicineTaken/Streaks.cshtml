@@ -1,21 +1,34 @@
 ﻿@model IEnumerable<SimpleHealthTracking.Web.Classes.MedicineStats>
 
 @{ 
-    ViewBag.Title = "Medicine/Streak Stats";
+    ViewBag.Title = "Medicine/Habit Streak Stats";
 }
 
-<h2>Medicine/Streak Stats</h2>
+<h2>Medicine/Habit Streak Stats</h2>
 <p></p>
 @foreach (var medicine in Model)
 {
     if (medicine.DoesMedicineHaveRecords)
     {
-        <div>
-            <h3>@medicine.Medicine.Name</h3>
-            <p>Longest Streak: @medicine.LongestStreak.DayCount @medicine.LongestStreak.BuildDateString()</p>
-            <p>Current Streak: @medicine.CurrentStreak.DayCount @medicine.CurrentStreak.BuildDateString()</p>
-            <p>Completed: @medicine.CompletionCount</p>
-            <p>Completion Percentage: @medicine.CompletionPercentage.ToString("0.00")% (@medicine.CompletionCount of @medicine.TotalExpected)</p>
+        <div class="streak-stats-card">
+            <h3 class="streak-title">@medicine.Medicine.Name</h3>
+            <p>
+                <label class="streak-category">Longest Streak: </label>
+                <label class="streak-value">@medicine.LongestStreak.DayCount @medicine.LongestStreak.BuildDateString()</label>
+            </p>
+            <p>
+                <label class="streak-category">Current Streak: </label>
+                <label class="streak-value">@medicine.CurrentStreak.DayCount @medicine.CurrentStreak.BuildDateString()</label>
+                
+            </p>
+            <p>
+                <label class="streak-category">Completed: </label>
+                <label class="streak-value">@medicine.CompletionCount</label>                
+            </p>
+            <p>
+                <label class="streak-category">Completion Percentage: </label>
+                <label class="streak-value">@medicine.CompletionPercentage.ToString("0.00")% (@medicine.CompletionCount of @medicine.TotalExpected)</label>
+            </p>
         </div>
     }
 }

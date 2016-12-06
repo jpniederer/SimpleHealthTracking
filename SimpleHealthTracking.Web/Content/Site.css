@@ -132,3 +132,33 @@ h6,
 hr {
     border-top: 1px solid #bba6a6;
 }
+
+.streak-stats-card {
+    background-color: #0D5206;
+    width: 240px;
+    border-radius: 25px;
+    margin-bottom: 24px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+.streak-title {
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+}
+
+.streak-category {
+    color: #cec7c7;
+    font-size: 12px;
+    padding: 4px;
+}
+
+.streak-value {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 700;
+    padding: 4px;
+}
