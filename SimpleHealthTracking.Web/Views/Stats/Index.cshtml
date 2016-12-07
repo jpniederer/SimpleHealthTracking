@@ -7,51 +7,80 @@
 <h2>Health Statistics</h2>
 
 <div class="row">
-    <div class="col-md-3">
-        <h2>Heartrate</h2>
+    <div class="streak-stats-card">
+        <h3 class="streak-title">Heartrate</h3>
         @if (Model.MaxHeartrateCheckin != null)
         {
-            <p><b>Average:</b> @Model.AverageHeartrate.ToString("0.00") bpm</p>
-            <p><b>Max:</b> @Model.MaxHeartrateCheckin.Heartrate on @Model.MaxHeartrateCheckin.TimeAdded.ToShortDateString()</p>
-            <p><b>Min:</b> @Model.MinHeartrateCheckin.Heartrate on @Model.MinHeartrateCheckin.TimeAdded.ToShortDateString()</p>
+            <p>
+                <label class="streak-category">Average: </label> 
+                <label class="streak-value">@Model.AverageHeartrate.ToString("0.00") bpm</label>
+            </p>
+            <p>
+                <label class="streak-category">Max: </label>
+                <label class="streak-value">@Model.MaxHeartrateCheckin.Heartrate on @Model.MaxHeartrateCheckin.TimeAdded.ToShortDateString()</label>
+            </p>
+            <p>
+                <label class="streak-category">Min: </label>
+                <label class="streak-value">@Model.MinHeartrateCheckin.Heartrate on @Model.MinHeartrateCheckin.TimeAdded.ToShortDateString()</label>
+            </p>
         }
         else
         {
-            <p>Nothing to see! No Heartrates have been entered yet.</p>
+            <label class="streak-category">Nothing to see! No Heartrates have been entered yet.</label>
         }
     </div>
-    <div class="col-md-3">
-        <h2>Weight</h2>
+    <div class="streak-stats-card">
+        <h3 class="streak-title">Weight</h3>
         @if (Model.MaxWeightCheckin != null)
         {
-            <p><b>Average:</b> @Model.AverageWeight.ToString("0.00")</p>
-            <p><b>Max:</b> @Model.MaxWeightCheckin.Weight on @Model.MaxWeightCheckin.TimeAdded.ToShortDateString()</p>
-            <p><b>Min:</b> @Model.MinWeightCheckin.Weight on @Model.MinWeightCheckin.TimeAdded.ToShortDateString()</p>
+            <p>
+                <label class="streak-category">Average: </label>
+                <label class="streak-value">@Model.AverageWeight.ToString("0.00")</label>
+            </p>
+            <p>
+                <label class="streak-category">Max: </label> 
+                <label class="streak-value">@Model.MaxWeightCheckin.Weight on @Model.MaxWeightCheckin.TimeAdded.ToShortDateString()</label>
+            </p>
+            <p>
+                <label class="streak-category">Min: </label> 
+                <label class="streak-value">@Model.MinWeightCheckin.Weight on @Model.MinWeightCheckin.TimeAdded.ToShortDateString()</label>
+            </p>
         }
         else
         {
-            <p>Nothing to see! No weights have been entered yet.</p>
+            <label class="streak-category">Nothing to see! No weights have been entered yet.</label>
         }
     </div>
-    <div class="col-md-3">
-        <h2>Sleep</h2>
+    <div class="streak-stats-card">
+        <h3 class="streak-title">Sleep</h3>
         @if (Model.MostSleep != null)
         {
-            <p><b>Average Slept:</b> @((Model.AverageMinutesSlept / 60).ToString("0.00")) hours</p>
-            <p><b>Average Start Time:</b> @Model.AverageSleepStartTime.ToShortTimeString()</p>
-            <p><b>Average End Time:</b> @Model.AverageSleepEndTime.ToShortTimeString()</p>
             <p>
-                <b>Most Sleep:</b> @(((double)Model.MostSleep.MinutesSlept / 60).ToString("0.00")) hours
-                on @Model.MostSleep.StartTime.Value.ToShortDateString()
+                <label class="streak-category">Average Slept: </label>
+                <label class="streak-value">@((Model.AverageMinutesSlept / 60).ToString("0.00")) hours</label>
             </p>
             <p>
-                <b>Least Sleep:</b> @(((double)Model.LeastSleep.MinutesSlept / 60).ToString("0.00")) hours
-                on @Model.LeastSleep.StartTime.Value.ToShortDateString()
+                <label class="streak-category">Average Start Time: </label>
+                <label class="streak-value">@Model.AverageSleepStartTime.ToShortTimeString()</label>
+            </p>
+            <p>
+                <label class="streak-category">Average End Time: </label>
+                <label class="streak-value">@Model.AverageSleepEndTime.ToShortTimeString()</label>
+            </p>
+            <p>
+                <label class="streak-category">Most Sleep: </label>
+                <label class="streak-value">@(((double)Model.MostSleep.MinutesSlept / 60).ToString("0.00")) hours
+                on @Model.MostSleep.StartTime.Value.ToShortDateString()</label>
+            </p>
+            <p>
+                <label class="streak-category">Least Sleep: </label>
+                <label class="streak-value">@(((double)Model.LeastSleep.MinutesSlept / 60).ToString("0.00")) hours
+                on @Model.LeastSleep.StartTime.Value.ToShortDateString()</label>
             </p>
         }
         else
         {
-            <p>Nothing to see here! No sleep entries have been added.</p>
+            <label class="streak-category">Nothing to see here! No sleep entries have been added.</label>
         }
     </div>
 </div>

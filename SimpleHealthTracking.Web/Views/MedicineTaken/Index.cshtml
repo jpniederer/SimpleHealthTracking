@@ -2,18 +2,18 @@
 @model PagedList.IPagedList<SimpleHealthTracking.Repository.Entities.MedicineTaken>
 
 @{ 
-    ViewBag.Title = "Your Medicine Taken Entries";
+    ViewBag.Title = "Your Habit/Medicine Taken Entries";
 }
 
-<h2>Your Medicine Taken Entries</h2>
+<h2>Your Habit/Medicine Taken Entries</h2>
 
 <p>
-    @Html.ActionLink("Add a New Medicine Taken", "Create")
+    @Html.ActionLink("Add a Habit/New Medicine Taken", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Medicine", "Index", new { sortOrder = ViewBag.MedicineNameParameter })
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.MedicineNameParameter })
         </th>
         <th>
             @Html.ActionLink("Time Taken", "Index", new { sortOrder = ViewBag.DateSortParameter })

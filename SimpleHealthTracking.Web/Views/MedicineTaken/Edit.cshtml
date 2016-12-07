@@ -1,10 +1,10 @@
 ﻿@model SimpleHealthTracking.Repository.Entities.MedicineTaken
 
 @{
-    ViewBag.Title = "Edit MedicineTaken";
+    ViewBag.Title = "Edit Habit/Medicine Taken";
 }
 
-<h2>Edit MedicineTaken</h2>
+<h2>Edit Habit/Medicine Taken</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -25,7 +25,7 @@
 <div style="padding-top: 15px;">
     <p>
         @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
-        @Html.ActionLink("Back to MedicineTaken Record List", "Index")
+        @Html.ActionLink("Back to Habit/Medicine Taken Record List", "Index")
     </p>
 </div>
 @section scripts

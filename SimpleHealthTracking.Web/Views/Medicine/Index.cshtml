@@ -2,13 +2,15 @@
 @model PagedList.IPagedList<SimpleHealthTracking.Repository.Entities.Medicine>
 
 @{
-    ViewBag.Title = "Your Medicines";
+    ViewBag.Title = "Your Habits/Medicines";
 }
 
-<h2>Your Medicines</h2>
-
+<h2>Your Habits/Medicines</h2>
 <p>
-    @Html.ActionLink("Add a New Medication", "Create")
+    This feature can be used to track habit completion and medicines taken.
+</p>
+<p>
+    @Html.ActionLink("Add a New Habit/Medication", "Create")
 </p>
 <table class="table">
     <tr>

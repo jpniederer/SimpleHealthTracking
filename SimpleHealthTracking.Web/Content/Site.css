@@ -153,12 +153,12 @@ hr {
 .streak-category {
     color: #cec7c7;
     font-size: 12px;
-    padding: 4px;
+    padding: 10px;
 }
 
 .streak-value {
     font-size: 14px;
     color: #fff;
     font-weight: 700;
-    padding: 4px;
+    padding: 15px;
 }

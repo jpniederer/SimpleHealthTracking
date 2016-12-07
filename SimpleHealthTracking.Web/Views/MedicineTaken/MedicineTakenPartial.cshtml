@@ -1,12 +1,12 @@
 ﻿@model SimpleHealthTracking.Web.ViewModels.MedicineTakenViewModel
 
-<h2>Add a New Medicine Taken</h2>
+<h2>Add a New Habit/Medicine Taken</h2>
 <div class="row">
     <div class="record-added">
         <p id="MedicineTakenAddedText"></p>
     </div>
     <div class="col-md-3">
-        <h4>Medicine</h4>
+        <h4>Habit/Medicine</h4>
         @Html.DropDownListFor(mt => mt.MedicineId, new SelectList(ViewBag.MedicinesForUser, "Value", "Text"), new { @class = "form-control" })
         @Html.ValidationMessageFor(mt => mt.MedicineId)
     </div>
@@ -22,5 +22,5 @@
     </div>
 </div>
 <div class="partial-add-record">
-    <button class="btn btn-primary create-medicineTaken">Add Medicine Taken</button>
+    <button class="btn btn-primary create-medicineTaken">Add Record</button>
 </div>

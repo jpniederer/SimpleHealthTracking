@@ -1,14 +1,14 @@
 ﻿@model SimpleHealthTracking.Repository.Entities.Medicine
 
 @{
-    ViewBag.Title = "Delete this Medicine";
+    ViewBag.Title = "Delete this Habit/Medicine";
 }
 
-<h2>Delete This Medicine</h2>
+<h2>Delete This Habit/Medicine</h2>
 
-<p>Do you really want to delete this medicine? Once deleted, it'll be gone forever and all of its medicine taken records will be deleted too.</p>
+<p>Do you really want to delete this habit/medicine? Once deleted, it'll be gone forever and all of its medicine taken records will be deleted too.</p>
 <div>
-    <h4>Medicine</h4>
+    <h4>Habit/Medicine</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>Name</dt>
@@ -31,8 +31,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete Medicine" class="btn btn-default" /> |
-            @Html.ActionLink("Go Back to Medicine List", "Index")
+            <input type="submit" value="Delete Habit/Medicine" class="btn btn-default" /> |
+            @Html.ActionLink("Go Back to Habit/Medicine List", "Index")
         </div>
     }
 </div>

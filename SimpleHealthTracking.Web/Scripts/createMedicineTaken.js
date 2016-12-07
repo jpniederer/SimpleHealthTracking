@@ -14,10 +14,10 @@
                 timeTextBox.value = null;
             })
             .fail(function () {
-                alert("Could not create the medicine taken entry.");
+                alert("Could not create the habit/medicine taken entry.");
             });
         } else {
-            alert("You must add a date and time to create a medicine taken entry.");
+            alert("You must add a date and time to create a habit/medicine taken entry.");
         }
     });
 });
@@ -25,5 +25,5 @@
 function showMedicineAdded() {
     var medicineTakenText = document.getElementById("MedicineTakenAddedText");
     medicineTakenText.visible = true;
-    medicineTakenText.innerText = "New Medicine Taken Added";
+    medicineTakenText.innerText = "New Habit/Medicine Taken Added";
 }

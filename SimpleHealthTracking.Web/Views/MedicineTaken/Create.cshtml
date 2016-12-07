@@ -1,15 +1,15 @@
 ﻿@model SimpleHealthTracking.Web.ViewModels.MedicineTakenViewModel
 @{
-    ViewBag.Title = "Add a Medicine Taken Entry";
+    ViewBag.Title = "Add a Habit/Medicine Taken Entry";
 }
 
-<h2>Add a New Medicine Taken Entry</h2>
+<h2>Add a New Habit/Medicine Taken Entry</h2>
 @using (Html.BeginForm("Create", "MedicineTaken"))
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(mt => mt.MedicineId)
-        @Html.DropDownListFor(mt => mt.MedicineId, new SelectList(ViewBag.MedicinesForUser, "Value", "Text"), , new { @class = "form-control" })
+        @Html.DropDownListFor(mt => mt.MedicineId, new SelectList(ViewBag.MedicinesForUser, "Value", "Text"), new { @class = "form-control" })
     </div>
     <div class="form-group">
         @Html.LabelFor(mt => mt.DateAddedFor)
@@ -21,7 +21,7 @@
         @Html.TextBoxFor(mt => mt.TimeAddedFor, new { @class = "form-control timepicker", placeholder = "22:22"})
         @Html.ValidationMessageFor(mt => mt.TimeAddedFor)
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary">Create</button>
 }
 @section scripts
 {
