@@ -2,6 +2,7 @@
 {
     using Repository.Entities;
     using Repository.Factories;
+    using Repository.DTO;
     using Repository;
     using ViewModels;
     using Microsoft.AspNet.Identity;
@@ -70,6 +71,33 @@
             }
 
             return Json(isAllMedicineTakenForDate);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IEnumerable<MedicineTakenNotificationDto> GetNotifications()
+        {
+            string userId = User.Identity.GetUserId();
+            List<Medicine> medicinesForUser = repository.GetActiveMedicineForUser(userId).ToList();
+            List<MedicineTaken> medicineTakenToday = repository.GetMedicineTakenByUserForDate(userId, DateTime.Now.Date).ToList();
+            List<MedicineTakenNotificationDto> notifications = new List<MedicineTakenNotificationDto>();
+
+            foreach (var medicine in medicinesForUser)
+            {
+                int medsTaken = medicineTakenToday.Where(mt => mt.MedicineId == medicine.Id).Count();
+
+                if (medsTaken < medicine.NumberOfTimesPerDay)
+                {
+                    notifications.Add(new MedicineTakenNotificationDto
+                    {
+                        MedicineName = medicine.Name,
+                        NumberCompleted = medsTaken,
+                        NumberNeeded = medicine.NumberOfTimesPerDay
+                    });
+                }
+            }
+
+            return notifications;
         }
     }
 }

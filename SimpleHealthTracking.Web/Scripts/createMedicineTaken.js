@@ -10,6 +10,7 @@
                 TimeAddedFor: timeTextBox.value})
             .done(function () {
                 showMedicineAdded();
+                checkForNotifications();
                 dateTextBox.value = null;
                 timeTextBox.value = null;
             })
