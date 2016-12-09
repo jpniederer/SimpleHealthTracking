@@ -78,8 +78,10 @@
         public IEnumerable<MedicineTakenNotificationDto> GetNotifications()
         {
             string userId = User.Identity.GetUserId();
+            TimeZoneInfo cst = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            DateTime centralDate = TimeZoneInfo.ConvertTime(DateTime.Now, cst);
             List<Medicine> medicinesForUser = repository.GetActiveMedicineForUser(userId).ToList();
-            List<MedicineTaken> medicineTakenToday = repository.GetMedicineTakenByUserForDate(userId, DateTime.Now.Date).ToList();
+            List<MedicineTaken> medicineTakenToday = repository.GetMedicineTakenByUserForDate(userId, centralDate.Date).ToList();
             List<MedicineTakenNotificationDto> notifications = new List<MedicineTakenNotificationDto>();
 
             foreach (var medicine in medicinesForUser)
