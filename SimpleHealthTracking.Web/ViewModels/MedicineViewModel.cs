@@ -17,6 +17,9 @@
         [Required]
         public bool IsActive { get; set; }
 
+        [Required]
+        public bool IsPublic { get; set; }
+
         [ValidDateOrNull]
         public string StartDate { get; set; }
 

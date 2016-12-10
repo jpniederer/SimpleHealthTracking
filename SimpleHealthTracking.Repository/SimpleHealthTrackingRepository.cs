@@ -512,5 +512,85 @@
                                         .OrderByDescending(s => s.StartTime)
                                         .Take(count);
         }
+
+        public ActionResult<PublicStatsPage> InsertPublicStatsPage(PublicStatsPage psp)
+        {
+            try
+            {
+                _context.PublicStatsPages.Add(psp);
+                var result = _context.SaveChanges();
+
+                if (result > 0)
+                {
+                    return new ActionResult<PublicStatsPage>(psp, ActionStatus.Created);
+                }
+                else
+                {
+                    return new ActionResult<PublicStatsPage>(psp, ActionStatus.NothingModified, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ActionResult<PublicStatsPage>(psp, ActionStatus.Error, ex);
+            }
+        }
+
+        public ActionResult<PublicStatsPage> UpdatePublicStatsPage(PublicStatsPage psp)
+        {
+            try
+            {
+                var currentPsp = _context.PublicStatsPages.FirstOrDefault(p => p.Id == psp.Id);
+
+                if (currentPsp == null)
+                {
+                    return new ActionResult<PublicStatsPage>(psp, ActionStatus.NotFound);
+                }
+
+                _context.Entry(currentPsp).State = EntityState.Detached;
+                _context.PublicStatsPages.Attach(psp);
+                _context.Entry(psp).State = EntityState.Modified;
+                var result = _context.SaveChanges();
+
+                if (result > 0)
+                {
+                    return new ActionResult<PublicStatsPage>(psp, ActionStatus.Updated);
+                }
+                else
+                {
+                    return new ActionResult<PublicStatsPage>(psp, ActionStatus.NothingModified, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ActionResult<PublicStatsPage>(psp, ActionStatus.Error, ex);
+            }
+        }
+
+        public ActionResult<PublicStatsPage> DeletePublicStatsPage(int id)
+        {
+            try
+            {
+                var currentPsp = _context.PublicStatsPages.FirstOrDefault(p => p.Id == id);
+
+                if (currentPsp != null)
+                {
+                    _context.PublicStatsPages.Remove(currentPsp);
+                    _context.SaveChanges();
+
+                    return new ActionResult<PublicStatsPage>(null, ActionStatus.Deleted);
+                }
+
+                return new ActionResult<PublicStatsPage>(null, ActionStatus.NotFound);
+            }
+            catch (Exception ex)
+            {
+                return new ActionResult<PublicStatsPage>(null, ActionStatus.Error, ex);
+            }
+        }
+
+        public PublicStatsPage GetPublicStatsPage(int id)
+        {
+            return _context.PublicStatsPages.FirstOrDefault(p => p.Id == id);
+        }
     }
 }

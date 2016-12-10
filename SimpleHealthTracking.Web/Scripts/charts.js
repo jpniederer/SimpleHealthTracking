@@ -19,7 +19,7 @@ function setupDataSetsHome() {
     .done(function () {
         homeGraphGeneral(setupSleeps, "#sleepChart", 0.1, '');
     });
-};
+}
 
 function updateChart(webService, setupFunction, idName, scaleModifier, name) {
     $.get(webService, function (d) {
@@ -72,7 +72,7 @@ function homeGraphGeneral(setupFunction, idName, scaleModifier, name) {
 
     graph.append("svg:g")
       .attr("class", "y axis")
-      .attr("transform", "translate(" + (margins.left) + ",0)")
+      .attr("transform", "translate(" + margins.left + ",0)")
       .call(yAxis);
 
     var lineFunc = d3.line()
@@ -88,8 +88,8 @@ function homeGraphGeneral(setupFunction, idName, scaleModifier, name) {
         .attr('stroke', 'blue')
         .attr('stroke-width', 2)
         .attr('fill', 'none')
-        .text(name)
-};
+        .text(name);
+}
 
 function setupSleeps() {
     var sleeps = webServiceJsonResult.map(function (item) {
@@ -100,7 +100,7 @@ function setupSleeps() {
     });
 
     return sleeps;
-};
+}
 
 function setupWeights() {
     var weights = webServiceJsonResult.map(function (item) {
@@ -111,7 +111,7 @@ function setupWeights() {
     });
 
     return weights;
-};
+}
 
 function setupHeartrates() {
     var heartrates = webServiceJsonResult.map(function (item) {
@@ -122,4 +122,4 @@ function setupHeartrates() {
     });
 
     return heartrates;
-};
+}

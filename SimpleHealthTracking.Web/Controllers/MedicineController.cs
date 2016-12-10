@@ -51,6 +51,7 @@
                 Name = viewModel.Name,
                 NumberOfTimesPerDay = viewModel.NumberOfTimesPerDay,
                 IsActive = viewModel.IsActive,
+                IsPublic = viewModel.IsPublic,
                 StartDate = viewModel.GetStartDate(),
                 EndDate = viewModel.GetEndDate(),
                 TimeAdded = DateTime.Now,

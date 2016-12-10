@@ -46,5 +46,11 @@
         IQueryable<Sleep> GetLastThirtySleepsForUser(string userId);
         IQueryable<Sleep> GetLastNumberOfSleepsForUser(string userId, int count);
         IQueryable<Sleep> GetLastFullSleepsForUser(string userId, int count);
+
+        // PublicStatsPages
+        ActionResult<PublicStatsPage> InsertPublicStatsPage(PublicStatsPage psp);
+        ActionResult<PublicStatsPage> UpdatePublicStatsPage(PublicStatsPage psp);
+        ActionResult<PublicStatsPage> DeletePublicStatsPage(int id);
+        PublicStatsPage GetPublicStatsPage(int id);
     }
 }

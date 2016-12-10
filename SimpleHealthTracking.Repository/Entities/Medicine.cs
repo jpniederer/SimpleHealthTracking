@@ -22,6 +22,9 @@
         [Required]
         public bool IsActive { get; set; }
 
+        [Required]
+        public bool IsPublic { get; set; }
+
         public DateTime? StartDate { get; set; }
 
         public DateTime? EndDate { get; set; }
@@ -37,12 +40,13 @@
             MedicineTakens = new HashSet<MedicineTaken>();
         }
 
-        public Medicine(string userId, string name, int numberOfTimesPerDay, bool isActive)
+        public Medicine(string userId, string name, int numberOfTimesPerDay, bool isActive, bool isPublic)
         {
             UserId = userId;
             Name = name;
             NumberOfTimesPerDay = numberOfTimesPerDay;
             IsActive = isActive;
+            IsPublic = isPublic;
             TimeAdded = DateTime.Now;
             UpdateTime = DateTime.Now;
             MedicineTakens = new HashSet<MedicineTaken>();

@@ -10,6 +10,7 @@
         public string Name { get; set; }
         public int NumberOfTimesPerDay { get; set; }
         public bool IsActive { get; set; }
+        public bool IsPublic { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public DateTime TimeAdded { get; set; }
