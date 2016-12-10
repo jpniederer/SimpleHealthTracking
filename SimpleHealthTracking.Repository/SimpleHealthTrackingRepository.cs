@@ -261,6 +261,14 @@
             return medicine;
         }
 
+        public IQueryable<Medicine> GetPublicMedicineForUser(string userId)
+        {
+            var medicine = _context.Medicines.Where(m => m.UserId.Equals(userId) && m.IsActive
+                                                    && m.IsPublic);
+
+            return medicine;
+        }
+
         // Medicine Taken
         public ActionResult<MedicineTaken> InsertMedicineTaken(MedicineTaken medicineTaken)
         {

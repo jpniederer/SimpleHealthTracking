@@ -35,13 +35,8 @@
         public ActionResult Streaks()
         {
             string userId = User.Identity.GetUserId();
-            List<Medicine> medicines = repository.GetMedicinesForUser(userId).ToList();
-            List<MedicineStats> medicineStats = new List<MedicineStats>();
-
-            foreach (var medicine in medicines)
-            {
-                medicineStats.Add(new MedicineStats(medicine));
-            }
+            List<Medicine> medication = repository.GetMedicinesForUser(userId).ToList();
+            List<MedicineStats> medicineStats = MedicineStats.GetMedicineStats(medication);
 
             return View(medicineStats);
         }

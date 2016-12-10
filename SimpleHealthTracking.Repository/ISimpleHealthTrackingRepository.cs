@@ -24,6 +24,7 @@
         Medicine GetMedicine(int id);
         IQueryable<Medicine> GetMedicinesForUser(string userId);
         IQueryable<Medicine> GetActiveMedicineForUser(string userId);
+        IQueryable<Medicine> GetPublicMedicineForUser(string userId);
 
         // Medicine Taken
         ActionResult<MedicineTaken> InsertMedicineTaken(MedicineTaken medicineTaken);

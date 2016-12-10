@@ -239,6 +239,7 @@
     <Compile Include="ViewModels\CheckinViewModel.cs" />
     <Compile Include="ViewModels\MedicineTakenViewModel.cs" />
     <Compile Include="ViewModels\MedicineViewModel.cs" />
+    <Compile Include="ViewModels\PublicStatsViewModel.cs" />
     <Compile Include="ViewModels\SleepViewModel.cs" />
     <Compile Include="ViewModels\ValidDate.cs" />
     <Compile Include="ViewModels\ValidDateOrNull.cs" />
@@ -356,9 +357,11 @@
     <Content Include="Views\Checkin\Notes.cshtml" />
     <Content Include="Views\MedicineTaken\Streaks.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
+    <Content Include="Views\Stats\PublicStats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\PublicStats\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

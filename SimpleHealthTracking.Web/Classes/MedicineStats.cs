@@ -63,5 +63,17 @@
             LongestStreak = sg.GetLongestStreak();
             CurrentStreak = sg.GetCurrentStreak();
         }
+
+        public static List<MedicineStats> GetMedicineStats(List<Medicine> medication)
+        {
+            List<MedicineStats> medicineStats = new List<MedicineStats>();
+
+            foreach (var medicine in medication)
+            {
+                medicineStats.Add(new MedicineStats(medicine));
+            }
+
+            return medicineStats;
+        }
     }
 }
