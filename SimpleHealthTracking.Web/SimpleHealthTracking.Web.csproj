@@ -358,6 +358,7 @@
     <Content Include="Views\MedicineTaken\Streaks.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
     <Content Include="Views\Stats\PublicStats.cshtml" />
+    <Content Include="Views\Stats\PublicStatsMaintenance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

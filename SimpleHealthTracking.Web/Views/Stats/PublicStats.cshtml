@@ -1,1 +1,139 @@
-﻿
+﻿@model SimpleHealthTracking.Web.ViewModels.PublicStatsViewModel
+
+@{ 
+    ViewBag.Title = "Public Health Stats";
+}
+
+<h2>Public Health Stats</h2>
+@if (Model.PublicStatsPage.IsVisible)
+{
+    <div>
+        <div>
+            <h3>General Health</h3>
+            <div class="streak-stats-card">
+                <h3 class="streak-title">Heartrate</h3>
+                @if (Model.HealthStats.MaxHeartrateCheckin != null)
+                {
+                    <p>
+                        <label class="streak-category">Average: </label>
+                        <label class="streak-value">@Model.HealthStats.AverageHeartrate.ToString("0.00") bpm</label>
+                    </p>
+                    <p>
+                        <label class="streak-category">Max: </label>
+                        <label class="streak-value">@Model.HealthStats.MaxHeartrateCheckin.Heartrate on @Model.HealthStats.MaxHeartrateCheckin.TimeAdded.ToShortDateString()</label>
+                    </p>
+                    <p>
+                        <label class="streak-category">Min: </label>
+                        <label class="streak-value">@Model.HealthStats.MinHeartrateCheckin.Heartrate on @Model.HealthStats.MinHeartrateCheckin.TimeAdded.ToShortDateString()</label>
+                    </p>
+                }
+                else
+                {
+                    <label class="streak-category">Nothing to see! No Heartrates have been entered yet.</label>
+                }
+            </div>
+            <div class="streak-stats-card">
+                <h3 class="streak-title">Weight</h3>
+                @if (Model.HealthStats.MaxWeightCheckin != null)
+                {
+                    <p>
+                        <label class="streak-category">Average: </label>
+                        <label class="streak-value">@Model.HealthStats.AverageWeight.ToString("0.00")</label>
+                    </p>
+                    <p>
+                        <label class="streak-category">Max: </label>
+                        <label class="streak-value">@Model.HealthStats.MaxWeightCheckin.Weight on @Model.HealthStats.MaxWeightCheckin.TimeAdded.ToShortDateString()</label>
+                    </p>
+                    <p>
+                        <label class="streak-category">Min: </label>
+                        <label class="streak-value">@Model.HealthStats.MinWeightCheckin.Weight on @Model.HealthStats.MinWeightCheckin.TimeAdded.ToShortDateString()</label>
+                    </p>
+                }
+                else
+                {
+                    <label class="streak-category">Nothing to see! No weights have been entered yet.</label>
+                }
+            </div>
+            <div class="streak-stats-card">
+                <h3 class="streak-title">Sleep</h3>
+                @if (Model.HealthStats.MostSleep != null)
+                {
+                    <p>
+                        <label class="streak-category">Average Slept: </label>
+                        <label class="streak-value">@((Model.HealthStats.AverageMinutesSlept / 60).ToString("0.00")) hours</label>
+                    </p>
+                    <p>
+                        <label class="streak-category">Average Start Time: </label>
+                        <label class="streak-value">@Model.HealthStats.AverageSleepStartTime.ToShortTimeString()</label>
+                    </p>
+                    <p>
+                        <label class="streak-category">Average End Time: </label>
+                        <label class="streak-value">@Model.HealthStats.AverageSleepEndTime.ToShortTimeString()</label>
+                    </p>
+                    <p>
+                        <label class="streak-category">Most Sleep: </label>
+                        <label class="streak-value">
+                            @(((double)Model.HealthStats.MostSleep.MinutesSlept / 60).ToString("0.00")) hours
+                            on @Model.HealthStats.MostSleep.StartTime.Value.ToShortDateString()
+                        </label>
+                    </p>
+                    <p>
+                        <label class="streak-category">Least Sleep: </label>
+                        <label class="streak-value">
+                            @(((double)Model.HealthStats.LeastSleep.MinutesSlept / 60).ToString("0.00")) hours
+                            on @Model.HealthStats.LeastSleep.StartTime.Value.ToShortDateString()
+                        </label>
+                    </p>
+                }
+                else
+                {
+                    <label class="streak-category">Nothing to see here! No sleep entries have been added.</label>
+                }
+            </div>
+        </div>
+        <div>
+            <h3>Habit/Medicine Stats</h3>
+            @if (Model.MedicineStatsList.Count > 0)
+            {
+                foreach (var medicine in Model.MedicineStatsList)
+                {
+                    if (medicine.DoesMedicineHaveRecords)
+                    {
+                        <div class="streak-stats-card">
+                            <h3 class="streak-title">@medicine.Medicine.Name</h3>
+                            <p>
+                                <label class="streak-category">Longest Streak: </label>
+                                <label class="streak-value">@medicine.LongestStreak.DayCount @medicine.LongestStreak.BuildDateString()</label>
+                            </p>
+                            <p>
+                                <label class="streak-category">Current Streak: </label>
+                                <label class="streak-value">@medicine.CurrentStreak.DayCount @medicine.CurrentStreak.BuildDateString()</label>
+
+                            </p>
+                            <p>
+                                <label class="streak-category">Completed: </label>
+                                <label class="streak-value">@medicine.CompletionCount</label>
+                            </p>
+                            <p>
+                                <label class="streak-category">Completion Percentage: </label>
+                                <label class="streak-value">@medicine.CompletionPercentage.ToString("0.00")% (@medicine.CompletionCount of @medicine.TotalExpected)</label>
+                            </p>
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                <p>This user has no publicly visible Habits.</p>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div>
+        <p>
+            Sorry, this user's health stats are no longer publicly visible.
+        </p>
+    </div>
+}

@@ -53,5 +53,6 @@
         ActionResult<PublicStatsPage> UpdatePublicStatsPage(PublicStatsPage psp);
         ActionResult<PublicStatsPage> DeletePublicStatsPage(int id);
         PublicStatsPage GetPublicStatsPage(int id);
+        PublicStatsPage GetPublicStatsPageForUser(string userId);
     }
 }

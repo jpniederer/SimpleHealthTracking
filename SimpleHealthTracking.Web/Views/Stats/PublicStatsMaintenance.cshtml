@@ -1,0 +1,29 @@
+﻿@model SimpleHealthTracking.Repository.Entities.PublicStatsPage
+
+@{ 
+    ViewBag.Title = "Public Stats Maintenance";
+}
+
+<h2>Public Stats Maintenance</h2>
+<p>
+    Your public stats page can be viewed here: <a href="http://www.simplehealthtracking.com/stats/publicstats/@Model.Id">http://www.simplehealthtracking.com/stats/publicstats/@Model.Id</a>.
+    You can disable access to this page by unchecking the IsVisible checkbox and clicking the "Save" button.
+</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.UserId)
+    @Html.HiddenFor(model => model.TimeAdded)
+    <div class="form-group">
+        @Html.LabelFor(p => p.IsVisible)
+        @Html.CheckBoxFor(p => p.IsVisible, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

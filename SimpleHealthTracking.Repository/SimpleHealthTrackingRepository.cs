@@ -600,5 +600,10 @@
         {
             return _context.PublicStatsPages.FirstOrDefault(p => p.Id == id);
         }
+
+        public PublicStatsPage GetPublicStatsPageForUser(string userId)
+        {
+            return _context.PublicStatsPages.FirstOrDefault(p => p.UserId == userId);
+        }
     }
 }
