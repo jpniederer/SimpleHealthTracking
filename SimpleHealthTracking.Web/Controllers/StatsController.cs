@@ -17,7 +17,7 @@
 
         public StatsController()
         {
-            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackingContext());
         }
 
         [Authorize]

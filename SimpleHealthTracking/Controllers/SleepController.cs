@@ -20,7 +20,7 @@
 
         public SleepController()
         {
-            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackingContext());
         }
 
         public SleepController(ISimpleHealthTrackingRepository repo)

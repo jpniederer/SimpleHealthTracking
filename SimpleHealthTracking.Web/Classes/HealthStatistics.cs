@@ -28,7 +28,7 @@
         public HealthStatistics(string user, bool getAllStats = false)
         {
             userId = user;
-            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackingContext());
 
             if (getAllStats)
             {

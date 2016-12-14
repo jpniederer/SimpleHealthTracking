@@ -22,7 +22,7 @@
 
         public MedicineStats(Medicine medicine)
         {
-            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackingContext());
             Medicine = medicine;
             MedicinesTaken = repository.GetMedicineTakenByMedicineId(Medicine.Id).ToList();
 

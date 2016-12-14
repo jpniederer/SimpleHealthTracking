@@ -27,12 +27,12 @@
 
         public ExcelDataConverter()
         {
-            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackingContext());
         }
 
         public ExcelDataConverter(IExcelDataReader rawExcel, string worksheetName, string userId)
         {
-            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackingContext());
             UserId = userId;
             WorksheetName = worksheetName;
             excelDataSet = rawExcel.AsDataSet();

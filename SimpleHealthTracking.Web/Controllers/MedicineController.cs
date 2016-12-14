@@ -19,7 +19,7 @@
 
         public MedicineController()
         {
-            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackingContext());
         }
 
         public MedicineController(ISimpleHealthTrackingRepository repo)

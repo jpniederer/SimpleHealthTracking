@@ -33,6 +33,13 @@ span.field-validation-error {
     font-weight: bold;
 }
 
+.text-body {
+    font-size: 110%;
+    line-height: 1.4;
+    position: relative;
+    width: 75%;
+}
+
 /* Bootstrap Overrides */
 .navbar-inverse {
     background-color: #2a942a;

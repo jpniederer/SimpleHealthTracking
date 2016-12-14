@@ -7,9 +7,9 @@
 
     public class SimpleHealthTrackingRepository : ISimpleHealthTrackingRepository
     {
-        SimpleHealthTrackerContext _context;
+        SimpleHealthTrackingContext _context;
 
-        public SimpleHealthTrackingRepository(SimpleHealthTrackerContext context)
+        public SimpleHealthTrackingRepository(SimpleHealthTrackingContext context)
         {
             _context = context;
             _context.Configuration.LazyLoadingEnabled = false;

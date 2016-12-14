@@ -19,7 +19,7 @@
 
         public CheckinController()
         {
-            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackerContext());
+            repository = new SimpleHealthTrackingRepository(new SimpleHealthTrackingContext());
         }
         
         public CheckinController(ISimpleHealthTrackingRepository repo)
