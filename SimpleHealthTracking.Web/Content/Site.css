@@ -87,6 +87,14 @@ span.field-validation-error {
     font-weight: bold;
 }
 
+.odd-row {
+    background: #ffffff;
+}
+
+.even-row {
+    background: #f1f1f1;
+}
+
 body {
     font-size: 17px;
 }
