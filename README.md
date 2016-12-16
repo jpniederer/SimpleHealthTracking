@@ -20,7 +20,7 @@ Features
 
 Deployment
 --------------
-The current version of SimpleHealthTracking is live on Azure: http://www.simplehealthtracking.com/.
+The current version of SimpleHealthTracking is live on Azure: http://www.simplehealthtracking.com/home/landing.
 
 Setup
 --------------
