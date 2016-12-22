@@ -36,9 +36,19 @@ function deletePreviousChart(idName) {
     svg.selectAll("*").remove();
 }
 
+function parseTime(dateString) {
+    var pt1 = d3.timeParse("%Y-%m-%dT%H:%M:%S");
+
+    if (pt1(dateString) !== null) {
+        return pt1(dateString);
+    } else {
+        var pt2 = d3.timeParse("%Y-%m-%dT%H:%M:%S.%L");
+        return pt2(dateString);
+    }
+}
+
 function homeGraphGeneral(setupFunction, idName, scaleModifier, name) {
     var items = setupFunction();
-    var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S");
     var graph = d3.select(idName),
         margins = { top: 20, right: 20, bottom: 20, left: 50 },
         width = 400,
