@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "All Time Weight Chart";
+}
+
+<h2>All Time Weight</h2>
+<p>Weight trend over all your entries.</p>
+<p>
+    <div class="weightChart">
+        <svg id="weightChart" width="1200" height="800"></svg>
+    </div>
+</p>
+
+@section scripts
+{
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="~/Scripts/charts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            setupFullWeightChart();
+        });
+    </script>
+}

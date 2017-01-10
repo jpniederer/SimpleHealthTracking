@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "All Time Sleep Chart";
+}
+
+<h2>All Time Sleep</h2>
+<p>Sleep trend over all your entries.</p>
+<p>
+    <div class="sleepChart">
+        <svg id="sleepChart" width="1200" height="800"></svg>
+    </div>
+</p>
+
+@section scripts
+{
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="~/Scripts/charts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            setupFullSleepChart();
+        });
+    </script>
+}

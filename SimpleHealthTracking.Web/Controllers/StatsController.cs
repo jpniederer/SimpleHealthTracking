@@ -52,6 +52,24 @@
         }
 
         [Authorize]
+        public ActionResult AllTimeHeartrateChart()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult AllTimeWeightChart()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult AllTimeSleepChart()
+        {
+            return View();
+        }
+
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult PublicStatsMaintenance(PublicStatsPage psp)

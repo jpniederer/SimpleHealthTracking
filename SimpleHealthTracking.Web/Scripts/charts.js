@@ -1,23 +1,51 @@
 ﻿var webServiceJsonResult;
+var maxInt = 2147483647;
 
 function setupDataSetsHome() {
     $.get("api/CheckinApi/GetLastCheckinsForWeights?count=30", function (d) {
         webServiceJsonResult = d;
     })
     .done(function () {
-        homeGraphGeneral(setupWeights, "#weightChart", 1, '');
+        homeGraphGeneral(setupWeights, "#weightChart", 1, '', 400, 400);
     });
     $.get("api/CheckinApi/GetLastCheckinsForHeartrates?count=30", function (d) {
         webServiceJsonResult = d;
     })
     .done(function () {
-        homeGraphGeneral(setupHeartrates, "#heartChart", 5, '');
+        homeGraphGeneral(setupHeartrates, "#heartChart", 5, '', 400, 400);
     });
     $.get("api/SleepApi/GetLastFullSleeps?count=30", function (d) {
         webServiceJsonResult = d;
     })
     .done(function () {
-        homeGraphGeneral(setupSleeps, "#sleepChart", 0.1, '');
+        homeGraphGeneral(setupSleeps, "#sleepChart", 0.1, '', 400, 400);
+    });
+}
+
+function setupFullHeartrateChart() {
+    $.get("/api/CheckinApi/GetLastCheckinsForHeartrates?count=" + maxInt, function (d) {
+        webServiceJsonResult = d;
+    })
+    .done(function () {
+        homeGraphGeneral(setupHeartrates, "#heartChart", 5, '', 1200, 800);
+    });
+}
+
+function setupFullWeightChart() {
+    $.get("/api/CheckinApi/GetLastCheckinsForWeights?count=" + maxInt, function (d) {
+        webServiceJsonResult = d;
+    })
+    .done(function () {
+        homeGraphGeneral(setupWeights, "#weightChart", 1, '', 1200, 800);
+    });
+}
+
+function setupFullSleepChart() {
+    $.get("/api/SleepApi/GetLastFullSleeps?count=" + maxInt, function (d) {
+        webServiceJsonResult = d;
+    })
+    .done(function () {
+        homeGraphGeneral(setupSleeps, "#sleepChart", 0.1, '', 1200, 800);
     });
 }
 
@@ -27,7 +55,7 @@ function updateChart(webService, setupFunction, idName, scaleModifier, name) {
     })
     .done(function () {
         deletePreviousChart(idName);
-        homeGraphGeneral(setupFunction, idName, scaleModifier, name);
+        homeGraphGeneral(setupFunction, idName, scaleModifier, name, 400, 400);
     });
 }
 
@@ -47,12 +75,10 @@ function parseTime(dateString) {
     }
 }
 
-function homeGraphGeneral(setupFunction, idName, scaleModifier, name) {
+function homeGraphGeneral(setupFunction, idName, scaleModifier, name, width, height) {
     var items = setupFunction();
     var graph = d3.select(idName),
         margins = { top: 20, right: 20, bottom: 20, left: 50 },
-        width = 400,
-        height = 400,
         // d3 converts local time to GMT.
         xRange = d3.scaleTime().range([margins.left, width - margins.right]).domain([
             d3.min(items, function (d) {
