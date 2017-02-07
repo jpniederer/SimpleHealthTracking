@@ -65,6 +65,8 @@
     <Compile Include="Entities\PublicStatsPage.cs" />
     <Compile Include="Entities\SimpleHealthTrackerContext.cs" />
     <Compile Include="Entities\Sleep.cs" />
+    <Compile Include="Entities\Workout.cs" />
+    <Compile Include="Entities\WorkoutType.cs" />
     <Compile Include="Factories\CheckinFactory.cs" />
     <Compile Include="Factories\MedicineFactory.cs" />
     <Compile Include="Factories\MedicineTakenFactory.cs" />
@@ -81,6 +83,10 @@
     <Compile Include="Migrations\201612100237496_AddingPublicStatsPage.Designer.cs">
       <DependentUpon>201612100237496_AddingPublicStatsPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702070253118_AddingWorkoutClasses.cs" />
+    <Compile Include="Migrations\201702070253118_AddingWorkoutClasses.Designer.cs">
+      <DependentUpon>201702070253118_AddingWorkoutClasses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleHealthTrackingRepository.cs" />
@@ -91,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612100237496_AddingPublicStatsPage.resx">
       <DependentUpon>201612100237496_AddingPublicStatsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702070253118_AddingWorkoutClasses.resx">
+      <DependentUpon>201702070253118_AddingWorkoutClasses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

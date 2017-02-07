@@ -605,5 +605,31 @@
         {
             return _context.PublicStatsPages.FirstOrDefault(p => p.UserId == userId);
         }
+
+        // Workouts
+        public ActionResult<Workout> InsertWorkout(Workout workout)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ActionResult<Workout> UpdateWorkout(Workout workout)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ActionResult<Workout> DeleteWorkout(Workout workout)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Workout GetWorkout(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<Workout> GetWorkoutsForUser(string userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

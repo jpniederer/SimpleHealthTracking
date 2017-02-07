@@ -54,5 +54,12 @@
         ActionResult<PublicStatsPage> DeletePublicStatsPage(int id);
         PublicStatsPage GetPublicStatsPage(int id);
         PublicStatsPage GetPublicStatsPageForUser(string userId);
+
+        // Workouts
+        ActionResult<Workout> InsertWorkout(Workout workout);
+        ActionResult<Workout> UpdateWorkout(Workout workout);
+        ActionResult<Workout> DeleteWorkout(Workout workout);
+        Workout GetWorkout(int id);
+        IQueryable<Workout> GetWorkoutsForUser(string userId);
     }
 }
