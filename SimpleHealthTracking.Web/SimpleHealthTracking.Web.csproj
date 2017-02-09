@@ -227,6 +227,7 @@
     <Compile Include="Controllers\StatsApiController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\WorkoutController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -367,6 +368,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\PublicStats\" />
+    <Folder Include="Views\Workout\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
