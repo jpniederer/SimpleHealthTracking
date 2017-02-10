@@ -58,7 +58,7 @@
         // Workouts
         ActionResult<Workout> InsertWorkout(Workout workout);
         ActionResult<Workout> UpdateWorkout(Workout workout);
-        ActionResult<Workout> DeleteWorkout(Workout workout);
+        ActionResult<Workout> DeleteWorkout(int id);
         Workout GetWorkout(int id);
         IQueryable<Workout> GetWorkoutsForUser(string userId);
     }

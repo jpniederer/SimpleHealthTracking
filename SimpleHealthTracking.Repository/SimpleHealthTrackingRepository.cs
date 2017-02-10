@@ -609,27 +609,87 @@
         // Workouts
         public ActionResult<Workout> InsertWorkout(Workout workout)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Workouts.Add(workout);
+                var result = _context.SaveChanges();
+
+                if (result > 0)
+                {
+                    return new ActionResult<Workout>(workout, ActionStatus.Created);
+                }
+                else
+                {
+                    return new ActionResult<Workout>(workout, ActionStatus.NothingModified, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ActionResult<Workout>(workout, ActionStatus.Error, ex);
+            }
         }
 
         public ActionResult<Workout> UpdateWorkout(Workout workout)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var currentWorkout = _context.Workouts.FirstOrDefault(w => w.Id == workout.Id);
+
+                if (currentWorkout == null)
+                {
+                    return new ActionResult<Workout>(workout, ActionStatus.NotFound);
+                }
+
+                _context.Entry(currentWorkout).State = EntityState.Detached;
+                _context.Workouts.Attach(workout);
+                _context.Entry(workout).State = EntityState.Modified;
+                var result = _context.SaveChanges();
+
+                if (result > 0)
+                {
+                    return new ActionResult<Workout>(workout, ActionStatus.Updated);
+                }
+                else
+                {
+                    return new ActionResult<Workout>(workout, ActionStatus.NothingModified, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ActionResult<Workout>(workout, ActionStatus.Error, ex);
+            }
         }
 
-        public ActionResult<Workout> DeleteWorkout(Workout workout)
+        public ActionResult<Workout> DeleteWorkout(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var currentWorkout = _context.Workouts.FirstOrDefault(w => w.Id == id);
+
+                if (currentWorkout != null)
+                {
+                    _context.Workouts.Remove(currentWorkout);
+                    _context.SaveChanges();
+
+                    return new ActionResult<Workout>(null, ActionStatus.Deleted);
+                }
+
+                return new ActionResult<Workout>(null, ActionStatus.NotFound);
+            }
+            catch (Exception ex)
+            {
+                return new ActionResult<Workout>(null, ActionStatus.Error, ex);
+            }
         }
 
         public Workout GetWorkout(int id)
         {
-            throw new NotImplementedException();
+            return _context.Workouts.FirstOrDefault(w => w.Id == id);
         }
 
         public IQueryable<Workout> GetWorkoutsForUser(string userId)
         {
-            throw new NotImplementedException();
+            return _context.Workouts.Where(w => w.UserId == userId);
         }
     }
 }
