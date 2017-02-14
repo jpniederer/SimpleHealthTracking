@@ -38,6 +38,77 @@
             return RedirectToAction("Index");
         }
 
+        [Authorize]
+        public ActionResult Edit(int id)
+        {
+            var currentUser = User.Identity.GetUserId();
+            Workout workout = repository.GetWorkout(id);
+
+            if (workout == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (currentUser != workout.UserId)
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            return View(workout);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Workout workout)
+        {
+            var currentUser = User.Identity.GetUserId();
+
+            if (currentUser != workout.UserId)
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            if (ModelState.IsValid)
+            {
+                workout.UpdateTime = DateTime.Now;
+                repository.UpdateWorkout(workout);
+                return RedirectToAction("Index");
+            }
+
+            return View(workout);
+        }
+
+        [Authorize]
+        public ActionResult Delete(int id)
+        {
+            var currentUser = User.Identity.GetUserId();
+            Workout workout = repository.GetWorkout(id);
+
+            if (currentUser != workout.UserId || workout == null)
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            return View(workout);
+        }
+
+        [Authorize]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var currentUser = User.Identity.GetUserId();
+            Workout workout = repository.GetWorkout(id);
+
+            if (currentUser != workout.UserId || workout == null)
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            return View(workout);
+        }
+
         public ActionResult Index()
         {
             return View();
