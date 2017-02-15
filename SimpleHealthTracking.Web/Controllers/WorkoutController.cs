@@ -8,6 +8,7 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+    using PagedList;
 
     public class WorkoutController : Controller
     {
@@ -109,9 +110,48 @@
             return View(workout);
         }
 
-        public ActionResult Index()
+        [Authorize]
+        public ActionResult Details(int id)
         {
-            return View();
+            var currentUser = User.Identity.GetUserId();
+            Workout workout = repository.GetWorkout(id);
+
+            if (currentUser != workout.UserId || workout == null)
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            return View(workout);
+        }
+
+        [Authorize]
+        public ActionResult Index(string sortOrder, int? page)
+        {
+            var currentUser = User.Identity.GetUserId();
+            var workoutsForUser = GetWorkoutsForIndex(sortOrder, currentUser);
+            SetupIndexSortingViewBag(sortOrder);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(workoutsForUser.ToPagedList(pageNumber, pageSize));
+        }
+
+        private void SetupIndexSortingViewBag(string sortOrder)
+        {
+            ViewBag.CurrentSort = sortOrder;
+        }
+
+        private IEnumerable<Workout> GetWorkoutsForIndex(string sortOrder, string currentUser)
+        {
+            var workoutsForUser = repository.GetWorkoutsForUser(currentUser);
+
+            switch (sortOrder)
+            {
+                case "DifficultyLevel":
+                    return workoutsForUser.OrderBy(w => w.DifficultyLevel);
+                default:
+                    return workoutsForUser.OrderBy(w => w.DateAddedFor);
+            }
         }
     }
 }
