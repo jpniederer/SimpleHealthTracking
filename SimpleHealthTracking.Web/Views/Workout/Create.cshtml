@@ -1,7 +1,59 @@
-﻿
+﻿@model SimpleHealthTracking.Repository.Entities.Workout
+
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add a Workout";
 }
 
-<h2>Create</h2>
+<h2>Add a New Workout</h2>
+@using (Html.BeginForm("Create", "Workout"))
+{
+    @Html.AntiForgeryToken()
 
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.UserId)
+    @Html.HiddenFor(model => model.TimeAdded)
+    
+    <div class="from-group">
+        @Html.LabelFor(w => w.WorkoutTypeId)
+        @Html.DropDownListFor(w => w.WorkoutTypeId, new SelectList(ViewBag.WorkoutTypes, "Value", "Text"), new { @class = "form-control" })
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.DateAddedFor)
+        @Html.TextBoxFor(w => w.DateAddedFor, new { @class = "form-control datepicker", placeholder = "01/01/2017" })
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.Notes)
+        @Html.TextAreaFor(w => w.Notes, new { @class = "form-control", placeholder = "Notes about the exercise..."})
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.KeyTakeaways)
+        @Html.TextAreaFor(w => w.KeyTakeaways, new { @class = "form-control", placeholder = "Key Takeaways from the exercise..." })
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.PreFeeling)
+        @Html.TextBoxFor(w => w.PreFeeling, new { @class="form-control", placeholder = "0.0 out of 10.0 rating (not required)"})
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.PreFeeling)
+        @Html.TextBoxFor(w => w.PreFeeling, new { @class = "form-control", placeholder = "0.0 out of 10.0 rating (not required)" })
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.DifficultyLevel)
+        @Html.TextBoxFor(w => w.DifficultyLevel, new { @class = "form-control", placeholder = "0.0 out of 10.0 rating (not required)" })
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.LengthInMinutes)
+        @Html.TextBoxFor(w => w.LengthInMinutes, new { @class = "form-control", placeholder = "Length (minutes, not required)" })
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+@section scripts
+{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+        });
+    </script>
+}

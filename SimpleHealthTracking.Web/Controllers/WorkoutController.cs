@@ -22,6 +22,9 @@
         [Authorize]
         public ActionResult Create()
         {
+            ViewBag.User = User.Identity.GetUserId();
+            ViewBag.WorkoutTypes = repository.GetWorkoutTypes()
+                                   .Select(w => new { Value = w.Id, Text = w.Name });
             return View();
         }
 
@@ -32,9 +35,15 @@
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.User = User.Identity.GetUserId();
+                ViewBag.WorkoutTypes = repository.GetWorkoutTypes()
+                                   .Select(w => new { Value = w.Id, Text = w.Name });
+
                 return View("Create", workout);
             }
 
+            workout.TimeAdded = DateTime.Now;
+            workout.UpdateTime = DateTime.Now;
             repository.InsertWorkout(workout);
             return RedirectToAction("Index");
         }
@@ -44,6 +53,8 @@
         {
             var currentUser = User.Identity.GetUserId();
             Workout workout = repository.GetWorkout(id);
+            ViewBag.WorkoutTypes = repository.GetWorkoutTypes()
+                                   .Select(w => new { Value = w.Id, Text = w.Name });
 
             if (workout == null)
             {
@@ -76,6 +87,9 @@
                 repository.UpdateWorkout(workout);
                 return RedirectToAction("Index");
             }
+
+            ViewBag.WorkoutTypes = repository.GetWorkoutTypes()
+                                   .Select(w => new { Value = w.Id, Text = w.Name });
 
             return View(workout);
         }

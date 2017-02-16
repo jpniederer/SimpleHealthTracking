@@ -61,5 +61,8 @@
         ActionResult<Workout> DeleteWorkout(int id);
         Workout GetWorkout(int id);
         IQueryable<Workout> GetWorkoutsForUser(string userId);
+
+        // Workout Types
+        IQueryable<WorkoutType> GetWorkoutTypes();
     }
 }

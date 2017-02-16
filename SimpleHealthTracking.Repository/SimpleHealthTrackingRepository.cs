@@ -691,5 +691,10 @@
         {
             return _context.Workouts.Where(w => w.UserId == userId);
         }
+
+        public IQueryable<WorkoutType> GetWorkoutTypes()
+        {
+            return _context.WorkoutTypes;
+        }
     }
 }
