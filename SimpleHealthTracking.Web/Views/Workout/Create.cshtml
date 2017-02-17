@@ -1,4 +1,4 @@
-﻿@model SimpleHealthTracking.Repository.Entities.Workout
+﻿@model SimpleHealthTracking.Web.ViewModels.WorkoutViewModel
 
 @{
     ViewBag.Title = "Add a Workout";
@@ -8,18 +8,14 @@
 @using (Html.BeginForm("Create", "Workout"))
 {
     @Html.AntiForgeryToken()
-
-    @Html.HiddenFor(model => model.Id)
-    @Html.HiddenFor(model => model.UserId)
-    @Html.HiddenFor(model => model.TimeAdded)
     
     <div class="from-group">
         @Html.LabelFor(w => w.WorkoutTypeId)
         @Html.DropDownListFor(w => w.WorkoutTypeId, new SelectList(ViewBag.WorkoutTypes, "Value", "Text"), new { @class = "form-control" })
     </div>
     <div class="from-group">
-        @Html.LabelFor(w => w.DateAddedFor)
-        @Html.TextBoxFor(w => w.DateAddedFor, new { @class = "form-control datepicker", placeholder = "01/01/2017" })
+        @Html.LabelFor(w => w.DateOfString)
+        @Html.TextBoxFor(w => w.DateOfString, new { @class = "form-control datepicker", placeholder = "01/01/2017" })
     </div>
     <div class="from-group">
         @Html.LabelFor(w => w.Notes)
@@ -34,8 +30,8 @@
         @Html.TextBoxFor(w => w.PreFeeling, new { @class="form-control", placeholder = "0.0 out of 10.0 rating (not required)"})
     </div>
     <div class="from-group">
-        @Html.LabelFor(w => w.PreFeeling)
-        @Html.TextBoxFor(w => w.PreFeeling, new { @class = "form-control", placeholder = "0.0 out of 10.0 rating (not required)" })
+        @Html.LabelFor(w => w.PostFeeling)
+        @Html.TextBoxFor(w => w.PostFeeling, new { @class = "form-control", placeholder = "0.0 out of 10.0 rating (not required)" })
     </div>
     <div class="from-group">
         @Html.LabelFor(w => w.DifficultyLevel)

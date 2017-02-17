@@ -245,6 +245,7 @@
     <Compile Include="ViewModels\ValidDate.cs" />
     <Compile Include="ViewModels\ValidDateOrNull.cs" />
     <Compile Include="ViewModels\ValidTime.cs" />
+    <Compile Include="ViewModels\WorkoutViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />

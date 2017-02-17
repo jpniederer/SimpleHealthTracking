@@ -9,6 +9,7 @@
     using System.Web;
     using System.Web.Mvc;
     using PagedList;
+    using ViewModels;
 
     public class WorkoutController : Controller
     {
@@ -22,16 +23,16 @@
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.User = User.Identity.GetUserId();
+            WorkoutViewModel viewModel = new WorkoutViewModel();
             ViewBag.WorkoutTypes = repository.GetWorkoutTypes()
                                    .Select(w => new { Value = w.Id, Text = w.Name });
-            return View();
+            return View(viewModel);
         }
 
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Workout workout)
+        public ActionResult Create(WorkoutViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -39,11 +40,24 @@
                 ViewBag.WorkoutTypes = repository.GetWorkoutTypes()
                                    .Select(w => new { Value = w.Id, Text = w.Name });
 
-                return View("Create", workout);
+                return View("Create", viewModel);
             }
 
-            workout.TimeAdded = DateTime.Now;
-            workout.UpdateTime = DateTime.Now;
+            Workout workout = new Workout
+            {
+                UserId = User.Identity.GetUserId(),
+                TimeAdded = DateTime.Now,
+                UpdateTime = DateTime.Now,
+                WorkoutTypeId = viewModel.WorkoutTypeId,
+                DateAddedFor = viewModel.GetDateAddedFor(),
+                Notes = viewModel.Notes,
+                KeyTakeaways = viewModel.KeyTakeaways,
+                PreFeeling = viewModel.PreFeeling,
+                PostFeeling = viewModel.PostFeeling,
+                DifficultyLevel = viewModel.DifficultyLevel,
+                LengthInMinutes = viewModel.DifficultyLevel
+            };
+            
             repository.InsertWorkout(workout);
             return RedirectToAction("Index");
         }
