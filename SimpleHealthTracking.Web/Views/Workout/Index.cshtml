@@ -1,7 +1,57 @@
-﻿
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<SimpleHealthTracking.Repository.Entities.Workout>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Your Workouts";
 }
 
-<h2>Index</h2>
-
+<h2>Your Workouts</h2>
+<p>
+    This feature can be used to track your workouts.
+</p>
+<p>
+    @Html.ActionLink("Add a Workout", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Workout Type", "Index", new { sortOrder = ViewBag.TypeSort })
+        </th>
+        <th>
+            @Html.ActionLink("Length", "Index", new { sortOrder = ViewBag.LengthSort })
+        </th>
+        <th>
+            @Html.ActionLink("Pre Feeling", "Index", new { sortOrder = ViewBag.PreFeelingSort })
+        </th>
+        <th>
+            @Html.ActionLink("Post Feeling", "Index", new { sortOrder = ViewBag.PostFeelingSort })
+        </th>
+        <th>
+            @Html.ActionLink("Difficulty", "Index", new { sortOrder = ViewBag.DifficultySort })
+        </th>
+        <th>
+            @Html.ActionLink("Workout Date", "Index", new { sortOrder = ViewBag.WorkoutDateSort })
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var workout in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(w => workout.WorkoutType.Name)</td>
+            <td>@Html.DisplayFor(w => workout.LengthInMinutes)</td>
+            <td>@Html.DisplayFor(w => workout.PreFeeling)</td>
+            <td>@Html.DisplayFor(w => workout.PostFeeling)</td>
+            <td>@Html.DisplayFor(w => workout.DifficultyLevel)</td>
+            <td>@Html.DisplayFor(w => workout.DateAddedFor)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = workout.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = workout.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = workout.Id })
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort }))
+</p>

@@ -1,7 +1,67 @@
-﻿
+﻿@model SimpleHealthTracking.Repository.Entities.Workout
+
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit Workout</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.UserId)
+    @Html.HiddenFor(model => model.TimeAdded)
 
+    <div class="from-group">
+        @Html.LabelFor(w => w.WorkoutTypeId)
+        @Html.DropDownListFor(w => w.WorkoutTypeId, new SelectList(ViewBag.WorkoutTypes, "Value", "Text"), new { @class = "form-control" })
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.DateAddedFor)
+        @Html.TextBoxFor(w => w.DateAddedFor, new { @class = "form-control datepicker", placeholder = "01/01/2017" })
+        @Html.ValidationMessageFor(w => w.DateAddedFor)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.Notes)
+        @Html.TextAreaFor(w => w.Notes, new { @class = "form-control", placeholder = "Notes about the exercise..." })
+        @Html.ValidationMessageFor(w => w.Notes)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.KeyTakeaways)
+        @Html.TextAreaFor(w => w.KeyTakeaways, new { @class = "form-control", placeholder = "Key Takeaways from the exercise..." })
+        @Html.ValidationMessageFor(w => w.KeyTakeaways)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.PreFeeling)
+        @Html.TextBoxFor(w => w.PreFeeling, new { @class = "form-control", placeholder = "0.0 out of 10.0 rating (not required)" })
+        @Html.ValidationMessageFor(w => w.PreFeeling)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.PostFeeling)
+        @Html.TextBoxFor(w => w.PostFeeling, new { @class = "form-control", placeholder = "0.0 out of 10.0 rating (not required)" })
+        @Html.ValidationMessageFor(w => w.PostFeeling)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.DifficultyLevel)
+        @Html.TextBoxFor(w => w.DifficultyLevel, new { @class = "form-control", placeholder = "0.0 out of 10.0 rating (not required)" })
+        @Html.ValidationMessageFor(w => w.DifficultyLevel)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(w => w.LengthInMinutes)
+        @Html.TextBoxFor(w => w.LengthInMinutes, new { @class = "form-control", placeholder = "Length (minutes, not required)" })
+        @Html.ValidationMessageFor(w => w.LengthInMinutes)
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+}
+<div style="padding-top: 15px;">
+    <p>
+        @Html.ActionLink("Workout Details", "Details", new { id = Model.Id}) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+        @Html.ActionLink("Back to Workout List", "Index")
+    </p>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

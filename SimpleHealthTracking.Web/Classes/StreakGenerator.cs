@@ -41,6 +41,7 @@
         {
             int maxStreak = 0;
             int currentStreak = 0;
+            DateTime currentStreakStartDate = DateTime.MinValue;
             DateTime startDate = DateTime.MinValue;
             DateTime endDate = DateTime.MinValue;
 
@@ -48,11 +49,12 @@
             {
                 if (IsSatisfiedForDay(day))
                 {
+                    currentStreakStartDate = currentStreak == 0 ? day : currentStreakStartDate;
                     currentStreak++;
 
-                    startDate = maxStreak == 0 ? day : startDate;
                     if (currentStreak > maxStreak)
                     {
+                        startDate = currentStreakStartDate;
                         maxStreak = currentStreak;
                         endDate = day;
                     }

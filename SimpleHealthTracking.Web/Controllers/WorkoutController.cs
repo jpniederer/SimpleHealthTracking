@@ -167,6 +167,12 @@
         private void SetupIndexSortingViewBag(string sortOrder)
         {
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.WorkoutDateSort = string.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewBag.DifficultySort = sortOrder == "Difficulty" ? "DifficultyDesc" : "Difficulty";
+            ViewBag.PostFeelingSort = sortOrder == "PostFeeling" ? "PostFeelingDesc" : "PostFeeling";
+            ViewBag.PreFeelingSort = sortOrder == "PreFeeling" ? "PreFeelingDesc" : "PreFeeling";
+            ViewBag.LengthSort = sortOrder == "Length" ? "LengthDesc" : "Length";
+            ViewBag.TypeSort = sortOrder == "Type" ? "TypeDesc" : "Type";
         }
 
         private IEnumerable<Workout> GetWorkoutsForIndex(string sortOrder, string currentUser)
@@ -175,10 +181,30 @@
 
             switch (sortOrder)
             {
-                case "DifficultyLevel":
+                case "Difficulty":
                     return workoutsForUser.OrderBy(w => w.DifficultyLevel);
-                default:
+                case "DifficultyDesc":
+                    return workoutsForUser.OrderByDescending(w => w.DifficultyLevel);
+                case "PostFeeling":
+                    return workoutsForUser.OrderBy(w => w.PostFeeling);
+                case "PostFeelingDesc":
+                    return workoutsForUser.OrderByDescending(w => w.PostFeeling);
+                case "PreFeeling":
+                    return workoutsForUser.OrderBy(w => w.PreFeeling);
+                case "PreFeelingDesc":
+                    return workoutsForUser.OrderByDescending(w => w.PreFeeling);
+                case "Length":
+                    return workoutsForUser.OrderBy(w => w.LengthInMinutes);
+                case "LengthDesc":
+                    return workoutsForUser.OrderByDescending(w => w.LengthInMinutes);
+                case "Type":
+                    return workoutsForUser.OrderBy(w => w.WorkoutType.Name);
+                case "TypeDesc":
+                    return workoutsForUser.OrderByDescending(w => w.WorkoutType.Name);
+                case "Date":
                     return workoutsForUser.OrderBy(w => w.DateAddedFor);
+                default:
+                    return workoutsForUser.OrderByDescending(w => w.DateAddedFor);
             }
         }
     }
