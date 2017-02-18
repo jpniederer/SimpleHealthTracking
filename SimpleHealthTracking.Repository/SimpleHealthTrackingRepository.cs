@@ -696,5 +696,10 @@
         {
             return _context.WorkoutTypes;
         }
+
+        public WorkoutType GetWorkoutType(int id)
+        {
+            return _context.WorkoutTypes.SingleOrDefault(wt => wt.Id == id);
+        }
     }
 }

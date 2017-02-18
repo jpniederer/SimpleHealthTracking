@@ -113,6 +113,7 @@
         {
             var currentUser = User.Identity.GetUserId();
             Workout workout = repository.GetWorkout(id);
+            workout.WorkoutType = repository.GetWorkoutType(workout.WorkoutTypeId);
 
             if (currentUser != workout.UserId || workout == null)
             {
@@ -135,7 +136,9 @@
                 return new HttpUnauthorizedResult();
             }
 
-            return View(workout);
+            repository.DeleteWorkout(id);
+
+            return RedirectToAction("Index");
         }
 
         [Authorize]
@@ -143,6 +146,7 @@
         {
             var currentUser = User.Identity.GetUserId();
             Workout workout = repository.GetWorkout(id);
+            workout.WorkoutType = repository.GetWorkoutType(workout.WorkoutTypeId);
 
             if (currentUser != workout.UserId || workout == null)
             {
@@ -156,6 +160,7 @@
         public ActionResult Index(string sortOrder, int? page)
         {
             var currentUser = User.Identity.GetUserId();
+            List<WorkoutType> workoutTypes = repository.GetWorkoutTypes().ToList();
             var workoutsForUser = GetWorkoutsForIndex(sortOrder, currentUser);
             SetupIndexSortingViewBag(sortOrder);
 

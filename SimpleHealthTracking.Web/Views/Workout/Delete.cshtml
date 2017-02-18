@@ -1,7 +1,39 @@
-﻿
+﻿@model SimpleHealthTracking.Repository.Entities.Workout
+
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete this Workout";
 }
 
-<h2>Delete</h2>
+<h2>Delete This Workout</h2>
+<p>Do you really want to delete this workout? Once deleted, it's gone forever (unless you remember it).</p>
+<div>
+    <h4>Workout</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Type</dt>
+        <dd>@Html.DisplayFor(w => w.WorkoutType.Name)</dd>
+        <dt>Notes</dt>
+        <dd>@Html.DisplayFor(w => w.Notes)</dd>
+        <dt>Key Takeaways</dt>
+        <dd>@Html.DisplayFor(w => w.KeyTakeaways)</dd>
+        <dt>Pre Feeling</dt>
+        <dd>@Html.DisplayFor(w => w.PreFeeling)</dd>
+        <dt>Post Feeling</dt>
+        <dd>@Html.DisplayFor(w => w.PostFeeling)</dd>
+        <dt>Difficulty Level</dt>
+        <dd>@Html.DisplayFor(w => w.DifficultyLevel)</dd>
+        <dt>Length (minutes)</dt>
+        <dd>@Html.DisplayFor(w => w.LengthInMinutes)</dd>
+        <dt>Date</dt>
+        <dd>@Html.DisplayFor(w => w.DateAddedFor)</dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete Workout" class="btn btn-default" /> |
+            @Html.ActionLink("Go Back to Workout List", "Index")
+        </div>
+    }
+</div>

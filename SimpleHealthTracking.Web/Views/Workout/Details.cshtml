@@ -1,7 +1,35 @@
-﻿
+﻿@model SimpleHealthTracking.Repository.Entities.Workout
+
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Workout Details</h2>
 
+<div>
+    <h4>Workout</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Type</dt>
+        <dd>@Html.DisplayFor(w => w.WorkoutType.Name)</dd>
+        <dt>Notes</dt>
+        <dd>@Html.DisplayFor(w => w.Notes)</dd>
+        <dt>Key Takeaways</dt>
+        <dd>@Html.DisplayFor(w => w.KeyTakeaways)</dd>
+        <dt>Pre Feeling</dt>
+        <dd>@Html.DisplayFor(w => w.PreFeeling)</dd>
+        <dt>Post Feeling</dt>
+        <dd>@Html.DisplayFor(w => w.PostFeeling)</dd>
+        <dt>Difficulty Level</dt>
+        <dd>@Html.DisplayFor(w => w.DifficultyLevel)</dd>
+        <dt>Length (minutes)</dt>
+        <dd>@Html.DisplayFor(w => w.LengthInMinutes)</dd>
+        <dt>Date</dt>
+        <dd>@Html.DisplayFor(w => w.DateAddedFor)</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+    @Html.ActionLink("Back to Workout List", "Index")
+</p>

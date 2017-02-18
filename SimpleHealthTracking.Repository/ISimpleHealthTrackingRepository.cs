@@ -64,5 +64,6 @@
 
         // Workout Types
         IQueryable<WorkoutType> GetWorkoutTypes();
+        WorkoutType GetWorkoutType(int id);
     }
 }
