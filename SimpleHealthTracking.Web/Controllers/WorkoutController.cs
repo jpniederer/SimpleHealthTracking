@@ -55,7 +55,7 @@
                 PreFeeling = viewModel.PreFeeling,
                 PostFeeling = viewModel.PostFeeling,
                 DifficultyLevel = viewModel.DifficultyLevel,
-                LengthInMinutes = viewModel.DifficultyLevel
+                LengthInMinutes = viewModel.LengthInMinutes
             };
             
             repository.InsertWorkout(workout);
