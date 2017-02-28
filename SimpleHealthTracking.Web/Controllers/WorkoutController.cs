@@ -157,6 +157,19 @@
         }
 
         [Authorize]
+        public ActionResult WorkoutInformation(int? page)
+        {
+            var currentUser = User.Identity.GetUserId();
+            var workoutsForUser = repository.GetWorkoutsForUser(currentUser)
+                .Where(w => !string.IsNullOrEmpty(w.KeyTakeaways) || !string.IsNullOrEmpty(w.Notes))
+                .OrderByDescending(w => w.TimeAdded);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(workoutsForUser.ToPagedList(pageNumber, pageSize));
+        }
+
+        [Authorize]
         public ActionResult Index(string sortOrder, int? page)
         {
             var currentUser = User.Identity.GetUserId();

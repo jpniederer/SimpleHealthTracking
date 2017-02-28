@@ -1,0 +1,43 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<SimpleHealthTracking.Repository.Entities.Workout>
+
+@{
+    ViewBag.Title = "Workout Information";
+}
+
+<h2>Workout Information</h2>
+
+<p>
+    @Html.ActionLink("Add a Workout", "Create")
+</p>
+@foreach (var workout in Model)
+{
+    <div>
+        <h3>Workout Information</h3>
+
+        @if (!string.IsNullOrEmpty(workout.KeyTakeaways))
+        {
+            <b>Key Takeaways</b>
+            <p>@workout.KeyTakeaways</p>
+        }
+
+        @if (!string.IsNullOrEmpty(workout.Notes))
+        {
+            <b>Notes</b>
+            <p>@workout.Notes</p>
+        }
+        
+        <p>From <i>@workout.TimeAdded.ToString()</i></p>
+    </div>
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { id = workout.Id }) |
+        @Html.ActionLink("Full Details", "Details", new { id = workout.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = workout.Id })
+    </div>
+    <hr />
+}
+<p>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Notes", new { page }))
+</p>

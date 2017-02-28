@@ -370,6 +370,7 @@
     <Content Include="Views\Workout\Delete.cshtml" />
     <Content Include="Views\Workout\Details.cshtml" />
     <Content Include="Views\Workout\Index.cshtml" />
+    <Content Include="Views\Workout\WorkoutInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
